@@ -1,6 +1,5 @@
 div#following {
   float: right;
-  background-color: green;
   overflow-y: scroll;
   height: 90vh;
   margin-top: 5vh;
@@ -14,7 +13,29 @@ div#lastfm {
 }
 div#mainUser {
   float: left;
-  background-color: pink;
   width: 70vw;
   margin-top: 5vh;
+}
+
+h2 {
+  font-family:'Roboto', sans-serif;
+  font-size: 35px;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+}
+
+a:link {
+  text-decoration: none
+}
+a:visited {
+  color: inherit;
+}
+a:hover {
+  text-decoration: underline;
+}
+a {
+  outline: none;
 }

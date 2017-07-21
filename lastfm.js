@@ -13,7 +13,7 @@ function fetchUserRecentTracks (username, api_key, limit) {
 
 function displayPastSongs (limit, jsonObj, username) {
   var tracks = "";
-  tracks += "<h3>" + "User: "   + jsonObj.recenttracks["@attr"].user + "</h3>";
+  tracks += "<a href='https://www.last.fm/user/" + username + "'>" + "<h3>" + jsonObj.recenttracks["@attr"].user + "</h3>" + "</a>";
   for (i = 0; i < limit; i++) {
     var iString = i.toString();
     if (jsonObj.recenttracks.track[i]["@attr"] != null) {
@@ -21,8 +21,15 @@ function displayPastSongs (limit, jsonObj, username) {
       console.log(i);
     }
     tracks += jsonObj.recenttracks.track[i].artist["#text"];
-    tracks += ":  ";
+    tracks += " — ";
     tracks += jsonObj.recenttracks.track[i].name;
+    /*
+    if (jsonObj.recenttracks.track[i].date["#text"] != null) {
+      tracks += "<span style='float: right;'>";
+      tracks += jsonObj.recenttracks.track[i].date["#text"];
+      tracks += "</span>";
+    }
+    */
     if (jsonObj.recenttracks.track[i]["@attr"] != null  ) {
       tracks += "</b>";
     }
@@ -56,7 +63,7 @@ function displayUserFollowing (jsonObj, api_key, followingTrackLimit) {
   document.getElementById("userFollowing").innerHTML = "";
   for (i = 0; i < numberOfFriends; i++) {
     var username = jsonObj.friends.user[i].name;
-    document.getElementById("userFollowing").innerHTML += "<h3>" + "</h3>" + "<p id=\"" + username + "\">" + "</p>";
+    document.getElementById("userFollowing").innerHTML += "<p id=\"" + username + "\">" + "</p>";
     fetchUserRecentTracks(username, api_key, followingTrackLimit);
   }
 }
