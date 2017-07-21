@@ -1,0 +1,20 @@
+div#following {
+  float: right;
+  background-color: green;
+  overflow-y: scroll;
+  height: 90vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  width: 25vw;
+}
+div#lastfm {
+  display: inline;
+  background-color: blue;
+  margin: 0px;
+}
+div#mainUser {
+  float: left;
+  background-color: pink;
+  width: 70vw;
+  margin-top: 5vh;
+}
