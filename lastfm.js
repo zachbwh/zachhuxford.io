@@ -70,3 +70,8 @@ function fetchAll (username, api_key, userTrackLimit, followingTrackLimit) {
   fetchUserRecentTracks(username, api_key, userTrackLimit);
   fetchUserFollowing(username, api_key, followingTrackLimit);
 }
+
+function periodicFetch (api_key, userTrackLimit, followingTrackLimit) {
+    fetchUserRecentTracks(currentUser, "a0f6605fafd4fe8da5875bc7c04dca05", 10);
+    fetchUserFollowing(currentUser, "a0f6605fafd4fe8da5875bc7c04dca05", 5);
+}
