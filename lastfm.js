@@ -13,23 +13,26 @@ function fetchUserRecentTracks (username, api_key, limit) {
 
 function displayPastSongs (limit, jsonObj, username) {
   var tracks = "";
+  for (i = 0; i < limit; i++) {
+
+  }
+  /* var tracks = "";
   tracks += "<a href='https://www.last.fm/user/" + username + "'>" + "<h3>" + jsonObj.recenttracks["@attr"].user + "</h3>" + "</a>";
   for (i = 0; i < limit; i++) {
     var iString = i.toString();
     if (jsonObj.recenttracks.track[i]["@attr"] != null) {
       tracks += "<b>";
-      console.log(i);
     }
     tracks += jsonObj.recenttracks.track[i].artist["#text"];
     tracks += " — ";
     tracks += jsonObj.recenttracks.track[i].name;
-    /*
-    if (jsonObj.recenttracks.track[i].date["#text"] != null) {
-      tracks += "<span style='float: right;'>";
+
+    if (jsonObj.recenttracks.track[i].date != null) {
+      tracks += "<span style='float: right'>";
       tracks += jsonObj.recenttracks.track[i].date["#text"];
       tracks += "</span>";
     }
-    */
+
     if (jsonObj.recenttracks.track[i]["@attr"] != null  ) {
       tracks += "</b>";
     }
@@ -39,7 +42,8 @@ function displayPastSongs (limit, jsonObj, username) {
     document.getElementById("user").innerHTML = tracks;
   } else {
     document.getElementById(username).innerHTML = tracks;
-  }
+  } */
+  return [username, tracks];
 }
 
 /* fetchUserFollowing is used to fetch the other last.fm users that a specific user is following using the user.getfriends method in the last.fm API
@@ -63,7 +67,13 @@ function displayUserFollowing (jsonObj, api_key, followingTrackLimit) {
   document.getElementById("userFollowing").innerHTML = "";
   for (i = 0; i < numberOfFriends; i++) {
     var username = jsonObj.friends.user[i].name;
-    document.getElementById("userFollowing").innerHTML += "<p id=\"" + username + "\">" + "</p>";
+    profilePic = jsonObj.friends.user[i].image[0]["#text"];
+    //document.getElementById("userFollowing").tr.th.innerHTML = "<img class='usersmall' src='" + profilePic "'>" + username
+    userHeading = "<img class='usersmall' src='" + profilePic + "'>" + username;
+    document.getElementById("userFollowing").innerHTML += "<table id=\"" + username + "\">" + "<tr><th><a href='https://www.last.fm/user/" + username + "'>" + userHeading + "</a></th></tr>" + "</table>";
+  }
+  for (i = 0; i < numberOfFriends; i++) {
+    var username = jsonObj.friends.user[i].name;
     fetchUserRecentTracks(username, api_key, followingTrackLimit);
   }
 }

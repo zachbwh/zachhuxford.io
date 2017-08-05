@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="./startpage.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <script src="./startpage.js"></script>
+  <title>startpage</title>
+</head>
+<body>
+  <h1><a href="http://zachhuxford.io">zachhuxford.io</a></h1>
+  <input id="search" type="text" autocomplete="off" autofocus="on" onkeyup="javascript: handleQuery(event, this.value);" placeholder="Search..."></input>
+  <div id="options" onmouseover="javascript: toggle()" onmouseout="javascript: toggle()">+</div>
+  <div id="sites">
+    <ul>
+      <li><b>!g</b><span class="website">google</span></li>
+      <li><b>!i</b><span class="website">google images</span></li>
+      <li><b>!y</b><span class="website">youtube</span></li>
+      <li><b>!d</b><span class="website">duckduckgo</span></li>
+      <li><b>!aw</b><span class="website">arch wiki</span></li>
+      <li><b>!au</b><span class="website">arch user repository</span></li>
+      <li><b>!u</b><span class="website">urban dictionary</span></li>
+      <li><b>!m</b><span class="website">imdb</span></li>
+      <li><b>!gh</b><span class="website">github</span></li>
+      <li><b>!ge</b><span class="website">genius</span></li>
+      <li><b>!r</b><span class="website">go to subreddit</span></li>
+      <li><b>!w</b><span class="website">wikipedia</span></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,93 @@
+:root {
+  --main-color: #FA5050;
+  --text-in-main-color: #FCF5DD;
+  --background-color: #FCF5ED;
+  --accent-color: #FF9292;
+  --global-border-radius: 4px;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  color: var(--text-in-main-color);
+  background-color: var(--background-color);
+}
+
+div#currentUser {
+  width: 75vw;
+  float: left;
+}
+
+img#currentUserDP {
+  position: relative;
+  border-radius: 50%;
+  width: 10vw;
+  height: 10vw;
+  float: left;
+  z-index: 1;
+}
+table#currentUserInfoBasics {
+  background-color: var(--main-color);
+  position: static;
+  float: right;
+  vertical-align: middle;
+  line-height: 5vw;
+  margin-top: 2.5vw;
+  margin-right:   5vw;
+  margin-left: -10vw;
+  padding-left: 250px;
+  height: 5vw;
+  width: 65vw;
+  border-radius: var(--global-border-radius);
+  font-size: 22px;
+  z-index: -1;
+}
+
+div#currentUserInfo {
+  height: 10vw;
+  width: 75vw;
+  vertical-align: middle;
+}
+
+td#currentUserName {
+  float: left;
+  vertical-align: middle;
+  line-height: 5vw;
+  text-align: center;
+}
+td#totalScrobbles {
+  vertical-align: middle;
+  line-height: 5vw;
+  text-align: center;
+}
+
+input#newUsername {
+  font-size: 22px;
+  width: 10vw;
+  float: right;
+  margin-right: 2vw;
+  background-color: var(--accent-color);
+  color: white;
+  border-style: none;
+  border-radius: var(--global-border-radius);
+}
+
+h2#recentTracksHeader {
+  color: #333333;
+  float: right;
+  text-align: left;
+  width:60vw;
+}
+
+table#currentUserRecentTracks {
+  background-color: var(--main-color);
+  float: right;
+  width: 55vw;
+  text-align: left;
+  border-radius: var(--global-border-radius);
+  margin-left: 250px;
+  margin-right: 5vw;
+}
+
+tr.playing {
+  font-weight: bold;
+}

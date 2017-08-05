@@ -1,3 +1,7 @@
+body {
+  background-color: #FCF5DD;
+  color: #FF5A79;
+}
 div#following {
   float: right;
   overflow-y: scroll;
@@ -19,7 +23,7 @@ div#mainUser {
 
 h2 {
   font-family:'Roboto', sans-serif;
-  font-size: 35px;
+  font-size: 34px;
 }
 
 p {
@@ -27,15 +31,26 @@ p {
   font-size: 15px;
 }
 
-a:link {
-  text-decoration: none
-}
-a:visited {
-  color: inherit;
-}
 a:hover {
   text-decoration: underline;
 }
 a {
+  color: inherit;
   outline: none;
+  text-decoration: none;
+}
+
+.playing {
+  font-weight: bold;
+}
+
+img.usersmall {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  margin-right: 10px;
+}
+
+th {
+  font-size: 25px;
 }
