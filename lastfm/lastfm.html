@@ -15,19 +15,25 @@
         <tr>
           <td id="currentUserName">ZACHBWH</td>
           <td id="currentUserTotalScrobbles">TOTAL SCROBBLES: <span id="CUTS"></span></td>
-          <td><input id="newUsername" type="text" value="" placeholder="New User" onkeyup="javascript:updateCurrentUser(event,this.value);">
+          <td>
+            <input id="newUsername" type="text" value="" placeholder="New User" onkeyup="javascript:updateCurrentUser(event,this.value);">
+          </td>
         </tr>
       </table>
     </div>
     <h2 id="recentTracksHeader">Recent Tracks</h2>
     <table id="currentUserRecentTracks">
-      <tr>
-        <th>Album</th>
-        <th>Artist</th>
-        <th>Track</th>
-        <th>When</th>
-      </tr>
+      <thead>
+        <tr>
+          <th>Album</th>
+          <th>Artist</th>
+          <th>Track</th>
+          <th>When</th>
+        </tr>
+      </thead>
+      <tbody>
 
+      </tbody>
     </table>
   </div>
   <div id='creeperBar'>

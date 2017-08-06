@@ -1,7 +1,7 @@
 :root {
-  --main-color: #FA5050;
+  --main-color: #FF3838;
   --text-in-main-color: #FCF5DD;
-  --background-color: #FCF5ED;
+  --background-color: #FCF5DD ;
   --accent-color: #FF9292;
   --global-border-radius: 4px;
 }
@@ -72,7 +72,7 @@ input#newUsername {
 }
 
 h2#recentTracksHeader {
-  color: #333333;
+  color: var(--main-color);
   float: right;
   text-align: left;
   width:60vw;
@@ -88,6 +88,36 @@ table#currentUserRecentTracks {
   margin-right: 5vw;
 }
 
+table#currentUserRecentTracks tbody {
+  height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 tr.playing {
   font-weight: bold;
+}
+
+a {
+  color: var(--text-in-main-color);
+  outline: none;
+  text-decoration: none;
+}
+
+a:hover {
+ text-decoration: underline;
+}
+
+tr {
+  vertical-align: middle;
+}
+
+tr[class="0"] {
+  background-color: var(--main-color);
+  color: inherit;
+}
+
+tr[class="1"] {
+  background-color: var(--accent-color);
+  color: white;
 }

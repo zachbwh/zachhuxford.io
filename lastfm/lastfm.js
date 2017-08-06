@@ -13,6 +13,7 @@ updateModel();
 function createAlbumArtThumbnail (jsonTrackObj) {
   var albumArtLink = jsonTrackObj.image[0]["#text"];
   var albumName = jsonTrackObj.album["#text"];
+  return "<img src='" + albumArtLink + "'>" + albumName;
 }
 function createArtistlink (jsonTrackObj) {
   var trackLink = jsonTrackObj.url;
@@ -33,7 +34,7 @@ function createUserLink (jsonUserInfoObj) {
 }
 
 function timeSince (date) {
-  var seconds = Math.floor((new Date() - date) / 1000);
+  var seconds = Math.floor(((new Date().getTime() / 1000) - date));
   var interval = Math.floor(seconds / 31536000);
 
   if (interval > 1) {
@@ -74,7 +75,7 @@ function sleep(milliseconds) {
 // END OF HELPER FUNCTIONS
 
 // UPDATE MODEL FUNCTIONS
-function updateUsers (usernameList) {
+function updateUsers (usernameList, newModel) {
   if (usernameList[0] != null) {
 
     var userInfoAndTracks = {}; // this object gets pushed to the model
@@ -94,8 +95,8 @@ function updateUsers (usernameList) {
             userInfoAndTracks.userRecentTracks = userRecentTracks;
             console.log("userInfoRequest returned")
             newModel.push(userInfoAndTracks);
-            if (usernameList.length < 0) {
-              updateUsers(usernameList.slice(1, usernameList.length));
+            if (usernameList.length > 0) {
+              updateUsers(usernameList.slice(1, usernameList.length), newModel);
             }
           }
         };
@@ -131,58 +132,57 @@ function updateModel () {
         console.log(userFriends.friends.user[i].name);
         usernameList.push(userFriends.friends.user[i].name);
       }
-      updateUsers(usernameList);
+      updateUsers(usernameList, newModel);
     }
   };
   userFriendsRequest.open("GET", "http://ws.audioscrobbler.com/2.0/?method=user.getfriends&user=" + currentUser + "&api_key=" + api_key + "&format=json", true);
   userFriendsRequest.send();
-
-  //PUTTING IN RECURSIVE FUNCTION
-  /*
-  for (i = 0; i < usernameList.length; i++) {
-    console.log(usernameList[i]);
-    var userInfoAndTracks = {}; // this object gets pushed to the model
-
-    // retrieves user information from last.fm
-    var userInfoRequest = new XMLHttpRequest();
-    userInfoRequest.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var userInfo = JSON.parse(this.responseText);
-        userInfoAndTracks.userInfo = userInfo;
-        console.log("userRecentTracksRequest returned")
-      }
-    };
-    userInfoRequest.open("GET", "http://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=" + usernameList[i] + "&api_key=" + api_key + "&format=json", true);
-    userInfoRequest.send();
-
-    // retrieves user recent tracks from last.fm
-    var userRecentTracksRequest = new XMLHttpRequest();
-    userRecentTracksRequest.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var userRecentTracks = JSON.parse(this.responseText);
-        userInfoAndTracks.userRecentTracks = userRecentTracks;
-        console.log("userInfoRequest returned")
-      }
-    };
-    userRecentTracksRequest.open("GET", "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=" + usernameList[i] + "&api_key=" + api_key + "&format=json&limit=" + numberOfRecentTracks, true);
-    userRecentTracksRequest.send();
-
-    newModel.push(userInfoAndTracks);
-  }
-
-  currentModel = newModel;
-  */
-  // END OF PUTTING IN RECURSIVE FUNCTION
 }
 
 function updateCurrentUser (event, newUsername) {
   if (event.which == 13) {
-    console.log("enter key pressed");
     currentUser = newUsername;
     updateModel();
-    console.log("test " + currentModel[0].userInfo)
-    //updateView();
   }
+}
+
+//UPDATE VIEW FUNCTIONS
+
+function updateCurrentUserRecentTracksView () {
+  var table = "";
+  for (var i=0; i<numberOfRecentTracks; i++) {
+    var jsonTrackObj = currentModel[0].userRecentTracks.recenttracks.track[i];
+
+    if (currentModel[0].userRecentTracks.recenttracks.track[i]["@attr"] != null) {
+      table += "<b>";
+    }
+    table += "<tr class='" + i%2 + "'>";
+
+    table += "<td>";
+    table += createAlbumArtThumbnail(jsonTrackObj);
+    table += "</td>";
+
+    table += "<td>";
+    table += createArtistlink(jsonTrackObj);
+    table += "</td>";
+
+    table += "<td>";
+    table += createTrackLink(jsonTrackObj);
+    table += "</td>";
+
+    table += "<td>";
+    if (currentModel[0].userRecentTracks.recenttracks.track[i]["@attr"] != null) {
+      table += "Playing";
+    } else if (currentModel[0].userRecentTracks.recenttracks.track[i].date != null) {
+      table += timeSincePlayed(jsonTrackObj);
+    }
+    table += "</td>";
+
+    if (currentModel[0].userRecentTracks.recenttracks.track[i]["@attr"] != null) {
+      table += "</b>";
+    }
+  }
+  document.getElementById("currentUserRecentTracks").tBodies[0].innerHTML = table;
 }
 
 function updateView() {
@@ -190,5 +190,6 @@ function updateView() {
   document.getElementById("currentUserDP").src = currentModel[0].userInfo.user.image[2]["#text"]; // update main user profile photo
   document.getElementById("currentUserName").innerHTML = currentModel[0].userInfo.user.name.toUpperCase(); // update main user username
   document.getElementById("CUTS").innerHTML = currentModel[0].userInfo.user.playcount.toString(); // update scrobble count
+  updateCurrentUserRecentTracksView();
 
 }
