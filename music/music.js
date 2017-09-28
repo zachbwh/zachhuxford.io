@@ -6,6 +6,11 @@ function sendRequest() {
 
   albumHistoryRequest.onreadystatechange = function(){
     if (this.readyState == 4 && this.status == 200) {
+      var myNode = document.getElementById("albums");
+      while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+      }
+
       var albumInfo = JSON.parse(this.responseText);
       var numberOfAlbums = albumInfo.topalbums["@attr"].perPage;
       for (i = 0; i < numberOfAlbums; i++) {
@@ -32,11 +37,12 @@ function  createImageObject(url) {
   div = document.createElement('div');
   div.className = "coverDiv col";
   //console.log(div.style.backgroundImage);
-  div.style.width = "174px";
-  div.style.height = "174px";
+  div.style.width = "10%";
+  div.style.height = "20%";
   div.style.backgroundImage = "radial-gradient(rgba(100, 100, 100, 0.3), rgba(10, 10, 10, 0.3))," + "url('" + url + "')";
   div.style.filter = "grayscale(100%)"
   div.style.backgroundRepeat = "no-repeat";
+  div.style.backgroundSize = "cover";
   //console.log(div.style.backgroundImage);
 
   /*
