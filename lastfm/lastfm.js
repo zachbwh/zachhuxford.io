@@ -1,6 +1,8 @@
 // GLOBAL VARIABLES
 var api_key = "a0f6605fafd4fe8da5875bc7c04dca05";
 var currentUser = "zachbwh"; // the default main user
+var currentUserInfo;
+var currentUserRecentTracks;
 var currentModel;
 numberOfRecentTracks = 15;
 // END OF GLOBAL VARIABLES
@@ -12,25 +14,36 @@ updateModel();
 // HELPER FUNCTIONS
 function createAlbumArtThumbnail (jsonTrackObj) {
   var albumArtLink = jsonTrackObj.image[0]["#text"];
-  var albumName = jsonTrackObj.album["#text"];
-  return "<img src='" + albumArtLink + "'>" + albumName;
+  var albumArtObject = document.createElement('img');
+  albumArtObject.src = albumArtLink;
+  return albumArtObject;
 }
-function createArtistlink (jsonTrackObj) {
+function createAlbumText (jsonTrackObj) {
+  var albumNameObject = document.createTextNode(jsonTrackObj.album["#text"]);
+  return albumNameObject;
+}
+function createArtistLink (jsonTrackObj) {
   var trackLink = jsonTrackObj.url;
   var cutPoint = trackLink.lastIndexOf("_/");
   var artistLink = trackLink.substring(0, cutPoint);
   var artistName = jsonTrackObj.artist["#text"];
-  return "<a href='" + artistLink + "'>" + artistName + "</a>";
+  var artistLinkObject = document.createElement('a');
+  artistLinkObject.href = artistLink;
+  artistLinkObject.appendChild(document.createTextNode(artistName));
+  return artistLinkObject;
 }
 function createTrackLink (jsonTrackObj) {
   var trackLink = jsonTrackObj.url;
   var trackName = jsonTrackObj.name;
-  return "<a href='" + trackLink + "'>" + trackName + "</a>";
+  var trackLinkObject = document.createElement('a');
+  trackLinkObject.href = trackLink;
+  trackLinkObject.appendChild(document.createTextNode(trackName));
+  return trackLinkObject;
 }
 function createUserLink (jsonUserInfoObj) {
   var userLink = jsonUserInfoObj.user.url;
   var username = jsonUserInfoObj.user.name;
-  return "<a href='" + userLink + "'>" + username.toUpperCase() + "</a";
+  return "<a href='" + userLink + "'>" + username.toUpperCase() + "</a>";
 }
 
 function timeSince (date) {
@@ -46,22 +59,30 @@ function timeSince (date) {
   }
   interval = Math.floor(seconds / 86400);
   if (interval > 1) {
-    return interval + " days";
+    return interval + " d";
   }
   interval = Math.floor(seconds / 3600);
   if (interval > 1) {
-    return interval + " hours";
+    return interval + " h";
   }
   interval = Math.floor(seconds / 60);
   if (interval > 1) {
-    return interval + " minutes";
+    return interval + " m";
   }
   return Math.floor(seconds) + " seconds";
 }
 
 function timeSincePlayed (jsonTrackObj) {
-  var datetime = parseInt(jsonTrackObj.date.uts);
-  return timeSince(datetime);
+  if (jsonTrackObj["@attr"] != null) {
+    var output = document.createTextNode("Playing Now");
+    output['data-unixtime'] = jsonTrackObj.date.uts;
+    return output
+  } else {
+    var datetime = parseInt(jsonTrackObj.date.uts);
+    var output = document.createTextNode(timeSince(datetime))
+    output['data-unixtime'] = jsonTrackObj.date.uts;
+    return output;
+  }
 }
 
 function sleep(milliseconds) {
@@ -148,41 +169,93 @@ function updateCurrentUser (event, newUsername) {
 
 //UPDATE VIEW FUNCTIONS
 
-function updateCurrentUserRecentTracksView () {
-  var table = "";
+function updateCurrentUserRecentTracksView (userRecentTracks) {
+  var table = document.createElement('tbody');
+  //var table = document.getElementById("currentUserRecentTracks").tBodies[0];
   for (var i=0; i<numberOfRecentTracks; i++) {
-    var jsonTrackObj = currentModel[0].userRecentTracks.recenttracks.track[i];
+    //var jsonTrackObj = currentModel[0].userRecentTracks.recenttracks.track[i];
+    var jsonTrackObj = userRecentTracks.recenttracks.track[i];
 
-    if (currentModel[0].userRecentTracks.recenttracks.track[i]["@attr"] != null) {
-      table += "<b>";
-    }
-    table += "<tr class='" + i%2 + "'>";
+    var newRow = document.createElement('tr');
+    var albumCell = document.createElement('td');
+    var trackNameCell = document.createElement('td');
+    var artistNameCell = document.createElement('td');
+    var timePlayedCell = document.createElement('td');
 
-    table += "<td>";
-    table += createAlbumArtThumbnail(jsonTrackObj);
-    table += "</td>";
+    albumCell.appendChild(createAlbumArtThumbnail(jsonTrackObj));
+    albumCell.appendChild(createAlbumText(jsonTrackObj));
+    artistNameCell.appendChild(createArtistLink(jsonTrackObj));
+    trackNameCell.appendChild(createTrackLink(jsonTrackObj));
+    timePlayedCell.appendChild(timeSincePlayed(jsonTrackObj));
 
-    table += "<td>";
-    table += createArtistlink(jsonTrackObj);
-    table += "</td>";
+    newRow.appendChild(albumCell);
+    newRow.appendChild(artistNameCell);
+    newRow.appendChild(trackNameCell);
+    newRow.appendChild(timePlayedCell);
 
-    table += "<td>";
-    table += createTrackLink(jsonTrackObj);
-    table += "</td>";
+    table.appendChild(newRow);
 
-    table += "<td>";
-    if (currentModel[0].userRecentTracks.recenttracks.track[i]["@attr"] != null) {
-      table += "Playing";
-    } else if (currentModel[0].userRecentTracks.recenttracks.track[i].date != null) {
-      table += timeSincePlayed(jsonTrackObj);
-    }
-    table += "</td>";
-
-    if (currentModel[0].userRecentTracks.recenttracks.track[i]["@attr"] != null) {
-      table += "</b>";
-    }
+    console.log("hmm");
+    var zachbwhProfileImage = document.createElement('img');
+    zachbwhProfileImage.src = "https://lastfm-img2.akamaized.net/i/u/300x300/6bf45f94307350945c1a64bd99c94234.png";
+    addRecentTrackToCreeperBar(jsonTrackObj, "zachbwh", zachbwhProfileImage);
   }
-  document.getElementById("currentUserRecentTracks").tBodies[0].innerHTML = table;
+  document.getElementById("currentUserRecentTracks").appendChild(table);
+}
+
+function addRecentTrackToCreeperBar(jsonTrackObj, username, userProfileImageObj) {
+  var recentTrackDiv = document.createElement('div');
+  recentTrackDiv.className = "mostRecentTrack";
+  recentTrackDiv.id = username;
+
+  userProfileImageObj.className = "creeperBarProfileImage";
+  recentTrackDiv.appendChild(userProfileImageObj);
+
+  var recentTrackTable = document.createElement('table');
+  recentTrackTable.className = "mostRecentTrack";
+
+  // Row 1 - Username and timeSincePlayed
+  var row1 = document.createElement('tr');
+  var row1col1 = document.createElement('td');
+  row1col1.className = "recentTrackUsername";
+  var recentTrackUsername = document.createTextNode(username);
+  row1col1.appendChild(recentTrackUsername);
+  row1.appendChild(row1col1);
+
+  var row1col1Time = document.createElement('span');
+  row1col1Time.className = "recentTrackTime";
+  row1col1Time.appendChild(document.createTextNode("— "));
+  row1col1Time.appendChild(timeSincePlayed(jsonTrackObj));
+  row1.appendChild(row1col1Time);
+
+  // Row 2 - Track Name
+  var row2 = document.createElement('tr');
+  var row2col1 = document.createElement('td');
+  row2col1.className = "recentTrackRow";
+  row2col1.appendChild(createTrackLink(jsonTrackObj));
+  row2.appendChild(row2col1);
+
+  // Row 3 - Artist Name
+  var row3 = document.createElement('tr');
+  var row3col1 = document.createElement('td');
+  row3col1.className = "recentTrackRow";
+  row3col1.appendChild(createArtistLink(jsonTrackObj));
+  row3.appendChild(row3col1);
+
+  // Row 4 - Album Name
+  var row4 = document.createElement('tr');
+  var row4col1 = document.createElement('td');
+  row4col1.className = "recentTrackRow"
+  row4col1.appendChild(createAlbumText(jsonTrackObj));
+  row4.appendChild(row4col1);
+
+  recentTrackTable.appendChild(row1);
+  recentTrackTable.appendChild(row2);
+  recentTrackTable.appendChild(row3);
+  recentTrackTable.appendChild(row4);
+
+  recentTrackDiv.appendChild(recentTrackTable);
+  document.getElementById("creeperBar").appendChild(recentTrackDiv)
 }
 
 function updateView() {
@@ -190,6 +263,6 @@ function updateView() {
   document.getElementById("currentUserDP").src = currentModel[0].userInfo.user.image[2]["#text"]; // update main user profile photo
   document.getElementById("currentUserName").innerHTML = currentModel[0].userInfo.user.name.toUpperCase(); // update main user username
   document.getElementById("CUTS").innerHTML = currentModel[0].userInfo.user.playcount.toString(); // update scrobble count
-  updateCurrentUserRecentTracksView();
+  updateCurrentUserRecentTracksView(currentModel[0].userRecentTracks);
 
 }

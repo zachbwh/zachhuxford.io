@@ -13,6 +13,7 @@ body {
 }
 
 div#currentUser {
+  display: inline;
   width: 75vw;
   float: left;
 }
@@ -89,9 +90,14 @@ table#currentUserRecentTracks {
 }
 
 table#currentUserRecentTracks tbody {
-  height: 100px;
-  overflow-y: auto;
   overflow-x: hidden;
+  height: 20vh;
+  display: block;
+  overflow-y: scroll;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: inherit;
+
 }
 
 tr.playing {
@@ -110,6 +116,15 @@ a:hover {
 
 tr {
   vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+td {
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  white-space: nowrap;
 }
 
 tr[class="0"] {
@@ -120,4 +135,64 @@ tr[class="0"] {
 tr[class="1"] {
   background-color: var(--accent-color);
   color: white;
+}
+
+div.mostRecentTrack {
+  height: 130px;
+  //width: 25vw;
+  vertical-align: top;
+  border-radius: var(--global-border-radius);
+  background-color: black;
+}
+
+#creeperBar {
+  background-color: #FF9292;
+  width: 20vw;
+  height: 99vh;
+  float: right;
+  display: inline;
+  overflow-y: scroll;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+.creeperBarProfileImage {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  float: left;
+  vertical-align: center;
+  position: relative;
+  top: 35px;
+  left: 10px;
+}
+
+table.mostRecentTrack {
+  position: relative;
+  left: 10px;
+  padding: 10px;
+  max-width: 10vw;
+}
+
+.recentTrackUsername {
+  font-weight: bold;
+  font-size 24px;
+  max-width: 10vw;
+  width: 10vw;
+  background-color: green;
+}
+
+.recentTrackTime {
+  float: right;
+  font-weight: normal;
+  background-color: pink;
+}
+
+.recentTrackRow {
+  width: 10vw;
+  max-width: 10vw;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-x: hidden;
 }
