@@ -18,11 +18,11 @@ function sendRequest() {
         addObjectToList(createImageObject(imageUrl));
       }
       $( "div.coverDiv" ).hover(function() {
-        //$(this).css("background-image", $(this).css("background-image").replace("radial-gradient(rgba(100, 100, 100, 0.3), rgba(10, 10, 10, 0.3)),", ""));
+        $(this).css("background-image", $(this).css("background-image").replace("radial-gradient(rgba(100, 100, 100, 0.3), rgba(10, 10, 10, 0.3)),", "radial-gradient(rgba(200, 200, 200, 0.1), rgba(100, 100, 100, 0.1)),"));
         $(this).css("filter", "grayscale(0%)");
       },
       function() {
-        //$(this).css("background-image", "radial-gradient(rgba(100, 100, 100, 0.3), rgba(10, 10, 10, 0.3))," + $(this).css("background-image"));
+        $(this).css("background-image", $(this).css("background-image").replace("radial-gradient(rgba(200, 200, 200, 0.1), rgba(100, 100, 100, 0.1)),", "radial-gradient(rgba(100, 100, 100, 0.3), rgba(10, 10, 10, 0.3)),"));
         $(this).css("filter", "grayscale(100%)");
       }
       );
