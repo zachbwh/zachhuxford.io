@@ -121,12 +121,12 @@ function updateUsers (usernameList, newModel) {
             }
           }
         };
-        userRecentTracksRequest.open("GET", "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=" + usernameList[0] + "&api_key=" + api_key + "&format=json&limit=" + numberOfRecentTracks, true);
+        userRecentTracksRequest.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=" + usernameList[0] + "&api_key=" + api_key + "&format=json&limit=" + numberOfRecentTracks, true);
         userRecentTracksRequest.send();
 
       }
     };
-    userInfoRequest.open("GET", "http://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=" + usernameList[0] + "&api_key=" + api_key + "&format=json", true);
+    userInfoRequest.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=" + usernameList[0] + "&api_key=" + api_key + "&format=json", true);
     userInfoRequest.send();
   } else {
     currentModel = newModel;

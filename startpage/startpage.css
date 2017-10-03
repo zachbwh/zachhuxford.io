@@ -23,6 +23,7 @@ input#search {
   font-size: 30px;
   font-family: Roboto Slab;
   width: 35vw;
+  min-width: 450px;
   background-color: #FF9292;
   border-style: none;
   border-radius: 3px;
