@@ -29,7 +29,7 @@ function sendRequest() {
 
     }
   }
-  albumHistoryRequest.open("GET", "http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=" + currentUser + "&api_key=" + api_key + "&format=json&period=3month", true);
+  albumHistoryRequest.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=" + currentUser + "&api_key=" + api_key + "&format=json&period=3month", true);
   albumHistoryRequest.send();
 }
 
