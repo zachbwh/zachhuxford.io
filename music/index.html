@@ -79,6 +79,10 @@ body {
 .description-min-width {
   min-width: 580px;
 }
+
+.overflow-break-word {
+  overflow-wrap: break-word;
+}
 </style>
 <body>
 
@@ -87,19 +91,19 @@ body {
   <div class="w3-bar w3-black w3-card-2 w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-black" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href="https://zachhuxford.io" class="w3-bar-item w3-button w3-padding-large w3-transparent">Home</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Projects</a>
+    <a href="https://zachhuxford.io/projects" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Projects</a>
     <a href="https://blog.zachhuxford.io" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Blog</a>
     <a href="https://zachhuxford.io/music" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Music</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Rice</a>
+    <a href="https://zachhuxford.io/rice" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Rice</a>
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
     <a href="https://zachhuxford.io" class="w3-bar-item w3-button w3-padding-large">Home</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Projects</a>
+    <a href="https://zachhuxford.io/projects" class="w3-bar-item w3-button w3-padding-large">Projects</a>
     <a href="https://blog.zachhuxford.io" class="w3-bar-item w3-button w3-padding-large">Blog</a>
     <a href="https://zachhuxford.io/music" class="w3-bar-item w3-button w3-padding-large">Music</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Rice</a>
+    <a href="https://zachhuxford.io/rice" class="w3-bar-item w3-button w3-padding-large">Rice</a>
   </div>
 </div>
 
@@ -170,12 +174,12 @@ body {
   <!-- shits fire yo playlist description and left hand side text alignment --> <!-- CHANGE THIS -->
   <div class="w3-row-padding w3-light-grey w3-padding-32">
     <div class="w3-content">
-      <div class="w3-twothird w3-left-align description-min-width">
+      <div class="w3-twothird w3-left-align make-me-left-align description-min-width">
         <h1>shits fire yo</h1> <!-- CHANGE THIS -->
-        <h5 class="w3-padding-32 w3-left-align">
+        <h5 class="w3-padding-32 w3-left-align make-me-left-align">
             <a href="https://open.spotify.com/user/zachbwh/playlist/6taYwF5fUtgJE0fAVLJPXg" target="_blank"><i class="fa fa-spotify w3-text-black w3-margin-right"></i>spotify: zachbwh</a> <!-- CHANGE THIS -->
         </h5>
-        <p class="w3-text-grey w3-left-align">
+        <p class="w3-text-grey w3-left-align make-me-left-align">
           this shit is fire. does that need any more explaining? <!-- CHANGE THIS -->
           <br><br><br>
           followers > 10 <!-- CHANGE THIS -->
@@ -214,12 +218,12 @@ body {
   <!-- solid rock playlist description and left hand side text alignment -->
   <div class="w3-row-padding w3-light-grey w3-padding-32">
     <div class="w3-content">
-      <div class="w3-twothird w3-left-align description-min-width">
+      <div class="w3-twothird w3-left-align make-me-left-align description-min-width">
         <h1>solid rock</h1>
-        <h5 class="w3-padding-32 w3-left-align">
+        <h5 class="w3-padding-32 w3-left-align make-me-left-align">
             <a href="https://open.spotify.com/user/zachbwh/playlist/293XVnIjz5i8MdvKmpJWzO" target="_blank"><i class="fa fa-spotify w3-text-black w3-margin-right"></i>spotify: zachbwh</a>
         </h5>
-        <p class="w3-text-grey w3-left-align">
+        <p class="w3-text-grey w3-left-align make-me-left-align">
           any and all of my rock music. cbf listing all the subgenres
           <br>
         </p>
@@ -260,9 +264,13 @@ body {
          var tmp = spotifyDiv.children[i].children[0].children[0];
          spotifyDiv.children[i].children[0].appendChild(tmp);
       }
-      rightAlign = $( document ).find('.w3-right-align');
+      rightAlign = $( document ).find('.make-me-right-align');
       for (i = 0; i < rightAlign.length; i++) {
-        rightAlign[i].className = rightAlign[i].className.replace("w3-right-align", "w3-left-align");
+        rightAlign[i].className = rightAlign[i].className.replace("w3-right-align", "w3-center");
+      }
+      leftAlign = $( document ).find('.make-me-left-align');
+      for (i = 0; i < leftAlign.length; i++) {
+        leftAlign[i].className = leftAlign[i].className.replace("w3-left-align", "w3-center");
       }
     } else if (viewportWidth < 890 && 890 < $( window ).width()) {
       for (i = 0; i < spotifyDiv.children.length; i = i + 2) {
@@ -271,57 +279,15 @@ body {
       }
       rightAlign = $( document ).find('.make-me-right-align');
       for (i = 0; i < rightAlign.length; i++) {
-        rightAlign[i].className = rightAlign[i].className.replace("w3-left-align", "w3-right-align");
+        rightAlign[i].className = rightAlign[i].className.replace("w3-center", "w3-right-align");
+      }
+      leftAlign = $( document ).find('.make-me-left-align');
+      for (i = 0; i < leftAlign.length; i++) {
+        leftAlign[i].className = leftAlign[i].className.replace("w3-center", "w3-left-align");
       }
     }
     firstCall = false;
     viewportWidth = $( window ).width();
-
-
-    /*if (viewportWidth < 1200) {
-      var div = document.createElement('div');
-      div.className = "w3-row-padding w3-light-grey w3-padding-32"
-
-      var contentDiv = document.createElement('div');
-      contentDiv.className = "w3-content"
-      div.appendChild(contentDiv);
-
-      var descriptionDiv = document.createElement('div');
-      descriptionDiv.className = "w3-twothird";
-      contentDiv.appendChild(descriptionDiv)
-
-      var playlistHeader = document.createElement('h1');
-      playlistHeader.innerHTML = "solid rock";
-      descriptionDiv.appendChild(playlistHeader);
-
-      var profileHeader = document.createElement('h5');
-      profileHeader.className = "w3-padding-32";
-      descriptionDiv.appendChild(profileHeader);
-
-      var profileLink = document.createElement('a');
-      profileLink.href = "https://open.spotify.com/user/zachbwh/playlist/293XVnIjz5i8MdvKmpJWzO";
-      profileLink.innerHTML = "<i class='fa fa-spotify w3-text-black w3-margin-right'></i>spotify: zachbwh";
-      descriptionDiv.appendChild(profileLink);
-
-      var playlistDescription = document.createElement('p');
-      playlistDescription.className = "w3-text-grey";
-      playlistDescription.innerHTML = "any and all of my rock music. cbf listing all the subgenres<br><br><br><br>"
-      descriptionDiv.appendChild(playlistDescription);
-
-      var spotifyEmbed = document.createElement('iframe');
-      spotifyEmbed.src = "https://open.spotify.com/embed?uri=spotify:user:zachbwh:playlist:293XVnIjz5i8MdvKmpJWzO&theme=white";
-      spotifyEmbed.width = "300px";
-      spotifyEmbed.height = "400px";
-      spotifyEmbed.frameborder = "0";
-      spotifyEmbed.allowtransparency = "true";
-      contentDiv.appendChild(spotifyEmbed);
-
-      while(spotifyDiv.hasChildNodes()) {
-        spotifyDiv.removeChild(spotifyDiv.lastChild);
-      }
-
-      spotifyDiv.appendChild(div);
-    }*/
   }
 
   setupPlaylistsView();
