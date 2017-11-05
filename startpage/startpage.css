@@ -54,6 +54,7 @@ div#sites {
   background-color: white;
   border-radius: 3px;
   z-index: 1;
+  pointer-events: none;
 }
 
 div#options {
