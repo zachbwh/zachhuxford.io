@@ -90,34 +90,12 @@ body {
 </style>
 <body>
 
-<!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-black w3-card-2 w3-left-align w3-large">
-    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-transparent" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="https://zachhuxford.io" class="w3-bar-item w3-button w3-padding-large w3-transparent">Home</a>
-    <a href="https://zachhuxford.io/projects" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Projects</a>
-    <a href="https://blog.zachhuxford.io" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Blog</a>
-    <a href="https://zachhuxford.io/music" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Music</a>
-    <a href="https://zachhuxford.io/rice" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Rice</a>
-  </div>
-
-  <!-- Navbar on small screens -->
-  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="https://zachhuxford.io" class="w3-bar-item w3-button w3-padding-large">Home</a>
-    <a href="https://zachhuxford.io/projects" class="w3-bar-item w3-button w3-padding-large">Projects</a>
-    <a href="https://blog.zachhuxford.io" class="w3-bar-item w3-button w3-padding-large">Blog</a>
-    <a href="https://zachhuxford.io/music" class="w3-bar-item w3-button w3-padding-large">Music</a>
-    <a href="https://zachhuxford.io/rice" class="w3-bar-item w3-button w3-padding-large">Rice</a>
-  </div>
-</div>
-
-<!-- Header -->
-
-<header class="w3-center bgimg bgimg-1 w3-display-container" style="padding:128px 16px">
-  <div class="w3-black w3-center" style="">
-    <h1 class="w3-margin w3-jumbo w3-text-white">MY MUSIC</h1>
-  </div>
-</header>
+  <script>
+    $(function(){
+      $("#header").load('../res/header.html');
+    });
+  </script>
+  <div id="header"></div>
 
 <!-- Second Grid -->
 <div class="w3-row-padding w3-light-grey w3-padding-64">
@@ -241,21 +219,13 @@ body {
 </div>
 
 <!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-center w3-opacity">
-  <p class="w3-xlarge w3-center">since you can probably dox me anyways</p>
-  <div class="w3-xlarge w3-padding-32">
-    <a href="https://www.facebook.com/zachbwh" target="_blank"><i class="fa fa-facebook-official w3-hover-opacity w3-margin-right"></i></a>
-    <a href="https://www.instagram.com/zachbwh/" target="_blank"><i class="fa fa-instagram w3-hover-opacity w3-margin-right"></i></a>
-    <a href="https://www.snapchat.com/add/zachbwh" target="_blank"><i class="fa fa-snapchat w3-hover-opacity w3-margin-right"></i></a>
-    <a href="https://t.me/zachbwh" target="_blank"><i class="fa fa-telegram w3-hover-opacity w3-margin-right"></i></a>
-    <a href="https://twitter.com/zachbwh" target="_blank"><i class="fa fa-twitter w3-hover-opacity w3-margin-right"></i></a>
-    <br>
-    <a href="https://github.com/zachbwh" target="_blank"><i class="fa fa-github w3-hover-opacity w3-margin-right"></i></a>
-    <a href="https://www.linkedin.com/in/zachbwh/" target="_blank"><i class="fa fa-linkedin w3-hover-opacity w3-margin-right"></i></a>
-    <a href="https://www.last.fm/user/zachbwh" target="_blank"><i class="fa fa-lastfm w3-hover-opacity w3-margin-right"></i></a>
-    <a href="https://open.spotify.com/user/zachbwh" target="_blank"><i class="fa fa-spotify w3-hover-opacity w3-margin-right"></i></a>
- </div>
-</footer>
+<script>
+  $(function(){
+    $("#footer").load('../res/footer.html');
+  });
+</script>
+<div id="footer">
+</div>
 
 <script>
   var viewportWidth = $( window ).width();

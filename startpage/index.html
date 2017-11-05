@@ -3,15 +3,102 @@
 <head>
   <meta charset="utf-8">
   <link href="./startpage.css" rel="stylesheet">
+  <link href="../res/w3.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="./startpage.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <title>startpage</title>
+
+  <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+    .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+    .fa-anchor,.fa-coffee {font-size:200px}
+
+    .bgimg {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    /* First image (Logo. Full height) */
+    .bgimg-1 {
+        background-image: linear-gradient(rgba(50, 50, 50, 0.5), rgba(10, 10, 10, 0.5)), url('../res/img/solar.jpg');
+        min-height: 100%;
+    }
+
+    @media only screen and (max-device-width: 1024px) {
+        .bgimg{
+            background-attachment: scroll;
+        }
+    }
+    a {
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /*
+    li a {
+      float: right;
+    }*/
+    .col {
+      float: left;
+      width: 2em;
+      font-size: 24px;
+      margin: 0.3em;
+      font-family: "SegoeUIEmoji";
+    }
+
+    div#output {
+      width: 300px;
+      height: 300px;
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+      overflow-y: scroll;
+      float: left;
+      width: 50vw;
+    }
+    div#footer{
+      float: right;
+      width: 50vw;
+    }
+    div#parentdiv {
+      text-align: center;
+    }
+
+    @font-face {
+    font-family: SegoeUIEmoji;
+    src: url("./seguiemj.ttf") format('truetype');
+}
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107350487-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+  gtag('config', 'UA-107350487-1');
+</script>
 </head>
-<body>
-  <h1><a href="http://zachhuxford.io">zachhuxford.io</a></h1>
-  <input id="search" type="text" autocomplete="off" autofocus="on" onkeyup="javascript: handleQuery(event, this.value);" placeholder="Search..."></input>
-  <div id="options" onmouseover="javascript: toggle()" onmouseout="javascript: toggle()">+</div>
-  <div id="sites">
+<body class="w3-grey">
+
+  <script>
+    $(function(){
+      $("#header").load('../res/header.html');
+    });
+  </script>
+  <div id="header"></div>
+
+
+  <input id="search" class="w3-text-grey" type="text" autocomplete="off" autofocus="on" onkeyup="javascript: handleKeyPress(event, this.value);" placeholder="Search..."></input>
+  <div id="options" class="w3-text-grey" onmouseover="javascript: toggle()" onmouseout="javascript: toggle()">+</div>
+  <div id="sites" class="w3-text-grey">
     <ul>
       <li><b>!g</b><span class="website">google</span></li>
       <li><b>!i</b><span class="website">google images</span></li>
@@ -26,5 +113,15 @@
       <li><b>!r</b><span class="website">go to subreddit</span></li>
       <li><b>!w</b><span class="website">wikipedia</span></li>
     </ul>
+  </div>
+  <script>
+    $(function(){
+      $("#footer").load('../res/footer.html');
+    });
+  </script>
+  <div id="footer">
+  </div>
+  <div id="output" class="w3-col">
+  </div>
 </body>
 </html>

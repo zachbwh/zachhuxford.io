@@ -1,7 +1,7 @@
 body {
-  background-color: #FCF5DD;
+  /*background-color: #FCF5DD;
   color: #FF3838;
-  text-align: center;
+  text-align: center;*/
 }
 
 h1 {
@@ -21,15 +21,16 @@ a {
 
 input#search {
   font-size: 30px;
-  font-family: Roboto Slab;
   width: 35vw;
   min-width: 450px;
-  background-color: #FF9292;
   border-style: none;
   border-radius: 3px;
-  color: #FCF5DD;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
   padding-left: 5px;
   padding-right: 5px;
+  margin-top: 15vh;
+  background-color: white;
 }
 
 ul {
@@ -43,28 +44,29 @@ ul {
 div#sites {
   position: absolute;
   width: 250px;
-  padding: 10px;
+  padding: 5px;
   font-family: Roboto Slab;
   margin-left: 50%;
   transform: translate(-50%, 0);
-  background-color: #FF9292;
-  color: #FCF5DD;
   opacity: 0;
   transition: .2s ease-out;
+  background-color: white;
+  border-radius: 3px;
 }
 
 div#options {
   font-family: Robota Slab;
-  color: #FF3838;
   width: 25px;
-  height: 25px;
+  height: 35px;
   margin-left: 50%;
   margin-top: 10px;
   margin-bottom: 10px;
   transform: translate(-50%, 0);
-  background-color: #FF9292;
+  text-align: center;
+  vertical-align: middle;
   border-radius: 3px;
   font-size: 20px;
+  background-color: white;
 }
 
 .website {
