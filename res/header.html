@@ -18,6 +18,7 @@
   }
   .dropdown-content a {
     color: white;
+    background-color: black;
     padding: 12px 16px;
     display: block;
   }
@@ -26,6 +27,9 @@
   }
   .dropdown:hover .dropdown-content {
      display: block;
+  }
+  .sub-link {
+    padding-left: 50px!important;
   }
   </style>
 
@@ -41,6 +45,7 @@
     </div>
     <div class="dropdown-content w3-black" id="projects-dropdown-content">
       <a href="https://tatai.zachhuxford.io/" class="w3-hover-white">Tātai</a>
+      <a href="https://zmojify.io/" class="w3-hover-white">zmojify.io</a>
       <a href="https://zachhuxford.io/startpage/" class="w3-hover-white">Startpage</a>
       <a href="https://zachhuxford.io/lastfm/" class="w3-hover-white">Lastfm creeper</a>
     </div>
@@ -63,10 +68,27 @@
     );
     </script>
 
+    <script>
+    // Used to toggle the menu on small screens when clicking on the menu button
+    function myFunction() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+    </script>
+
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-      <a href="https://zachhuxford.io" class="w3-bar-item w3-button w3-padding-large">Home</a>
       <a href="https://zachhuxford.io/projects" class="w3-bar-item w3-button w3-padding-large">Projects</a>
+
+      <a href="https://tatai.zachhuxford.io/" class="w3-bar-item w3-button w3-padding-large sub-link">Tātai</a>
+      <a href="https://zmojify.io/" class="w3-bar-item w3-button w3-padding-large sub-link">zmojify.io</a>
+      <a href="https://zachhuxford.io/startpage/" class="w3-bar-item w3-button w3-padding-large sub-link">Startpage</a>
+      <a href="https://zachhuxford.io/lastfm/" class="w3-bar-item w3-button w3-padding-large sub-link">Lastfm creeper</a>
+
       <a href="https://blog.zachhuxford.io" class="w3-bar-item w3-button w3-padding-large">Blog</a>
       <a href="https://zachhuxford.io/music" class="w3-bar-item w3-button w3-padding-large">Music</a>
       <a href="https://zachhuxford.io/rice" class="w3-bar-item w3-button w3-padding-large">Rice</a>
