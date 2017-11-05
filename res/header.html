@@ -1,16 +1,67 @@
 <!DOCTYPE html>
 
 <div>
+  <style>
+  .dropbtn {
+    cursor: pointer;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+  }
+  .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    display: block;
+  }
+  #projects-dropdown-content {
+    left: 100px;
+  }
+  .dropdown:hover .dropdown-content {
+     display: block;
+  }
+  </style>
+
   <!-- Navbar -->
   <div class="w3-top">
     <div class="w3-bar w3-black w3-card-2 w3-left-align w3-large">
       <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-transparent" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
       <a href="https://zachhuxford.io" class="w3-bar-item w3-button w3-padding-large w3-transparent">Home</a>
-      <a href="https://zachhuxford.io/projects" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Projects</a>
+      <a id="projects" href="https://zachhuxford.io/projects" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Projects</a>
       <a href="https://blog.zachhuxford.io" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Blog</a>
       <a href="https://zachhuxford.io/music" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Music</a>
       <a href="https://zachhuxford.io/rice" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Rice</a>
     </div>
+    <div class="dropdown-content w3-black" id="projects-dropdown-content">
+      <a href="https://tatai.zachhuxford.io/" class="w3-hover-white">Tātai</a>
+      <a href="https://zachhuxford.io/startpage/" class="w3-hover-white">Startpage</a>
+      <a href="https://zachhuxford.io/lastfm/" class="w3-hover-white">Lastfm creeper</a>
+    </div>
+
+    <script>
+    $( "#projects" ).hover(function() {
+      $("#projects-dropdown-content").css("display", "block");
+    },
+    function() {
+      $("#projects-dropdown-content").css("display", "none");
+    }
+    );
+
+    $( "#projects-dropdown-content" ).hover(function() {
+      $("#projects-dropdown-content").css("display", "block");
+    },
+    function() {
+      $("#projects-dropdown-content").css("display", "none");
+    }
+    );
+    </script>
 
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
