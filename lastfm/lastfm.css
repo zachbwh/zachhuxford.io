@@ -12,98 +12,6 @@ body {
   background-color: var(--background-color);
 }
 
-div#currentUser {
-  display: inline;
-  width: 75vw;
-  float: left;
-}
-
-img#currentUserDP {
-  position: relative;
-  border-radius: 50%;
-  width: 10vw;
-  height: 10vw;
-  float: left;
-  z-index: 1;
-}
-table#currentUserInfoBasics {
-  background-color: var(--main-color);
-  position: static;
-  float: right;
-  vertical-align: middle;
-  line-height: 5vw;
-  margin-top: 2.5vw;
-  margin-right:   5vw;
-  margin-left: -10vw;
-  padding-left: 250px;
-  height: 5vw;
-  width: 65vw;
-  border-radius: var(--global-border-radius);
-  font-size: 22px;
-  z-index: -1;
-}
-
-div#currentUserInfo {
-  height: 10vw;
-  width: 75vw;
-  vertical-align: middle;
-}
-
-td#currentUserName {
-  float: left;
-  vertical-align: middle;
-  line-height: 5vw;
-  text-align: center;
-}
-td#totalScrobbles {
-  vertical-align: middle;
-  line-height: 5vw;
-  text-align: center;
-}
-
-input#newUsername {
-  font-size: 22px;
-  width: 10vw;
-  float: right;
-  margin-right: 2vw;
-  background-color: var(--accent-color);
-  color: white;
-  border-style: none;
-  border-radius: var(--global-border-radius);
-}
-
-h2#recentTracksHeader {
-  color: var(--main-color);
-  float: right;
-  text-align: left;
-  width:60vw;
-}
-
-table#currentUserRecentTracks {
-  background-color: var(--main-color);
-  float: right;
-  width: 55vw;
-  text-align: left;
-  border-radius: var(--global-border-radius);
-  margin-left: 250px;
-  margin-right: 5vw;
-}
-
-table#currentUserRecentTracks tbody {
-  overflow-x: hidden;
-  height: 20vh;
-  display: block;
-  overflow-y: scroll;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: inherit;
-
-}
-
-tr.playing {
-  font-weight: bold;
-}
-
 a {
   color: var(--text-in-main-color);
   outline: none;
@@ -112,29 +20,6 @@ a {
 
 a:hover {
  text-decoration: underline;
-}
-
-tr {
-  vertical-align: middle;
-  text-overflow: ellipsis;
-  overflow-x: hidden;
-  white-space: nowrap;
-}
-
-td {
-  text-overflow: ellipsis;
-  overflow-x: hidden;
-  white-space: nowrap;
-}
-
-tr[class="0"] {
-  background-color: var(--main-color);
-  color: inherit;
-}
-
-tr[class="1"] {
-  background-color: var(--accent-color);
-  color: white;
 }
 
 div.mostRecentTrack {
@@ -146,11 +31,11 @@ div.mostRecentTrack {
 }
 
 #creeperBar {
-  background-color: #FF9292;
-  width: 20vw;
+  //background-color: #FF9292;
+  //width: 20vw;
   height: 99vh;
-  float: right;
-  display: inline;
+  //float: right;
+  //display: inline;
   overflow-y: scroll;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -163,35 +48,45 @@ div.mostRecentTrack {
   border-radius: 50%;
   float: left;
   vertical-align: center;
+  //top-padding: 35px
   position: relative;
-  top: 35px;
-  left: 10px;
+  top: 50%;
+  transform: translate(0%, -50%);
+  //left: 10px;
 }
 
-table.mostRecentTrack {
-  position: relative;
-  left: 10px;
+div.mostRecentTrackText {
+  //position: relative;
+  //left: 10px;
   padding: 10px;
-  max-width: 10vw;
+  float: left;
+}
+
+div.mostRecentTrack {
+  //position: relative;
+  //left: 10px;
+  //padding: 10px;
+  width: 100%;
+  float: left;
 }
 
 .recentTrackUsername {
   font-weight: bold;
   font-size 24px;
-  max-width: 10vw;
-  width: 10vw;
-  background-color: green;
+  //max-width: 10vw;
+  //width: 10vw;
+  //background-color: green;
 }
 
 .recentTrackTime {
   float: right;
   font-weight: normal;
-  background-color: pink;
+  //background-color: pink;
 }
 
 .recentTrackRow {
-  width: 10vw;
-  max-width: 10vw;
+  //width: 10vw;
+  //max-width: 10vw;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;

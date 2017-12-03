@@ -31,23 +31,36 @@
   .sub-link {
     padding-left: 50px!important;
   }
+
+  @media (min-width: 555px) {
+    .header-name {
+      font-size: 6em;
+    }
+  }
+
+  @media (max-width: 555px) {
+    .header-name {
+      font-size: 3em;
+    }
+  }
+
   </style>
 
   <!-- Navbar -->
   <div class="w3-top">
     <div class="w3-bar w3-black w3-card-2 w3-left-align w3-large">
       <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-transparent" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-      <a href="https://zachhuxford.io" class="w3-bar-item w3-button w3-padding-large w3-transparent">Home</a>
-      <a id="projects" href="https://zachhuxford.io/projects" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Projects</a>
+      <a href="/" class="w3-bar-item w3-button w3-padding-large w3-transparent">Home</a>
+      <a id="projects" href="/projects" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Projects</a>
       <a href="https://blog.zachhuxford.io" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Blog</a>
-      <a href="https://zachhuxford.io/music" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Music</a>
-      <a href="https://zachhuxford.io/rice" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Rice</a>
+      <a href="/music" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Music</a>
+      <a href="/rice" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-transparent">Rice</a>
     </div>
     <div class="dropdown-content w3-black" id="projects-dropdown-content">
       <a href="https://tatai.zachhuxford.io/" class="w3-hover-white">Tātai</a>
       <a href="https://zmojify.io/" class="w3-hover-white">zmojify.io</a>
-      <a href="https://zachhuxford.io/startpage/" class="w3-hover-white">Startpage</a>
-      <a href="https://zachhuxford.io/lastfm/" class="w3-hover-white">Lastfm creeper</a>
+      <a href="/startpage/" class="w3-hover-white">Startpage</a>
+      <a href="/lastfm/" class="w3-hover-white">Lastfm creeper</a>
     </div>
 
     <script>
@@ -82,23 +95,23 @@
 
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-      <a href="https://zachhuxford.io/projects" class="w3-bar-item w3-button w3-padding-large">Projects</a>
+      <a href="/projects" class="w3-bar-item w3-button w3-padding-large">Projects</a>
 
       <a href="https://tatai.zachhuxford.io/" class="w3-bar-item w3-button w3-padding-large sub-link">Tātai</a>
       <a href="https://zmojify.io/" class="w3-bar-item w3-button w3-padding-large sub-link">zmojify.io</a>
-      <a href="https://zachhuxford.io/startpage/" class="w3-bar-item w3-button w3-padding-large sub-link">Startpage</a>
-      <a href="https://zachhuxford.io/lastfm/" class="w3-bar-item w3-button w3-padding-large sub-link">Lastfm creeper</a>
+      <a href="/startpage/" class="w3-bar-item w3-button w3-padding-large sub-link">Startpage</a>
+      <a href="/lastfm/" class="w3-bar-item w3-button w3-padding-large sub-link">Lastfm creeper</a>
 
       <a href="https://blog.zachhuxford.io" class="w3-bar-item w3-button w3-padding-large">Blog</a>
-      <a href="https://zachhuxford.io/music" class="w3-bar-item w3-button w3-padding-large">Music</a>
-      <a href="https://zachhuxford.io/rice" class="w3-bar-item w3-button w3-padding-large">Rice</a>
+      <a href="/music" class="w3-bar-item w3-button w3-padding-large">Music</a>
+      <a href="/rice" class="w3-bar-item w3-button w3-padding-large">Rice</a>
     </div>
   </div>
 
   <!-- Header -->
   <header class="w3-center bgimg bgimg-1 w3-display-container" style="padding:64px 16px">
     <div class="w3-black w3-center" style="">
-      <h1 class="w3-margin w3-jumbo w3-text-white">ZACH HUXFORD</h1>
+      <h1 class="w3-margin header-name w3-text-white">ZACH HUXFORD</h1>
     </div>
   </header>
 </div>

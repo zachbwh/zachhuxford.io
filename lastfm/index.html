@@ -3,47 +3,55 @@
 <head>
   <meta charset="utf-8">
   <title>music creep - zachhuxford.io</title>
-  <link href="./lastfm.css" rel="stylesheet">
+  <!--<link href="./lastfm.css" rel="stylesheet">-->
+  <link href="/res/w3.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
   <script src="./lastfm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/async@2.6.0/dist/async.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore.min.js"></script>
 </head>
+<style>
+ .profile-image {
+   width: 80px;
+   border-radius: 40px;
+   padding: 10px;
+   margin-bottom: 20px;
+   float: left;
+   position: relative;
+   top: 50%;
+   transform: translate(0%, -50%);
+   display: inline-block;
+ }
+ .recentTrackText {
+   //float: left;
+   padding: 6px;
+   display: block;
+   flex-grow: 100%;
+   color: #888888;
+ }
+
+ .recentTrackText p {
+   margin: 6px;
+ }
+
+ .recentTrackDiv {
+   height: 132px;
+   border: solid #777777;
+   border-width: 0px 0px 1px 0px;
+   background-color: #111111;
+ }
+
+ a {
+   text-decoration: none;
+ }
+ a:hover {
+   text-decoration: underline;
+ }
+</style>
 <body>
-  <div id="currentUser">
-    <div id="currentUserInfo">
-      <img src="https://lastfm-img2.akamaized.net/i/u/300x300/6bf45f94307350945c1a64bd99c94234.png" id="currentUserDP">
-      <table id="currentUserInfoBasics">
-        <tr>
-          <td id="currentUserName">ZACHBWH</td>
-          <td id="currentUserTotalScrobbles">TOTAL SCROBBLES: <span id="CUTS"></span></td>
-          <td>
-            <input id="newUsername" type="text" value="" placeholder="New User" onkeyup="javascript:updateCurrentUser(event,this.value);">
-          </td>
-        </tr>
-      </table>
-    </div>
-    <h2 id="recentTracksHeader">Recent Tracks</h2>
-    <table id="currentUserRecentTracks">
-    </table>
-  </div>
   <div id='creeperBar'>
-    <div class="mostRecentTrack">
-      <img src="https://lastfm-img2.akamaized.net/i/u/300x300/6bf45f94307350945c1a64bd99c94234.png" style="height: 60px; width: 60px; border-radius: 50%; float: left; vertical-align: center; position: relative; top: 35px; left: 10px">
-      <table class="mostRecentTrack" style="position: relative; left: 10px; padding: 10px">
-        <tr>
-          <td style="font-weight: bold; font-size 24px">Zach Huxford</td>
-          <td>— 35m</td>
-        </tr>
-        <tr>
-          <td>Lex</td>
-        </tr>
-        <tr>
-          <td>Ratatat</td>
-        </tr>
-        <tr>
-          <td>Classics</td>
-        </tr>
-      </table>
+    <div class="">
+      </div>
     </div>
   </div>
-</body>
-</html>
+</body

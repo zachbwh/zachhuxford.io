@@ -75,7 +75,7 @@ function timeSince (date) {
 function timeSincePlayed (jsonTrackObj) {
   if (jsonTrackObj["@attr"] != null) {
     var output = document.createTextNode("Playing Now");
-    output['data-unixtime'] = jsonTrackObj.date.uts;
+    //output['data-unixtime'] = jsonTrackObj.date.uts;
     return output
   } else {
     var datetime = parseInt(jsonTrackObj.date.uts);
@@ -130,6 +130,17 @@ function updateUsers (usernameList, newModel) {
     userInfoRequest.send();
   } else {
     currentModel = newModel;
+
+    // sort model by most recently played
+    currentModel = _.sortBy(currentModel, function(user) {
+      if (user.userRecentTracks.recenttracks.track[0].date != null) {
+        return user.userRecentTracks.recenttracks.track[0].date.uts;
+      } else {
+        return Math.round((new Date()).getTime() / 1000);
+      }
+    })
+    // invert order of model to get most recent first
+    currentModel = currentModel.reverse();
     updateView();
   }
 }
@@ -198,56 +209,67 @@ function updateCurrentUserRecentTracksView (userRecentTracks) {
     console.log("hmm");
     var zachbwhProfileImage = document.createElement('img');
     zachbwhProfileImage.src = "https://lastfm-img2.akamaized.net/i/u/300x300/6bf45f94307350945c1a64bd99c94234.png";
-    addRecentTrackToCreeperBar(jsonTrackObj, "zachbwh", zachbwhProfileImage);
+    //addRecentTrackToCreeperBar(jsonTrackObj, "zachbwh", zachbwhProfileImage);
   }
-  document.getElementById("currentUserRecentTracks").appendChild(table);
+  //document.getElementById("currentUserRecentTracks").appendChild(table);
+}
+
+function updateCreeperBarView () {
+  var i;
+  for (i=0; i<currentModel.length; i++) {
+    var userProfileImage;
+    var username = currentModel[i].userInfo.user.name;
+    if (currentModel[i].userInfo.user.image[3]["#text"] === "") {
+      userProfileImage = document.createElement('img');
+      userProfileImage.src = "https://lastfm-img2.akamaized.net/i/u/avatar170s/818148bf682d429dc215c1705eb27b98"
+      userProfileImage.className = "profile-image";
+
+    } else {
+      userProfileImage = document.createElement('img');
+      userProfileImage.src = currentModel[i].userInfo.user.image[3]["#text"];
+      userProfileImage.className = "profile-image";
+    }
+  addRecentTrackToCreeperBar(currentModel[i].userRecentTracks.recenttracks.track[0], username, userProfileImage)
+  }
 }
 
 function addRecentTrackToCreeperBar(jsonTrackObj, username, userProfileImageObj) {
   var recentTrackDiv = document.createElement('div');
-  recentTrackDiv.className = "mostRecentTrack";
+  recentTrackDiv.className = "recentTrackDiv";
   recentTrackDiv.id = username;
 
-  userProfileImageObj.className = "creeperBarProfileImage";
+
   recentTrackDiv.appendChild(userProfileImageObj);
 
-  var recentTrackTable = document.createElement('table');
-  recentTrackTable.className = "mostRecentTrack";
+  var recentTrackTable = document.createElement('div');
+  recentTrackTable.className = "recentTrackText";
 
   // Row 1 - Username and timeSincePlayed
-  var row1 = document.createElement('tr');
-  var row1col1 = document.createElement('td');
-  row1col1.className = "recentTrackUsername";
+  var row1 = document.createElement('p');
+  row1.className = "recentTrackUsername";
   var recentTrackUsername = document.createTextNode(username);
-  row1col1.appendChild(recentTrackUsername);
-  row1.appendChild(row1col1);
+  row1.appendChild(recentTrackUsername);
 
-  var row1col1Time = document.createElement('span');
-  row1col1Time.className = "recentTrackTime";
-  row1col1Time.appendChild(document.createTextNode("— "));
-  row1col1Time.appendChild(timeSincePlayed(jsonTrackObj));
-  row1.appendChild(row1col1Time);
+  var row1Time = document.createElement('span');
+  row1Time.className = "w3-right";
+  row1Time.appendChild(document.createTextNode("— "));
+  row1Time.appendChild(timeSincePlayed(jsonTrackObj));
+  row1.appendChild(row1Time);
 
   // Row 2 - Track Name
-  var row2 = document.createElement('tr');
-  var row2col1 = document.createElement('td');
-  row2col1.className = "recentTrackRow";
-  row2col1.appendChild(createTrackLink(jsonTrackObj));
-  row2.appendChild(row2col1);
+  var row2 = document.createElement('p');
+  row2.className = "recentTrackRow";
+  row2.appendChild(createTrackLink(jsonTrackObj));
 
   // Row 3 - Artist Name
-  var row3 = document.createElement('tr');
-  var row3col1 = document.createElement('td');
-  row3col1.className = "recentTrackRow";
-  row3col1.appendChild(createArtistLink(jsonTrackObj));
-  row3.appendChild(row3col1);
+  var row3 = document.createElement('p');
+  row3.className = "recentTrackRow";
+  row3.appendChild(createArtistLink(jsonTrackObj));
 
   // Row 4 - Album Name
-  var row4 = document.createElement('tr');
-  var row4col1 = document.createElement('td');
-  row4col1.className = "recentTrackRow"
-  row4col1.appendChild(createAlbumText(jsonTrackObj));
-  row4.appendChild(row4col1);
+  var row4 = document.createElement('p');
+  row4.className = "recentTrackRow"
+  row4.appendChild(createAlbumText(jsonTrackObj));
 
   recentTrackTable.appendChild(row1);
   recentTrackTable.appendChild(row2);
@@ -260,9 +282,10 @@ function addRecentTrackToCreeperBar(jsonTrackObj, username, userProfileImageObj)
 
 function updateView() {
   // Update current user first
-  document.getElementById("currentUserDP").src = currentModel[0].userInfo.user.image[2]["#text"]; // update main user profile photo
-  document.getElementById("currentUserName").innerHTML = currentModel[0].userInfo.user.name.toUpperCase(); // update main user username
-  document.getElementById("CUTS").innerHTML = currentModel[0].userInfo.user.playcount.toString(); // update scrobble count
+  //document.getElementById("currentUserDP").src = currentModel[0].userInfo.user.image[2]["#text"]; // update main user profile photo
+  //document.getElementById("currentUserName").innerHTML = currentModel[0].userInfo.user.name.toUpperCase(); // update main user username
+  //document.getElementById("CUTS").innerHTML = currentModel[0].userInfo.user.playcount.toString(); // update scrobble count
   updateCurrentUserRecentTracksView(currentModel[0].userRecentTracks);
+  updateCreeperBarView()
 
 }
