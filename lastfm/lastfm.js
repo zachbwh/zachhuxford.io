@@ -18,9 +18,11 @@ function createAlbumArtThumbnail (jsonTrackObj) {
   albumArtObject.src = albumArtLink;
   return albumArtObject;
 }
-function createAlbumText (jsonTrackObj) {
-  var albumNameObject = document.createTextNode(jsonTrackObj.album["#text"]);
-  return albumNameObject;
+function createAlbumLink (jsonTrackObj) {
+  var albumLinkObject = createArtistLink(jsonTrackObj);
+  albumLinkObject.href += jsonTrackObj.album["#text"];
+  albumLinkObject.innerHTML = jsonTrackObj.album["#text"];
+  return albumLinkObject;
 }
 function createArtistLink (jsonTrackObj) {
   var trackLink = jsonTrackObj.url;
@@ -29,6 +31,7 @@ function createArtistLink (jsonTrackObj) {
   var artistName = jsonTrackObj.artist["#text"];
   var artistLinkObject = document.createElement('a');
   artistLinkObject.href = artistLink;
+  artistLinkObject.target = "_blank";
   artistLinkObject.appendChild(document.createTextNode(artistName));
   return artistLinkObject;
 }
@@ -37,49 +40,56 @@ function createTrackLink (jsonTrackObj) {
   var trackName = jsonTrackObj.name;
   var trackLinkObject = document.createElement('a');
   trackLinkObject.href = trackLink;
+  trackLinkObject.target = "_blank";
   trackLinkObject.appendChild(document.createTextNode(trackName));
   return trackLinkObject;
 }
-function createUserLink (jsonUserInfoObj) {
-  var userLink = jsonUserInfoObj.user.url;
-  var username = jsonUserInfoObj.user.name;
-  return "<a href='" + userLink + "'>" + username.toUpperCase() + "</a>";
+function createUserLink (username) {
+  var userLinkObj = document.createElement('a');
+  userLinkObj.href = "https://www.last.fm/user/" + username;
+  userLinkObj.target = "_blank";
+  userLinkObj.appendChild(document.createTextNode(username));
+
+  return userLinkObj;
 }
 
 function timeSince (date) {
   var seconds = Math.floor(((new Date().getTime() / 1000) - date));
-  var interval = Math.floor(seconds / 31536000);
+  var interval = seconds / 31536000;
 
   if (interval > 1) {
-    return interval + " years";
+    return Math.floor(seconds / 31536000) + " years";
   }
-  interval = Math.floor(seconds / 2592000);
+  interval = seconds / 2592000;
   if (interval > 1) {
-    return interval + " months";
+    return Math.floor(seconds / 2592000) + " months";
   }
-  interval = Math.floor(seconds / 86400);
+  interval = seconds / 86400;
   if (interval > 1) {
-    return interval + " d";
+    return Math.floor(seconds / 86400) + " d";
   }
-  interval = Math.floor(seconds / 3600);
+  interval = seconds / 3600;
   if (interval > 1) {
-    return interval + " h";
+    return Math.floor(seconds / 3600) + " h";
   }
-  interval = Math.floor(seconds / 60);
+  interval = seconds / 60;
   if (interval > 1) {
-    return interval + " m";
+    return Math.floor(seconds / 60) + " m";
   }
   return Math.floor(seconds) + " seconds";
 }
 
 function timeSincePlayed (jsonTrackObj) {
   if (jsonTrackObj["@attr"] != null) {
-    var output = document.createTextNode("Playing Now");
+    var output = document.createElement('i');
+    output.className = "fa fa-volume-up time-since-played";
     //output['data-unixtime'] = jsonTrackObj.date.uts;
     return output
   } else {
     var datetime = parseInt(jsonTrackObj.date.uts);
-    var output = document.createTextNode(timeSince(datetime))
+    var output = document.createElement('span');
+    output.appendChild(document.createTextNode(timeSince(datetime)));
+    output.className = "time-since-played";
     output['data-unixtime'] = jsonTrackObj.date.uts;
     return output;
   }
@@ -167,7 +177,7 @@ function updateModel () {
       updateUsers(usernameList, newModel);
     }
   };
-  userFriendsRequest.open("GET", "http://ws.audioscrobbler.com/2.0/?method=user.getfriends&user=" + currentUser + "&api_key=" + api_key + "&format=json", true);
+  userFriendsRequest.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getfriends&user=" + currentUser + "&api_key=" + api_key + "&format=json", true);
   userFriendsRequest.send();
 }
 
@@ -181,7 +191,7 @@ function updateCurrentUser (event, newUsername) {
 //UPDATE VIEW FUNCTIONS
 
 function updateCurrentUserRecentTracksView (userRecentTracks) {
-  var table = document.createElement('tbody');
+  /*var table = document.createElement('tbody');
   //var table = document.getElementById("currentUserRecentTracks").tBodies[0];
   for (var i=0; i<numberOfRecentTracks; i++) {
     //var jsonTrackObj = currentModel[0].userRecentTracks.recenttracks.track[i];
@@ -210,7 +220,7 @@ function updateCurrentUserRecentTracksView (userRecentTracks) {
     var zachbwhProfileImage = document.createElement('img');
     zachbwhProfileImage.src = "https://lastfm-img2.akamaized.net/i/u/300x300/6bf45f94307350945c1a64bd99c94234.png";
     //addRecentTrackToCreeperBar(jsonTrackObj, "zachbwh", zachbwhProfileImage);
-  }
+  }*/
   //document.getElementById("currentUserRecentTracks").appendChild(table);
 }
 
@@ -238,8 +248,11 @@ function addRecentTrackToCreeperBar(jsonTrackObj, username, userProfileImageObj)
   recentTrackDiv.className = "recentTrackDiv";
   recentTrackDiv.id = username;
 
-
-  recentTrackDiv.appendChild(userProfileImageObj);
+  var profileImageLink = createUserLink(username);
+  profileImageLink.innerHTML = "";
+  profileImageLink.className = "profile-image-parent";
+  profileImageLink.appendChild(userProfileImageObj)
+  recentTrackDiv.appendChild(profileImageLink);
 
   var recentTrackTable = document.createElement('div');
   recentTrackTable.className = "recentTrackText";
@@ -247,29 +260,41 @@ function addRecentTrackToCreeperBar(jsonTrackObj, username, userProfileImageObj)
   // Row 1 - Username and timeSincePlayed
   var row1 = document.createElement('p');
   row1.className = "recentTrackUsername";
-  var recentTrackUsername = document.createTextNode(username);
+  var userIcon = document.createElement('i');
+  userIcon.className = "fa fa-user-o w3-margin-right recentTrackIcon";
+  row1.appendChild(userIcon);
+  var recentTrackUsername = createUserLink(username);
   row1.appendChild(recentTrackUsername);
 
   var row1Time = document.createElement('span');
   row1Time.className = "w3-right";
-  row1Time.appendChild(document.createTextNode("— "));
+  row1Time.appendChild(document.createTextNode(" "));
   row1Time.appendChild(timeSincePlayed(jsonTrackObj));
   row1.appendChild(row1Time);
 
   // Row 2 - Track Name
   var row2 = document.createElement('p');
   row2.className = "recentTrackRow";
+  var trackIcon = document.createElement('i');
+  trackIcon.className = "fa fa-music w3-margin-right recentTrackIcon";
+  row2.appendChild(trackIcon);
   row2.appendChild(createTrackLink(jsonTrackObj));
 
   // Row 3 - Artist Name
   var row3 = document.createElement('p');
   row3.className = "recentTrackRow";
+  var artistIcon = document.createElement('i');
+  artistIcon.className = "fa fa-user-o w3-margin-right recentTrackIcon";
+  row3.appendChild(artistIcon);
   row3.appendChild(createArtistLink(jsonTrackObj));
 
   // Row 4 - Album Name
   var row4 = document.createElement('p');
   row4.className = "recentTrackRow"
-  row4.appendChild(createAlbumText(jsonTrackObj));
+  var albumIcon = document.createElement('i');
+  albumIcon.className = "fa fa-music w3-margin-right recentTrackIcon";
+  row4.appendChild(albumIcon);
+  row4.appendChild(createAlbumLink(jsonTrackObj));
 
   recentTrackTable.appendChild(row1);
   recentTrackTable.appendChild(row2);
