@@ -4,7 +4,8 @@ var currentUser = "zachbwh"; // the default main user
 var currentUserInfo;
 var currentUserRecentTracks;
 var currentModel;
-numberOfRecentTracks = 15;
+var newModel;
+numberOfRecentTracks = 1;
 // END OF GLOBAL VARIABLES
 
 // INITIALISATION CODE
@@ -106,7 +107,70 @@ function sleep(milliseconds) {
 // END OF HELPER FUNCTIONS
 
 // UPDATE MODEL FUNCTIONS
+var updateUser = function(username, cb) {
+  var userInfoAndTracks = {};
+  var tasks1 = [];
+
+  var getUserInfo = function(username, cb1){
+    var userInfoRequest = new XMLHttpRequest();
+    userInfoRequest.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var userInfo = JSON.parse(this.responseText);
+        userInfoAndTracks.userInfo = userInfo;
+        console.log("userInfoRequest returned")
+        cb1();
+      }
+    }
+    userInfoRequest.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=" + username + "&api_key=" + api_key + "&format=json", true);
+    userInfoRequest.send();
+  }
+  tasks1.push(getUserInfo.bind(null, username));
+
+  var getUserRecentTracks = function(username, cb1){
+    var userRecentTracksRequest = new XMLHttpRequest();
+    userRecentTracksRequest.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var userInfo = JSON.parse(this.responseText);
+        userInfoAndTracks.userRecentTracks = userInfo;
+        console.log("userRecentTracksRequest returned")
+        cb1();
+      }
+    }
+    userRecentTracksRequest.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=" + username + "&api_key=" + api_key + "&format=json&limit=" + numberOfRecentTracks, true);
+    userRecentTracksRequest.send();
+  }
+  tasks1.push(getUserRecentTracks.bind(null, username));
+
+  async.parallel(tasks1, function(){
+    newModel.push(userInfoAndTracks);
+    cb();
+  });
+
+}
+
 function updateUsers (usernameList, newModel) {
+  var tasks = [];
+  _.each(usernameList, function(element, index, list){
+    console.log("element = " + element);
+    tasks.push(updateUser.bind(null, element));
+  });
+  console.log(tasks);
+  async.parallel(tasks, function(err, results){
+    currentModel = newModel;
+
+    // sort model by most recently played
+    currentModel = _.sortBy(currentModel, function(user) {
+      if (user.userRecentTracks.recenttracks.track[0].date != null) {
+        return user.userRecentTracks.recenttracks.track[0].date.uts;
+      } else {
+        return Math.round((new Date()).getTime() / 1000);
+      }
+    })
+    // invert order of model to get most recent first
+    currentModel = currentModel.reverse();
+    updateView();
+  });
+  /*
   if (usernameList[0] != null) {
 
     var userInfoAndTracks = {}; // this object gets pushed to the model
@@ -139,24 +203,13 @@ function updateUsers (usernameList, newModel) {
     userInfoRequest.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=" + usernameList[0] + "&api_key=" + api_key + "&format=json", true);
     userInfoRequest.send();
   } else {
-    currentModel = newModel;
+    */
 
-    // sort model by most recently played
-    currentModel = _.sortBy(currentModel, function(user) {
-      if (user.userRecentTracks.recenttracks.track[0].date != null) {
-        return user.userRecentTracks.recenttracks.track[0].date.uts;
-      } else {
-        return Math.round((new Date()).getTime() / 1000);
-      }
-    })
-    // invert order of model to get most recent first
-    currentModel = currentModel.reverse();
-    updateView();
-  }
+
 }
 
 function updateModel () {
-  var newModel = [];
+  newModel = [];
   var currentUserRecentTracks;
   var currentUserInfo;
 
@@ -171,7 +224,7 @@ function updateModel () {
       userFriends = JSON.parse(this.responseText);
       numberOfFriends = userFriends.friends["@attr"].total;
       for (i = 0; i < numberOfFriends; i++) {
-        console.log(userFriends.friends.user[i].name);
+        //console.log(userFriends.friends.user[i].name);
         usernameList.push(userFriends.friends.user[i].name);
       }
       updateUsers(usernameList, newModel);
