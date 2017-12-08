@@ -151,10 +151,10 @@ var updateUser = function(username, cb) {
 function updateUsers (usernameList, newModel) {
   var tasks = [];
   _.each(usernameList, function(element, index, list){
-    console.log("element = " + element);
+    //console.log("element = " + element);
     tasks.push(updateUser.bind(null, element));
   });
-  console.log(tasks);
+  //console.log(tasks);
   async.parallel(tasks, function(err, results){
     currentModel = newModel;
 
@@ -279,6 +279,7 @@ function updateCurrentUserRecentTracksView (userRecentTracks) {
 
 function updateCreeperBarView () {
   var i;
+  document.getElementById('creeperBar').innerHTML = "";
   for (i=0; i<currentModel.length; i++) {
     var userProfileImage;
     var username = currentModel[i].userInfo.user.name;
@@ -294,11 +295,24 @@ function updateCreeperBarView () {
     }
   addRecentTrackToCreeperBar(currentModel[i].userRecentTracks.recenttracks.track[0], username, userProfileImage)
   }
+  $( ".recentTrackListenerDiv" ).hover(function() {
+    $( this ).css('background-color', '#333333');
+  },
+  function() {
+    $( this ).css('background-color', '#111111');
+  });
+
+  $( ".profile-image" ).hover(function() {
+    $( this ).css('background-color', '#333333');
+  },
+  function() {
+    $( this ).css('background-color', '#111111');
+  });
 }
 
 function addRecentTrackToCreeperBar(jsonTrackObj, username, userProfileImageObj) {
   var recentTrackDiv = document.createElement('div');
-  recentTrackDiv.className = "recentTrackDiv";
+  recentTrackDiv.className = "recentTrackDiv recentTrackListenerDiv";
   recentTrackDiv.id = username;
 
   var profileImageLink = createUserLink(username);
@@ -363,7 +377,12 @@ function updateView() {
   //document.getElementById("currentUserDP").src = currentModel[0].userInfo.user.image[2]["#text"]; // update main user profile photo
   //document.getElementById("currentUserName").innerHTML = currentModel[0].userInfo.user.name.toUpperCase(); // update main user username
   //document.getElementById("CUTS").innerHTML = currentModel[0].userInfo.user.playcount.toString(); // update scrobble count
+
   updateCurrentUserRecentTracksView(currentModel[0].userRecentTracks);
   updateCreeperBarView()
 
 }
+
+setInterval(
+  function(){console.log("updating");
+  updateModel()}, 20000);
