@@ -117,6 +117,18 @@
       margin-bottom: 32px;
       border-radius: 4px;
     }
+
+    .lastfm-button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+    }
+
+    #lastfm-username-input {
+      padding: 8px 16px;
+      border-radius: 4px;
+      border: none;
+    }
   </style>
 
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
@@ -195,10 +207,20 @@
           as what they are listening to changes in a similar fashion to the spotify
           creeper bar.
       </p>
+      <p class="blog-body">
+        <input id="lastfm-username-input" class="w3-text-grey w3-light-grey w3-left" type="text" autocomplete="off" placeholder="enter your username"></input>
+        <button class="w3-light-grey w3-text-grey lastfm-button" onclick="goToCreeper()">Take Me to My Last.fm Creeper Bar!</button>
+      </p>
       <p class="blog-body w3-right w3-text-gray">WIP</p>
-      <!-- FORMS TO REDIRECT TO CUSTOM USER PAGE GOES HERE -->
     </div>
   </div>
+  <script>
+  function goToCreeper() {
+    var username = document.getElementById('lastfm-username-input').value;
+    console.log(username);
+    window.location.href = "/lastfm?username=" + username;
+  }
+  </script>
 </div>
 
 <div class="w3-row-padding w3-padding-64 w3-container w3-panel">
