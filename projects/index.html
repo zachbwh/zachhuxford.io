@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<head>
+  <title>template - zachhuxford.io</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/res/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+    .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+    .fa-anchor,.fa-coffee {font-size:200px}
+
+    .bgimg {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    /* First image (Logo. Full height) */
+    .bgimg-1 {
+        background-image: linear-gradient(rgba(50, 50, 50, 0.5), rgba(10, 10, 10, 0.5)), url('/res/img/solar.jpg');
+        min-height: 100%;
+    }
+
+    @media only screen and (max-device-width: 1024px) {
+        .bgimg{
+            background-attachment: scroll;
+        }
+    }
+
+    dp {
+      background-image: linear-gradient(rgba(75, 108, 183, 0.5), rgba(24, 40, 72, 0.5)), url('/res/img/dp.jpg');
+      background-repeat: no-repeat;
+      width: 200px;
+      height: 200px;
+      border-radius: 100px;
+    }
+    a {
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+
+    /* Blog Styles */
+    .blog-title {
+      font-weight: bold;
+      font-size: 40px;
+      text-align: center;
+    }
+
+    .blog-date {
+      font-size: 16px;
+      color: #757575;
+      text-align: right;
+    }
+
+    h2 {
+      font-size: 30px;
+      font-weight: bold;
+      padding: 16px;
+      padding-bottom: 0px;
+      width: 100%
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: bold;
+      padding: 16px;
+      width: 100%
+    }
+
+    .blog-body {
+      font-size: 18px;
+      padding: 0px 16px 16px 16px;
+    }
+
+    .blog-code {
+      margin-left: 16px;
+      margin-right: 16px;
+      text-align: left;
+      padding:16px;
+      background-color: #DDDDDD;
+      overflow-x: scroll;
+      font-family: monospace;
+    }
+
+    .blog-quote {
+      padding: 48px;
+      color: #c8af16;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .blog-caption {
+      font-size: 14px;
+      color: #999999;
+      text-align: center;
+      margin-top: -24px;
+    }
+
+    .blog-about {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+      list-style-type: none;
+    }
+
+    .blog-image {
+      max-width: 100%;
+      margin-top: 32px;
+      margin-bottom: 32px;
+      border-radius: 4px;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107350487-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107350487-1');
+</script>
+
+</head>
+<html>
+<body>
+
+  <script>
+    $(function(){
+      $("#header").load('/res/header.html');
+    });
+  </script>
+  <div id="header"></div>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container w3-panel">
+  <div class="w3-content">
+    <h1 class="blog-title">Projects</h1>
+    <div class="w3-twothird">
+      <h2>
+        <a href="/startpage" target="_blank">startpage</a>
+      </h2>
+      <p class="blog-body">
+        A simple "New Tab" page that opens every time I open a new tab or window
+        in firefox.
+      </p>
+      <p class="blog-body">
+        The only significant feature it has is to directly search on a
+        set of desired websites such as google, duckduckgo, and the archwiki.
+        <br>A custom direct search can be performed by appending !code to the end
+        of your search query where code is replaced with the desired website code.
+        <br>For example if I wanted to search for pulseaudio on the archwiki I would enter into the input field:
+      </p>
+      <p class="blog-code">
+        pulseaudio!aw
+      </p>
+      <p class="blog-body">
+        followed by the enter key.
+      </p>
+      <p class="blog-body w3-right w3-text-gray">COMPLETE</p>
+    </div>
+
+    <div class="w3-third w3-center">
+      <img src="./startpage.png" class="blog-image">
+      <p class="blog-caption">search bar + header + quick links</p>
+    </div>
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container w3-panel">
+  <div class="w3-content">
+    <div class="w3-third w3-center">
+      <img src="./lastfm_creep.png" class="blog-image">
+      <p class="blog-caption">an attempt to emulate the spotify social bar for lastfm users</p>
+    </div>
+
+    <div class="w3-twothird w3-right-align">
+      <h2>
+        <a href="/lastfm" target="_blank">last.fm creeper</a>
+      </h2>
+      <p class="blog-body">
+          An emulation of the spotify "creeper" or socializer bar but for last.fm which shows what
+          your friends are listening to in real time or what they listened to most recently.
+      </p>
+      <p class="blog-body">
+          Goals for the future are to implement animations to change the order of users
+          as what they are listening to changes in a similar fashion to the spotify
+          creeper bar.
+      </p>
+      <p class="blog-body w3-right w3-text-gray">WIP</p>
+      <!-- FORMS TO REDIRECT TO CUSTOM USER PAGE GOES HERE -->
+    </div>
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container w3-panel">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h2>
+        <a href="https://tatai.zachhuxford.io/" target="_blank">Tatai</a>
+      </h2>
+      <p class="blog-body">
+        Tatai is an award winning, open source Te Reo Maori number pronunciation aid
+     targeted both at people who want to learn Maori for the first time and for people who simply want to improve.
+     Tatai runs on Linux and Windows and any other operating system that supports Java 8,
+     JavaFX 8 and the voice recognition software HTK.
+      </p>
+      <p class="blog-body">
+        The "brains" behind Tatai's voice recognition is a combination of <a href="http://htk.eng.cam.ac.uk/"> HTK (Hidden Markov Toolkit)</a>
+        and the Te Reo Maori dictionary files provided by Dr Catherine Watson from The University of Auckland.
+      </p>
+      <p class="blog-body">
+        This application was developed for the course SOFTENG 206 at The University of Auckland as a part of the
+        major project in the paper. As a consequence, an online search will show many projects of the same name, however
+        our project won both First Place and the People's Choice awards.
+      </p>
+      <p class="blog-body w3-right w3-text-gray">COMPLETE</p>
+    </div>
+
+    <div class="w3-third w3-center">
+      <img src="./question_screen.png" class="blog-image">
+      <p class="blog-caption"><a href="https://tatai.zachhuxford.io/">Tatai</a> uses HTK to do voice recognition.</p>
+      <img src="./achievements_screen.png" class="blog-image">
+      <p class="blog-caption">The achievements screen.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<script>
+  $(function(){
+    $("#footer").load('/res/footer.html');
+  });
+</script>
+<div id="footer">
+</div>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+</html>
