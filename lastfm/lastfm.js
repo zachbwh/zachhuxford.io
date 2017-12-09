@@ -1,6 +1,6 @@
 // GLOBAL VARIABLES
 var api_key = "a0f6605fafd4fe8da5875bc7c04dca05";
-var currentUser = "zachbwh"; // the default main user
+//var currentUser = "zachbwh"; // the default main user
 var currentUserInfo;
 var currentUserRecentTracks;
 var currentModel;
@@ -59,11 +59,19 @@ function timeSince (date) {
   var interval = seconds / 31536000;
 
   if (interval > 1) {
-    return Math.floor(seconds / 31536000) + " years";
+    if (Math.floor(seconds / 31536000) == 1) {
+      return Math.floor(seconds / 31536000) + " year";
+    } else {
+      return Math.floor(seconds / 31536000) + " years";
+    }
   }
   interval = seconds / 2592000;
   if (interval > 1) {
-    return Math.floor(seconds / 2592000) + " months";
+    if (Math.floor(seconds / 2592000) == 1) {
+      return Math.floor(seconds / 2592000) + " month";
+    } else {
+      return Math.floor(seconds / 2592000) + " months";
+    }
   }
   interval = seconds / 86400;
   if (interval > 1) {
@@ -158,6 +166,14 @@ function updateUsers (usernameList, newModel) {
   async.parallel(tasks, function(err, results){
     currentModel = newModel;
 
+    cleanedModel = [];
+    _.each(currentModel, function(user, index, list) {
+      if (user.userRecentTracks.recenttracks.track.length > 0) {
+        cleanedModel.push(user);
+      }
+    });
+    currentModel = cleanedModel
+
     // sort model by most recently played
     currentModel = _.sortBy(currentModel, function(user) {
       if (user.userRecentTracks.recenttracks.track[0].date != null) {
@@ -170,42 +186,6 @@ function updateUsers (usernameList, newModel) {
     currentModel = currentModel.reverse();
     updateView();
   });
-  /*
-  if (usernameList[0] != null) {
-
-    var userInfoAndTracks = {}; // this object gets pushed to the model
-
-    // retrieves user information from last.fm
-    var userInfoRequest = new XMLHttpRequest();
-    userInfoRequest.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var userInfo = JSON.parse(this.responseText);
-        userInfoAndTracks.userInfo = userInfo;
-        console.log("userRecentTracksRequest returned")
-
-        var userRecentTracksRequest = new XMLHttpRequest();
-        userRecentTracksRequest.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            var userRecentTracks = JSON.parse(this.responseText);
-            userInfoAndTracks.userRecentTracks = userRecentTracks;
-            console.log("userInfoRequest returned")
-            newModel.push(userInfoAndTracks);
-            if (usernameList.length > 0) {
-              updateUsers(usernameList.slice(1, usernameList.length), newModel);
-            }
-          }
-        };
-        userRecentTracksRequest.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=" + usernameList[0] + "&api_key=" + api_key + "&format=json&limit=" + numberOfRecentTracks, true);
-        userRecentTracksRequest.send();
-
-      }
-    };
-    userInfoRequest.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=" + usernameList[0] + "&api_key=" + api_key + "&format=json", true);
-    userInfoRequest.send();
-  } else {
-    */
-
-
 }
 
 function updateModel () {
@@ -244,37 +224,6 @@ function updateCurrentUser (event, newUsername) {
 //UPDATE VIEW FUNCTIONS
 
 function updateCurrentUserRecentTracksView (userRecentTracks) {
-  /*var table = document.createElement('tbody');
-  //var table = document.getElementById("currentUserRecentTracks").tBodies[0];
-  for (var i=0; i<numberOfRecentTracks; i++) {
-    //var jsonTrackObj = currentModel[0].userRecentTracks.recenttracks.track[i];
-    var jsonTrackObj = userRecentTracks.recenttracks.track[i];
-
-    var newRow = document.createElement('tr');
-    var albumCell = document.createElement('td');
-    var trackNameCell = document.createElement('td');
-    var artistNameCell = document.createElement('td');
-    var timePlayedCell = document.createElement('td');
-
-    albumCell.appendChild(createAlbumArtThumbnail(jsonTrackObj));
-    albumCell.appendChild(createAlbumText(jsonTrackObj));
-    artistNameCell.appendChild(createArtistLink(jsonTrackObj));
-    trackNameCell.appendChild(createTrackLink(jsonTrackObj));
-    timePlayedCell.appendChild(timeSincePlayed(jsonTrackObj));
-
-    newRow.appendChild(albumCell);
-    newRow.appendChild(artistNameCell);
-    newRow.appendChild(trackNameCell);
-    newRow.appendChild(timePlayedCell);
-
-    table.appendChild(newRow);
-
-    console.log("hmm");
-    var zachbwhProfileImage = document.createElement('img');
-    zachbwhProfileImage.src = "https://lastfm-img2.akamaized.net/i/u/300x300/6bf45f94307350945c1a64bd99c94234.png";
-    //addRecentTrackToCreeperBar(jsonTrackObj, "zachbwh", zachbwhProfileImage);
-  }*/
-  //document.getElementById("currentUserRecentTracks").appendChild(table);
 }
 
 function updateCreeperBarView () {
