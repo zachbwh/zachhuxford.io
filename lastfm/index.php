@@ -7,7 +7,15 @@
   <link href="/res/w3.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="text/javascript">var currentUser = <?php echo json_encode($_GET["username"]); ?>;</script>
+  <script type="text/javascript">
+    var currentUser = <?php
+        if (isset($_GET["username"])) {
+          echo json_encode($_GET["username"]);
+        } else {
+          echo json_encode("zachbwh");
+        }
+        ?>;
+</script>
   <script src="./lastfm.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/async@2.6.0/dist/async.min.js"></script>
