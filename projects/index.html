@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>template - zachhuxford.io</title>
+  <title>projects - zachhuxford.io</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -124,10 +124,40 @@
       border-radius: 4px;
     }
 
-    #lastfm-username-input {
+    .lastfm-inputs {
       padding: 8px 16px;
       border-radius: 4px;
       border: none;
+      margin: 0px 8px 8px 0px;
+    }
+
+    .lastfm-inputs[type="number"] {
+      margin: 0px;
+    }
+
+    @media (min-width: 594px) {
+      .lastfm-grid {
+        border: none;
+        border-radius: 4px;
+        height: 50vw;
+        max-height:500px
+        width: 30vw;
+        max-width: 300px
+      }
+    }
+
+    @media (max-width: 593px) {
+      .lastfm-grid {
+        border: none;
+        border-radius: 4px;
+        height: 155vw;
+        width: 90vw;
+      }
+    }
+
+    .grid-container {
+      //height: 50vw;
+      //width: 30vw;
     }
   </style>
 
@@ -208,7 +238,7 @@
           creeper bar.
       </p>
       <p class="blog-body">
-        <input id="lastfm-username-input" class="w3-text-grey w3-light-grey w3-left" type="text" autocomplete="off" placeholder="enter your username"></input>
+        <input id="creeper-username-input" class="w3-text-grey w3-light-grey w3-left lastfm-inputs" type="text" autocomplete="off" placeholder="enter your username"></input>
         <button class="w3-light-grey w3-text-grey lastfm-button" onclick="goToCreeper()">Take Me to My Last.fm Creeper Bar!</button>
       </p>
       <p class="blog-body w3-right w3-text-gray">WIP</p>
@@ -216,9 +246,14 @@
   </div>
   <script>
   function goToCreeper() {
-    var username = document.getElementById('lastfm-username-input').value;
+    var username = document.getElementById('creeper-username-input').value;
     console.log(username);
-    window.location.href = "/lastfm?username=" + username;
+    if (username) {
+      window.location.href = "/lastfm?username=" + username;
+    } else {
+      document.getElementById('creeper-username-input').placeholder = "username is required"
+      document.getElementById('creeper-username-input').className = document.getElementById('lastfm-username-input').className.replace("w3-text-grey", "w3-text-red");
+    }
   }
   </script>
 </div>
@@ -254,6 +289,76 @@
       <p class="blog-caption">The achievements screen.</p>
     </div>
   </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container w3-panel">
+  <div class="w3-content">
+    <div class="w3-third w3-center">
+      <!--<img src="./lastfm_grid.png" class="blog-image">-->
+      <div class="grid-container">
+        <iframe class="lastfm-grid" src="/lastfm/grid/?username=zachbwh&gridwidth=3&gridheight=5"></iframe>
+      </div>
+      <p class="blog-caption">inspired by <a href="http://counterrecords.com/home">counterrecords.com</a></p>
+    </div>
+
+    <div class="w3-twothird w3-right-align">
+      <h2>
+        <a href="/lastfm" target="_blank">last.fm grid</a>
+      </h2>
+      <p class="blog-body">
+          An emulation of the spotify "creeper" or socializer bar but for last.fm which shows what
+          your friends are listening to in real time or what they listened to most recently.
+      </p>
+      <p class="blog-body">
+          Goals for the future are to implement animations to change the order of users
+          as what they are listening to changes in a similar fashion to the spotify
+          creeper bar.
+      </p>
+      <p class="blog-body">
+        <div class="w3-content">
+          <div class="w3-col m12">
+            <p class="w3-third w3-left-align">Your last.fm username: </p>
+            <input id="grid-username-input" class="w3-text-grey w3-light-grey w3-left lastfm-inputs w3-half w3-right" type="text" autocomplete="off" placeholder="enter your username"></input>
+          </div>
+
+          <div class="w3-col m12">
+            <p class="w3-third w3-left-align">Grid width and height: </p>
+            <div class="w3-right w3-half">
+              <input id="grid-width" class="w3-text-grey w3-light-grey w3-left lastfm-inputs w3-third" type="number" autocomplete="off" value="3"></input>
+              <i class="fa fa-times w3-third w3-center w3-padding-16"></i>
+              <input id="grid-height" class="w3-text-grey w3-light-grey lastfm-inputs w3-third w3-left" type="number" autocomplete="off" value="3"></input>
+            </div>
+          </div>
+          <div class="w3-col m12">
+            <p class="w3-third w3-left-align">Image quality: </p>
+            <select id="image-quality" class="w3-text-grey w3-light-grey w3-left lastfm-inputs w3-half w3-right" value="3">
+              <option value="0">Small</option>
+              <option value="1">Medium</option>
+              <option value="2">Large</option>
+              <option value="3" selected="true">Extra Large</option>
+            </select>
+        </div>
+        </div>
+        <button class="w3-light-grey w3-text-grey lastfm-button" onclick="goToGrid()">Take Me to My Last.fm Grid!</button>
+      </p>
+      <p class="blog-body w3-right w3-text-gray">COMPLETE</p>
+    </div>
+  </div>
+  <script>
+  function goToGrid() {
+    var username = document.getElementById('grid-username-input').value;
+    var gridwidth = document.getElementById('grid-width').value;
+    var gridheight = document.getElementById('grid-height').value;
+    var imagequality = document.getElementById('image-quality').value;
+    console.log(username);
+    if (username) {
+      window.location.href = "/lastfm/grid/?username=" + username + "&gridheight=" + gridheight + "&gridwidth=" + gridwidth + "&imagesize=" + imagequality;
+    } else {
+      document.getElementById('grid-username-input').placeholder = "username is required"
+      document.getElementById('grid-username-input').className = document.getElementById('grid-username-input').className.replace("w3-text-grey", "w3-text-red");
+    }
+  }
+  </script>
 </div>
 
 <!-- Footer -->

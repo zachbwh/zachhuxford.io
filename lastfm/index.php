@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>music creep - zachhuxford.io</title>
-  <!--<link href="./lastfm.css" rel="stylesheet">-->
   <link href="/res/w3.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,7 +14,7 @@
           echo json_encode("zachbwh");
         }
         ?>;
-</script>
+  </script>
   <script src="./lastfm.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/async@2.6.0/dist/async.min.js"></script>
@@ -30,8 +29,6 @@
    position: relative;
    margin-bottom: 20px;
  }
-
-
 
  .time-since-played {
    color: #777777;
