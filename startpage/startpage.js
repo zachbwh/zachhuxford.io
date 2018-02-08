@@ -17,6 +17,7 @@ websiteSearchCodes = [
 
 function handleKeyPress(event, searchString) {
   var foundSite = false;
+  console.log(event.which);
   if (event.which == 13) {
     for (i = 0; i < websiteSearchCodes.length; i++) {
       if (searchString.endsWith(websiteSearchCodes[i][0]) && !foundSite) {
