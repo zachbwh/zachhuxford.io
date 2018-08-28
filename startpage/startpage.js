@@ -23,11 +23,11 @@ function handleKeyPress(event, searchString) {
       if (searchString.endsWith(websiteSearchCodes[i][0]) && !foundSite) {
         searchStringSansBang = searchString.slice(0, -websiteSearchCodes[i][0].length)
         foundSite = true;
-        window.location.href = websiteSearchCodes[i][2] + searchStringSansBang;
+        window.location.href = websiteSearchCodes[i][2] + encodeURIComponent(searchStringSansBang);
       }
     }
     if (!foundSite) {
-      window.location.href = "https://www.google.co.nz/search?q=" + searchString;
+      window.location.href = "https://www.google.co.nz/search?q=" + encodeURIComponent(searchString);
     }
   }
 }
