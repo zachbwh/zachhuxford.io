@@ -1,0 +1,11 @@
+.prevButton {
+    font-size: 2em;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.nextButton {
+    font-size: 2em;
+    text-align: center;
+    padding-top: 20px;
+}

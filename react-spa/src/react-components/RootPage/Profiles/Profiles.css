@@ -1,0 +1,36 @@
+.profiles {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.profiles .body {
+    width: 100%;
+}
+
+.profiles .links {
+    text-align: center;
+}
+
+.profiles h1 {
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.profiles .links a {
+    font-size: 80px;
+    margin: 0.5em;
+    line-height: 2em;
+}
+
+@media (max-width: 601px) {
+    .profiles .links a {
+        font-size: 3em;
+    }
+
+    .profiles {
+        min-height: 0;
+    }
+}

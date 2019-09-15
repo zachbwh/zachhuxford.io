@@ -1,0 +1,28 @@
+/* All CSS relating to colors should be put here so that it can easily be swapped out for a pluggable color scheme */
+
+/* General */
+.antibes .highlight-full-stop {
+    color: #DE858E;
+}
+
+.antibes p {
+    color: #703428;
+}
+
+.antibes .rootpage {
+    background-image: linear-gradient(#6BA0A0, #3DA2D4);
+}
+
+.antibes .rootpage h1 {
+    color: #703428;
+}
+
+/* Nav Bar Section */
+.antibes .navBar .links a {
+    color: #C17F27;
+}
+
+/* Profiles Section */
+.antibes .profiles .links a {
+    color: #703428;
+}

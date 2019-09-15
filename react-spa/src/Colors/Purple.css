@@ -1,0 +1,36 @@
+/* All CSS relating to colors should be put here so that it can easily be swapped out for a pluggable color scheme */
+
+/* General */
+.purple .highlight-full-stop {
+    color: #0D7D55;
+}
+
+.purple p {
+    color: #CCCCCC;
+}
+
+.purple .rootpage {
+    background-image: linear-gradient(#584C5C, #483C4C);
+}
+
+.purple .rootpage .prevButton {
+    color: #FFFFFF;
+}
+
+.purple .rootpage .nextButton {
+    color: #FFFFFF;
+}
+
+.purple .rootpage h1 {
+    color: #FFFFFF;
+}
+
+/* Nav Bar Section */
+.purple .navBar .links a {
+    color: #FFFFAD;
+}
+
+/* Profiles Section */
+.purple .profiles .links a {
+    color: #FFFFFF;
+}

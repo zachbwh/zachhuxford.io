@@ -1,0 +1,44 @@
+.startpage {
+    min-height: 100vh;
+    max-height: 100vh;
+    height: 100vh;
+    transition: transform 1s ease;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.startpage .body {
+    margin: auto;
+}
+
+.startpage .body input.search {
+    margin: auto;
+    font-size: 30px;
+    padding: 5px;
+}
+
+.startpage .toggle-popup {
+    padding: 5px;
+}
+
+.startpage .popup-container {
+    width: 70%;
+    transition: opacity .2s ease-out;
+    opacity: 0;
+    text-align: left;
+    margin: auto;
+}
+
+.startpage .popup-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.startpage .popup-container li {
+    width: 100%;
+}
+
+.startpage .popup-container .display-name {
+    float: right;
+}

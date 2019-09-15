@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+}
+
+.twemoji {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+}
+
+.twemoji img {
+  display: inline-block;
+}
+
+
+/* CSS Transitions */
+.fade-enter {
+  opacity: 0.01;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 500ms ease-in;
+}
+
+html,
+body {
+    overscroll-behavior-y: contain;
+}
+
+html {
+  scroll-behavior: smooth;
+}

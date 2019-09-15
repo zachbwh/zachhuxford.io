@@ -1,0 +1,48 @@
+/* All CSS relating to colors should be put here so that it can easily be swapped out for a pluggable color scheme */
+
+/* General */
+.all-star .highlight-full-stop {
+    color: #FF2E38;
+}
+
+.all-star {
+    color: #F0F0F0;
+}
+
+.all-star .rootpage .background {
+    background-image: linear-gradient(rgb(24, 49, 139), #2E5DFF);
+}
+
+.all-star .rootpage h1 {
+    color: #F0F0F0;
+}
+
+/* Nav Bar Section */
+.all-star .navBar .links a {
+    color: #F0F0F0;
+}
+
+/* Profiles Section */
+.all-star .profiles .links a {
+    color: #F0F0F0;
+}
+
+.all-star a {
+    color: #F0F0F0;
+}
+
+.all-star .homepage .contact-me a:hover {
+    color: #2E5DFF;
+    background-color: #F0F0F0;
+    border-color: #F0F0F0;
+}
+
+.all-star .homepage .contact-me a {
+    color: #F0F0F0;
+    background-color: none;
+    border-color: #F0F0F0;
+}
+
+.all-star .navBar .gradient-wrapper .gradient-1 {
+    background-image: linear-gradient(rgb(24, 49, 139), #2E5DFF);
+}

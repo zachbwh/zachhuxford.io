@@ -1,0 +1,28 @@
+/* All CSS relating to colors should be put here so that it can easily be swapped out for a pluggable color scheme */
+
+/* General */
+.yellow .highlight-full-stop {
+    color: #616BFF;
+}
+
+.yellow p {
+    color: #483C4C;
+}
+
+.yellow .rootpage {
+    background-image: linear-gradient(#FFFF50, #FFFF8C);
+}
+
+.yellow .rootpage h1 {
+    color: #222222;
+}
+
+/* Nav Bar Section */
+.yellow .navBar .links a {
+    color: #222222;
+}
+
+/* Profiles Section */
+.yellow .profiles .links a {
+    color: #222222;
+}
