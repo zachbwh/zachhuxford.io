@@ -19,6 +19,8 @@
     margin: auto;
     width: 100%;
     max-width: 980px;
+    overflow-y: hidden;
+    max-height: 100vh;
 }
 
 .rootpage .container > * {
@@ -81,27 +83,32 @@
 
 .anim-fade-enter-active .d1 {
     opacity: 1;
-    transition: opacity 0.25s ease-in-out 0.25s;
+    transition: opacity 0.25s ease-in-out;
+    transition-delay: 0.25s;
 }
 
 .anim-fade-enter-active .d2 {
     opacity: 1;
-    transition: opacity 0.25s ease-in-out 0.5s;
+    transition: opacity 0.25s ease-in-out;
+    transition-delay: 0.5s;
 }
 
 .anim-fade-enter-active .d3 {
     opacity: 1;
-    transition: opacity 0.25s ease-in-out 0.75s;
+    transition: opacity 0.25s ease-in-out;
+    transition-delay: 0.75s;
 }
 
 .anim-fade-enter-active .d4 {
     opacity: 1;
-    transition: opacity 0.25s ease-in-out 1s;
+    transition: opacity 0.25s ease-in-out;
+    transition-delay: 1s;
 }
 
 .anim-fade-enter-active .d5 {
     opacity: 1;
-    transition: opacity 0.25s ease-in-out 1.25s;
+    transition: opacity 0.25s ease-in-out;
+    transition-delay: 1.25s;
 }
 .anim-fade-exit {
     opacity: 1;
@@ -109,5 +116,5 @@
 
 .anim-fade-exit-active {
     opacity: 0;
-    transition: opacity 1s;
+    transition: opacity 0;
 }

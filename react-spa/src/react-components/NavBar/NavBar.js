@@ -12,6 +12,22 @@ class NavBar extends Component {
         };
     }
 
+    componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+    }
+
+    handleScroll = () => {
+        const currentScrollPos = window.pageYOffset;
+        const atTop = 0 === currentScrollPos;
+        this.setState({
+            atTop
+        });
+    };
+
     render() {
         return (
             <div className={classnames("navBar", {"hidden-navbar": !this.state.atTop})}>

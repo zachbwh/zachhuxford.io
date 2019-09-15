@@ -13,7 +13,10 @@ import Mates from './Mates/Mates';
 import { Route, Switch } from "react-router-dom";
 import { withRouter } from "react-router";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-const duration = 1500;
+const duration = {
+    enter: 1500,
+    exit: 0,
+   };
 
 class RootPage extends Component {
     constructor(props) {
@@ -27,29 +30,13 @@ class RootPage extends Component {
         }
     }
 
-    componentDidMount() {
-        window.addEventListener("scroll", this.handleScroll);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("scroll", this.handleScroll);
-    }
-
-    handleScroll = () => {
-        const currentScrollPos = window.pageYOffset;
-        const atTop = 0 === currentScrollPos;
-        this.setState({
-            atTop
-        });
-    };
-
     render() {
         return (
             <div className="rootpage">
                 <div className="background"></div>
                 <div className="container" onScroll={this.handleBodyScroll}>
                     <TransitionGroup>
-                        <CSSTransition duration={duration} key={this.props.location.key} classNames="anim-fade">
+                        <CSSTransition timeout={duration} key={this.props.location.key} classNames="anim-fade">
                             <Switch location={this.props.location}>
                                 <Route exact path="/" component={HomePage} />
                                 <Route exact path="/projects" component={Projects} />
