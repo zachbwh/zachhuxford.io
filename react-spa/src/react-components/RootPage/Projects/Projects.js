@@ -82,6 +82,9 @@ class Projects extends Component {
             } else {
                 this.setState({currentIndex: currentIndex});
             }
+        } else {
+            this.setState({currentIndex: 0});
+            window.location.hash = "";
         }
     }
 

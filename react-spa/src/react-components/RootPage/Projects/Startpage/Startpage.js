@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './Startpage.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook, faInstagram, faTwitter, faGithub, faLinkedin, faLastfm, faReddit, faYoutube } from '@fortawesome/free-brands-svg-icons';
+
+
 const bangToWebsite = [{
     bang: "g",
     displayName: "google",
@@ -115,12 +119,27 @@ class Startpage extends Component {
             <div className="startpage">
                 <div className="body">
                     <div>
+                        <h1>Startpage<span className="highlight-full-stop">.</span></h1>
                         <input placeholder="Search..." className="search"  autocomplete="off" autofocus="on" type="text" onKeyPress={this.onKeyPress.bind(this)}></input>
                         <div className="toggle-popup" onMouseEnter={this.togglePopup.bind(this)} onMouseLeave={this.togglePopup.bind(this)} >{this.state.showPopup ? "-" : "+"}</div>
                         <div className="popup-container" style={{opacity: this.state.showPopup ? 1 : 0 }}>
                             <ul>
                                 {listItems}
                             </ul>
+                        </div>
+                        <div className="quick-links">
+                            <div>
+                                <a href="https://www.facebook.com"><FontAwesomeIcon icon={faFacebook} /></a>
+                                <a href="https://www.instagram.com"><FontAwesomeIcon icon={faInstagram} /></a>
+                                <a href="https://www.reddit.com/"><FontAwesomeIcon icon={faReddit} /></a>
+                                <a href="https://twitter.com"><FontAwesomeIcon icon={faTwitter} /></a>
+                            </div>
+                            <div>
+                                <a href="https://github.com/zachbwh"><FontAwesomeIcon icon={faGithub} /></a>
+                                <a href="https://www.linkedin.com/"><FontAwesomeIcon icon={faLinkedin} /></a>
+                                <a href="https://www.last.fm/user/zachbwh"><FontAwesomeIcon icon={faLastfm} /></a>
+                                <a href="https://www.youtube.com/"><FontAwesomeIcon icon={faYoutube} /></a>
+                            </div>
                         </div>
                     </div>
                 </div>

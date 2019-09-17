@@ -7,19 +7,39 @@ import './Colors/Antibes.css';
 
 import RootPage from './react-components/RootPage/RootPage';
 import NavBar from './react-components/NavBar/NavBar';
+import ThemePicker from './react-components/ThemePicker/ThemePicker';
 import { BrowserRouter } from "react-router-dom";
 
 class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <div className="App all-star">
-          <NavBar />
-		      <RootPage />
-        </div>
-      </BrowserRouter>
-    );
-  }
+	constructor(props) {
+		super(props);
+		
+		var initialColorClass = localStorage.getItem("colorClass");
+		if (!initialColorClass) {
+			initialColorClass = "all-star";
+		}
+
+		this.state = {
+			colorClass: initialColorClass
+		};
+	}
+	
+	updateColorClass(newColorClass) {
+		localStorage.setItem("colorClass", newColorClass);
+		this.setState({colorClass: newColorClass});
+	}
+
+	render() {
+		return (
+    		<BrowserRouter>
+				<div className={"App " + this.state.colorClass}>
+					<NavBar />
+					<RootPage />
+					<ThemePicker updateColorClass={this.updateColorClass.bind(this)}/>
+				</div>
+      		</BrowserRouter>
+    	);
+  	}
 }
 
 export default App;

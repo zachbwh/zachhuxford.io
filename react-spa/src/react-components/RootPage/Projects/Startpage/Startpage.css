@@ -2,7 +2,6 @@
     min-height: 100vh;
     max-height: 100vh;
     height: 100vh;
-    transition: transform 1s ease;
     display: flex;
     align-items: center;
     text-align: center;
@@ -10,6 +9,12 @@
 
 .startpage .body {
     margin: auto;
+}
+
+.startpage .body h1 {
+    margin: auto;
+    padding-bottom: 100px; 
+    display: block;
 }
 
 .startpage .body input.search {
@@ -41,4 +46,17 @@
 
 .startpage .popup-container .display-name {
     float: right;
+}
+
+.startpage .quick-links {
+    padding-top: 32px;
+}
+
+.startpage .quick-links div {
+    font-size: 2em;
+    padding: 16px 0;
+}
+
+.startpage .quick-links a {
+    padding: 0 16px;
 }

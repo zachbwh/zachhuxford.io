@@ -5,20 +5,12 @@
     color: #0D7D55;
 }
 
-.purple p {
-    color: #CCCCCC;
+.purple {
+    color: #FFFFFF;
 }
 
-.purple .rootpage {
+.purple .rootpage .background {
     background-image: linear-gradient(#584C5C, #483C4C);
-}
-
-.purple .rootpage .prevButton {
-    color: #FFFFFF;
-}
-
-.purple .rootpage .nextButton {
-    color: #FFFFFF;
 }
 
 .purple .rootpage h1 {
@@ -27,10 +19,30 @@
 
 /* Nav Bar Section */
 .purple .navBar .links a {
-    color: #FFFFAD;
+    color: #FFFFFF;
 }
 
 /* Profiles Section */
 .purple .profiles .links a {
     color: #FFFFFF;
+}
+
+.purple a {
+    color: #FFFFFF;
+}
+
+.purple .homepage .contact-me a:hover {
+    color: #483C4C;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+}
+
+.purple .homepage .contact-me a {
+    color: #FFFFFF;
+    background-color: none;
+    border-color: #FFFFFF;
+}
+
+.purple .navBar .gradient-wrapper .gradient-1 {
+    background-image: linear-gradient(#584C5C, #483C4C);
 }

@@ -15,10 +15,10 @@ class HomePage extends Component {
                             </div>
                         </div>
                         <p className="d3">
-                            I'm a Software Devloper.<br /><br />
+                            I'm a Software Developer.<br /><br />
                             I like to spend my spare time browsing wikipedia, reading, listening to podcasts and music, and cooking.<br />
-                            I'm particularly interested in full stack web development, <em>graphic design</em> and Linux<br /><br />
-                            I care about my work having a positive impact on other people which is why it is important to me that my work has a strong <em>human</em> component,
+                            I'm particularly interested in full stack web development, <em>graphic design</em> and Linux.<br /><br />
+                            I care about my work having a positive impact on other people, which is why it is important to me that my work has a strong <em>human</em> component,
                             whether it is by creating something useful to people or something beautiful.<br /><br />
                         </p>
                         <p className="contact-me d5"><a className="" onClick={this.handleContactClick} href="mailto:me@zachhuxford.io">Contact Me</a></p>

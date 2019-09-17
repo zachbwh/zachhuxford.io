@@ -5,11 +5,11 @@
     color: #616BFF;
 }
 
-.yellow p {
-    color: #483C4C;
+.yellow {
+    color: #222222;
 }
 
-.yellow .rootpage {
+.yellow .rootpage .background {
     background-image: linear-gradient(#FFFF50, #FFFF8C);
 }
 
@@ -25,4 +25,24 @@
 /* Profiles Section */
 .yellow .profiles .links a {
     color: #222222;
+}
+
+.yellow a {
+    color: #222222;
+}
+
+.yellow .homepage .contact-me a:hover {
+    color: #483C4C;
+    background-color: #222222;
+    border-color: #222222;
+}
+
+.yellow .homepage .contact-me a {
+    color: #222222;
+    background-color: none;
+    border-color: #222222;
+}
+
+.yellow .navBar .gradient-wrapper .gradient-1 {
+    background-image: linear-gradient(#FFFF50, #FFFF8C);
 }
