@@ -9,6 +9,11 @@
 
 .startpage .body {
     margin: auto;
+    max-width: 100%;
+}
+
+.startpage .body > * {
+    padding: 16px;
 }
 
 .startpage .body h1 {
@@ -20,7 +25,7 @@
 .startpage .body input.search {
     margin: auto;
     font-size: 30px;
-    padding: 5px;
+    max-width: 90%;
 }
 
 .startpage .toggle-popup {
