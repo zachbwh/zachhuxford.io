@@ -47,6 +47,6 @@
     background-image: linear-gradient(rgb(24, 49, 139), #2E5DFF);
 }
 
-.all-star .music .loading-shimmer .animate {
+.all-star .recent-track.loading-shimmer .animate {
     background-image: linear-gradient(to right, rgb(31, 67, 193) 4%, #2E5DFF 25%, rgb(31, 67, 193) 36%);
 }

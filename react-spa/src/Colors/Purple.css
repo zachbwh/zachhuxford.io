@@ -47,6 +47,6 @@
     background-image: linear-gradient(#584C5C, #483C4C);
 }
 
-.purple .music .loading-shimmer .animate {
+.purple .recent-track.loading-shimmer .animate {
     background-image: linear-gradient(to right, #483C4C 4%, #584C5C 25%, #483C4C 36%);
 }
