@@ -46,3 +46,7 @@
 .yellow .navBar .gradient-wrapper .gradient-1 {
     background-image: linear-gradient(#FFFF50, #FFFF8C);
 }
+
+.yellow .music .loading-shimmer .animate {
+    background-image: linear-gradient(to right, #F0F046 4%, #FFFF8C 25%, #F0F046 36%);
+}

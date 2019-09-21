@@ -9,6 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "animated": "^0.2.2",
     "awesome-debounce-promise": "^2.1.0",
+    "moment": "^2.24.0",
     "react": "^16.9.0",
     "react-devicon": "^0.1.9",
     "react-dom": "^16.9.0",

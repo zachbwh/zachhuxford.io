@@ -19,29 +19,9 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    /* padding: 10em 0em; */
 }
 
 .projects .scroll-down {
     padding-top: 100px;
     text-align: center;
-}
-
-/* .projects > div {
-    transition: transform 1s ease;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-} */
-
-.projects .animate-in {
-    transform: translateY(0);
-}
-
-.projects .animate-up-out {
-    transform: translateY(-100vh);
-}
-
-.projects .animate-down-out {
-    transform: translateY(100vh);
 }

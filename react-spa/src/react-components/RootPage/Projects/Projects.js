@@ -103,7 +103,7 @@ class Projects extends Component {
                                 I want my next challenge to be related to an open source or monetizeable product BUT fundamentally something that other
                                     people will use because it is both useful and well marketed.<br /><br />
                                 In other words I'm sick of doing seemingly pointless personal and uni projects (but please have a look at them).
-                                </p>
+                            </p>
                             <div className="scroll-down">
                                 <p>SCROLL DOWN</p>
                                 <FontAwesomeIcon icon={faChevronDown} />
@@ -124,7 +124,7 @@ class Projects extends Component {
                                 the major project in the paper. As a consequence, an online search will show many projects of the same name,
                                     however our project won both First Place and the People's Choice awards.<br /><br />
                                 COMPLETE
-                                </p>
+                            </p>
                         </div>
                     </div>
     
@@ -151,7 +151,7 @@ class Projects extends Component {
                                 Goals for the future are to implement animations to change the order of users as what they are
                                     listening to changes in a similar fashion to the spotify creeper bar.<br /><br />
                                 WIP
-                                </p>
+                            </p>
                         </div>
                     </div>
                 </div>
