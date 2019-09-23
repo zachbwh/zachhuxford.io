@@ -1,30 +1,26 @@
-.projects {
+.viewport-pagination-view {
     min-height: 100vh;
     max-height: 100vh;
     height: 100vh;
 }
 
-.projects > * {
+.viewport-pagination-view > * {
     transition: transform 1s ease;
 }
 
-.projects .body {
+.viewport-pagination-view .viewport {
     min-height: 100vh;
     height: 100vh;
-    max-height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
 }
 
-.projects .project {
-    min-height: 100vh;
-    height: 100vh;
-    max-height: 100vh;
-    display: flex;
-    align-items: center;
+.viewport-pagination-view .viewport > *{
+    width: 100%;
 }
 
-.projects .scroll-down {
+.viewport-pagination-view .scroll-down {
     text-align: center;
     position: relative;
     top: 100px;

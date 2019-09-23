@@ -1,96 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from "react-router-dom";
 import './Projects.css';
+import ViewportPaginationView from '../ViewportPaginationView/ViewportPaginationView';
+import '../ViewportPaginationView/ViewportPaginationView.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-const scrollCooldownMilliSeconds = 500;
-const maxIndexValue = 3;
-const hashes = ["", "tatai", "util", "lastfm"]
-
-const handleScroll = function(event) {
-    event.preventDefault();
-
-    var currentDate = new Date(),
-        lastScrollTime = this.state.lastScrollTime;
-
-    if (typeof lastScrollTime !== "undefined" && lastScrollTime != null && new Date(lastScrollTime.getTime() + scrollCooldownMilliSeconds) < currentDate) {
-        
-        if (event.deltaY < 0) {
-            console.log("scroll up");
-            this.scrollToPrevRef();
-
-        } else if (event.deltaY > 0) {
-            console.log("scroll down");
-            this.scrollToNextRef();
-        }
-
-        this.setState({
-            lastScrollTime: currentDate
-        });
-    }
-}
-
-const handleTouchMove = function(event) {
-    event.preventDefault();
-
-    var currentDate = new Date(),
-        lastScrollTime = this.state.lastScrollTime,
-        currentPageY = event.targetTouches[0].pageY;;
-
-    if (typeof lastScrollTime !== "undefined" && lastScrollTime != null && new Date(lastScrollTime.getTime() + scrollCooldownMilliSeconds) < currentDate) {
-        
-        if (this.touchStartPos < currentPageY) {
-            console.log("scroll up");
-            this.scrollToPrevRef();
-
-        } else if (this.touchStartPos > currentPageY) {
-            console.log("scroll down");
-            this.scrollToNextRef();
-        }
-
-        this.setState({
-            lastScrollTime: currentDate
-        });
-    }
-}
-
-const registerTouchStart = function(event) {
-    event.preventDefault();
-    this.touchStartPos = event.targetTouches[0].pageY;
-}
-
-class Projects extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            currentIndex: 0,
-            lastScrollTime: new Date(),
-        }
-    }
-
-    componentDidMount() {
-        var hash = window.location.hash.slice(1);
-        if (hash) {
-            console.log(hash);
-            var currentIndex = hashes.indexOf(hash);
-            console.log(currentIndex);
-            if (currentIndex < 0) {
-                this.setState({currentIndex: 0});
-                window.location.hash = ""
-            } else {
-                this.setState({currentIndex: currentIndex});
-            }
-        } else {
-            this.setState({currentIndex: 0});
-            window.location.hash = "";
-        }
-    }
+class Projects extends ViewportPaginationView {
+    hashes = ["", "tatai", "util", "lastfm"]
 
     render() {
         return (
-            <div className="projects" onWheel={handleScroll.bind(this)} onTouchMove={handleTouchMove.bind(this)} onTouchStart={registerTouchStart.bind(this)}>
+            <div className="projects" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
                 <div style={{transform: "translateY(-" + this.state.currentIndex + "00vh)"}}>
                     <div className="body">
                         <div>
@@ -157,26 +78,6 @@ class Projects extends Component {
                 </div>
             </div>
         );
-    }
-
-    scrollToNextRef = () => {
-        var nextRefIndex,
-            currentIndex = this.state.currentIndex,
-
-        nextRefIndex = currentIndex < maxIndexValue ? currentIndex + 1 : maxIndexValue;
-        window.location.hash = hashes[nextRefIndex];
-
-        this.setState({currentIndex: nextRefIndex});
-    }
-
-    scrollToPrevRef = () => {
-        var nextRefIndex,
-            currentIndex = this.state.currentIndex,
-
-        nextRefIndex = currentIndex > 0 ? currentIndex - 1 : 0;
-        window.location.hash = hashes[nextRefIndex];
-
-        this.setState({currentIndex: nextRefIndex});
     }
 }
 

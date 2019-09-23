@@ -61,3 +61,8 @@
     }
   }
   
+  @media (max-width: 601px) {
+      .recent-track .text-block {
+          padding-left: 10px;
+      }
+}
