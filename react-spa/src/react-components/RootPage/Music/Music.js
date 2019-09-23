@@ -10,7 +10,6 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 class Music extends ViewportPaginationView {
     onComponentDidMount() {
         var that = this;
-        void config;
         fetch(`${config.apiDomain}/lastfm/getMyRecentTrack`).then(function(response) {
             return response.json();
         }).then(function(json) {
