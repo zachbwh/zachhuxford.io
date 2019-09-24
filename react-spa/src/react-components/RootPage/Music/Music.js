@@ -1,6 +1,8 @@
 import React from 'react';
 import config from '../../../config';
 import './Music.css';
+
+import io from 'socket.io-client';
 import RecentTrackTile from './RecentTrackTile/RecentTrackTile';
 import ViewportPaginationView from '../ViewportPaginationView/ViewportPaginationView';
 import '../ViewportPaginationView/ViewportPaginationView.css';
@@ -13,8 +15,22 @@ class Music extends ViewportPaginationView {
         fetch(`${config.apiDomain}/lastfm/getMyRecentTrack`).then(function(response) {
             return response.json();
         }).then(function(json) {
-            that.setState({"recentTrack": json});
+            that.setState({recentTrack: json});
         });
+
+        this.socket = io(`${config.apiDomain}/lastfm`);
+
+        this.socket.on("recent-track-update", function(message) {
+            var newRecentTrack = JSON.parse(message);
+            that.setState({recentTrack: newRecentTrack});
+        })
+        this.socket.on("connected", function(msg) {
+            console.log(msg);
+        })
+    }
+
+    componentWillUnmount() {
+        this.socket.close();
     }
 
     hashes = ["one", "two"]

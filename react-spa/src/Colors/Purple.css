@@ -50,3 +50,7 @@
 .purple .recent-track.loading-shimmer .animate {
     background-image: linear-gradient(to right, #483C4C 4%, #584C5C 25%, #483C4C 36%);
 }
+
+.purple .recent-track .display-photo.fa > svg {
+    color: #483C4C;
+}

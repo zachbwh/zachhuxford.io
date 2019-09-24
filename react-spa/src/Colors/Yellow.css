@@ -50,3 +50,7 @@
 .yellow .recent-track.loading-shimmer .animate {
     background-image: linear-gradient(to right, #F0F046 4%, #FFFF8C 25%, #F0F046 36%);
 }
+
+.yellow .recent-track .display-photo.fa > svg {
+    color: #F0F046;
+}

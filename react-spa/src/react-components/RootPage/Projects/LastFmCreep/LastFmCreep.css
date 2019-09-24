@@ -1,0 +1,13 @@
+.lastfm-creep {
+    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+.lastfm-creep .recent-track {
+    text-overflow: ellipsis;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+}

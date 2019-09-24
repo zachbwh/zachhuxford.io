@@ -11,9 +11,9 @@ class Projects extends ViewportPaginationView {
 
     render() {
         return (
-            <div className="projects" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
+            <div className="viewport-pagination-view projects" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
                 <div style={{transform: "translateY(-" + this.state.currentIndex + "00vh)"}}>
-                    <div className="body">
+                    <div className="viewport">
                         <div>
                             <h1>My Projects<span className="highlight-full-stop">.</span></h1>
                             <p>
@@ -32,7 +32,7 @@ class Projects extends ViewportPaginationView {
                         </div>
                     </div>
     
-                    <div className="project">
+                    <div className="viewport">
                         <div>
                             <h1>Tatai</h1>
                             <p>
@@ -49,7 +49,7 @@ class Projects extends ViewportPaginationView {
                         </div>
                     </div>
     
-                    <div className="project">
+                    <div className="viewport">
                         <div>
                             <h1>Utilities</h1>
                             <p>
@@ -63,7 +63,7 @@ class Projects extends ViewportPaginationView {
                         </div>
                     </div>
     
-                    <div className="project">
+                    <div className="viewport">
                         <div>
                             <h1>last.fm creeper</h1>
                             <p>

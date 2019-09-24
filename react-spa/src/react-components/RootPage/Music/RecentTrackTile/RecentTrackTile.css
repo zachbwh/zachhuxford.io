@@ -14,6 +14,10 @@
     vertical-align: baseline;
 }
 
+.recent-track .display-photo.fa > svg {
+    font-size: 5em;
+}
+
 .recent-track .user-info {
     margin-left: 20px;
 }
