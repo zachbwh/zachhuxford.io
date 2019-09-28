@@ -1,5 +1,5 @@
 let config = {
-    apiDomain: "http://localhost:3001"
+    apiDomain: "https://api.zachhuxford.io"
 };
 
 export { config as default };
