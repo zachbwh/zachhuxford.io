@@ -13,8 +13,8 @@ deploy:
   secret_access_key:
     secure: v210KfF96KDXP28aWKEU3wfZ5b3DyS52oW6qYzf4faMh2eDs1PNAHzr0oo2IX+HP69nf5c3WgLbtAERSryODI2nen2iyVtdOvX9O4BTLs9Zn6oXAusHqyk49C2ujhRDBFuIfJXSCDZZC3B2wiAPKaFdy4IKYvAjYClDZ0tGV1LSbLPD9/vB/tT9Gz5H6vEJ70aKs0pu5qRJAmJg5xjKd3W21a2NGxpiP81xJVNjKmToGYROkpiDQ8bk3yvZgPEgSgDO73wlCytbo2O5sF783gMO6kDOlJMj/hrXF7UgWFo8qRTOuBu0HAnBw36VPIT61ic1AZD0vJIqW75nmkwlil8HV+H0mL/ps3MIGQ1mTucrtBhFSdDzFYn03Wf1RfdEAoWaQKaqKp+zCQcwyg7afqpFJCmoOFyP4Q45DU8jrXWMnofrBSg7fBg4mF+qGiMJ6WmEdXWSjJRpcAqPVb/i4nGZZWc8+RGTKrqTPZFdXz2R1+BBMlFEFdXSKBolfn2GNgzO5FFn3zQN2zuwxW2pIXs4oWA64vsZQ221MELe8E3sct65CkywFRF3a6P6pAh37ueHFtOvFvxyOB8Kjl+z27TxNpRyS6Mt+NHD/IBR9WZHbc3KWK+DBRAxMslu9C/rrnGZ/JekwbonyV+0mqzGi9hY2VRGvgr+5thoHsk3qXfM=
   bucket: zachhuxford-io
-  local-dir: build/
-  upload-dir: public/
+  local-dir: build
+  upload-dir: public
   acl: public read, bucket owner full control
   on:
     repo: zachbwh/zachhuxford.io
