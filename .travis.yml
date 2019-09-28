@@ -11,8 +11,7 @@ script:
 deploy:
   provider: s3
   access_key_id: AKIAIGWRXLWWJ2QAYE4A
-  secret_access_key:
-    secure: aXRCFj9y6QcNFGV2V6EX6Pr5tgPajLomBR+Y74zpT8Z0jDMbPb3IWqyueead4zJjcxc03PyHJSWY6CFyApUStHKI8+kRkiizS9D4ubqXy+SF2IwwEXEt7fZqOxBV6a2tAxKvmcuY6+ZZLU5Hq8YK6uywOFVmRARvWe/rGyxbpp+Z/FPdDeXNtLAAzVr/XB/KXzA0zXGH5HpZDgWcyan8QIp7m3WrU9iLC5sKi2lVVZR3Gfh9jWpK3ep/ZZgf50gD+uj8VguZiQLg8vAUSnwfsPJj5ajU43ROK/SHT0h3TNkJsym4qneaYbnHiHDQfJX7gg6c/Xe2aZrhJkAhY+3hyvWrCHTL3JkXWI4nXJ0aUzhfa2Eygy0d6Mdx7bDEaigCn5iiUW6ETgC89KURr0dTW/Gk7EuwcMN/VX9NQNhcqchnA+OpjqFX8SLa50PELYMdUi5SlYShpH+vijW4xmeUWG3/ikdRFVwPlvFYqra18xjakwKu+Vbsq9LQ3mObGiHOfSZRsTbMCnW8urK31s3k4qDMDETtODN4t0/k2bHgt4jrXZ2tlKFjmrBq84flO2BClVrsFFQUYu0b9IDGeo0k20A7Om23GkrovyZaxFjlg+MKmqj5LXJqRkt6Wwe7zHQnk48Xmy6avvBApe+NnITPAVX9j7hYAvC+pZjXHDGwUCs=
+  secret_access_key: $AWS_SECRET_KEY 
   bucket: zachhuxford-io
   skip_cleanup: true
   region: ap-southeast-2
