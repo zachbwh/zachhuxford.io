@@ -1,0 +1,10 @@
+.rice .body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.rice .scroll-down {
+    padding-top: 100px;
+    text-align: center;
+}

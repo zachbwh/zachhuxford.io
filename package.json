@@ -1,0 +1,19 @@
+{
+  "name": "zachhuxford.io",
+  "version": "1.0.0",
+  "description": "A personal website to host a blog and small personal projects.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zachbwh/zachhuxford.io.git"
+  },
+  "author": "Zach Huxford",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zachbwh/zachhuxford.io/issues"
+  },
+  "homepage": "https://github.com/zachbwh/zachhuxford.io#readme"
+}

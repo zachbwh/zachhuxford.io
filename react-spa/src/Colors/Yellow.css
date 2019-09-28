@@ -1,0 +1,60 @@
+/* All CSS relating to colors should be put here so that it can easily be swapped out for a pluggable color scheme */
+
+/* General */
+.yellow .highlight-full-stop {
+    color: #616BFF;
+}
+
+.yellow {
+    color: #222222;
+}
+
+.yellow .rootpage .background {
+    background-image: linear-gradient(#FFFF50, #FFFF8C);
+}
+
+.yellow .rootpage h1 {
+    color: #222222;
+}
+
+/* Nav Bar Section */
+.yellow .navBar .links a {
+    color: #222222;
+}
+
+/* Profiles Section */
+.yellow .profiles .links a {
+    color: #222222;
+}
+
+.yellow a {
+    color: #222222;
+}
+
+.yellow .homepage .contact-me a:hover {
+    color: #483C4C;
+    background-color: #222222;
+    border-color: #222222;
+}
+
+.yellow .homepage .contact-me a {
+    color: #222222;
+    background-color: none;
+    border-color: #222222;
+}
+
+.yellow .navBar .gradient-wrapper .gradient-1 {
+    background-image: linear-gradient(#FFFF50, #FFFF8C);
+}
+
+.yellow .recent-track.loading-shimmer .animate {
+    background-image: linear-gradient(to right, #F0F046 4%, #FFFF8C 25%, #F0F046 36%);
+}
+
+.yellow .recent-track .display-photo.fa > svg {
+    color: #FFFF8C;
+}
+
+.yellow .lastfm-creep .recent-track {
+    background-color: #F0F046;
+}

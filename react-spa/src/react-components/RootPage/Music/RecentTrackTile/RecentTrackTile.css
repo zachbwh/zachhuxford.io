@@ -1,0 +1,71 @@
+.recent-track {
+    margin: auto;
+    max-width: 400px;
+}
+
+.recent-track .display-photo {
+    margin: 1em 0;
+    display: inline-block;
+    width: 5em;
+    height: 5em;
+    border-radius: 2.5em;
+    user-select: none;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+.recent-track .display-photo.fa>svg {
+    font-size: 5em;
+}
+
+.recent-track .user-info {
+    margin-left: 20px;
+    height: 116px;
+}
+
+.recent-track .user-info>div:not(.display-photo) {
+    width: 60%;
+    display: inline-block;
+    padding-left: 30px;
+    padding-top: 1em;
+    vertical-align: baseline;
+    vertical-align: top;
+}
+
+.recent-track.loading-shimmer .string {
+    margin: 1em 0;
+    height: 1em;
+    border-radius: 1em;
+}
+
+.recent-track.loading-shimmer .animate {
+    animation: shimmer 2s infinite linear;
+    background-size: 500px 100%;
+}
+
+.recent-track p.string {
+    margin: 0.4em 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+    display: block;
+}
+
+.recent-track .user-info .text-block {
+    margin: 0.4em 0 0 0;
+}
+
+.recent-track .text-block {
+    margin: 0.8em 0 0 0;
+    padding-left: 10px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position-x: -500px;
+    }
+    100% {
+        background-position-x: 500px;
+    }
+}

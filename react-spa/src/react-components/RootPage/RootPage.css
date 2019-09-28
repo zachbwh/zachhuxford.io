@@ -1,0 +1,115 @@
+.rootpage {
+    /* position: fixed; */
+    /* top: 120px; */
+    /* height: 100vh; */
+    /* width: 100vw; */
+    overflow-y: auto;
+    /* margin-top: 60px; */
+}
+
+.rootpage .background {
+    position: fixed;
+    top: 0px;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+}
+
+.rootpage .container {
+    margin: auto;
+    width: 100%;
+    max-width: 980px;
+    overflow-y: hidden;
+    max-height: 100vh;
+}
+
+.rootpage .container > * {
+    overflow: hidden;
+}
+
+.rootpage h1 {
+    font-family: 'Karla', sans-serif;
+    font-weight: 400;
+    font-size: 5em;
+    margin: 0 20px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
+    display: inline-block;
+    vertical-align: middle;
+    user-select: none;
+}
+
+.rootpage p {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0 20px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
+    user-select: none;
+    line-height: 1.6;
+}
+
+.rootpage .display-photo {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rootpage .display-photo img {
+    width: 5em;
+    height: 5em;
+    border-radius: 2.5em;
+    user-select: none;
+}
+@media (max-width: 601px) {
+    .rootpage h1 {
+       font-size: 4em;
+    }
+}
+
+.anim-fade-enter, .anim-fade-enter .d1, .anim-fade-enter .d2, .anim-fade-enter .d3, .anim-fade-enter .d4, .anim-fade-enter .d5 {
+    opacity: 0;
+}
+
+.anim-fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out;
+}
+
+.anim-fade-enter-active .d1 {
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out;
+    transition-delay: 0.25s;
+}
+
+.anim-fade-enter-active .d2 {
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out;
+    transition-delay: 0.5s;
+}
+
+.anim-fade-enter-active .d3 {
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out;
+    transition-delay: 0.75s;
+}
+
+.anim-fade-enter-active .d4 {
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out;
+    transition-delay: 1s;
+}
+
+.anim-fade-enter-active .d5 {
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out;
+    transition-delay: 1.25s;
+}
+.anim-fade-exit {
+    opacity: 1;
+}
+
+.anim-fade-exit-active {
+    opacity: 0;
+    transition: opacity 0;
+}

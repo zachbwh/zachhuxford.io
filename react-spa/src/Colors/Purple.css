@@ -1,0 +1,60 @@
+/* All CSS relating to colors should be put here so that it can easily be swapped out for a pluggable color scheme */
+
+/* General */
+.purple .highlight-full-stop {
+    color: #0D7D55;
+}
+
+.purple {
+    color: #FFFFFF;
+}
+
+.purple .rootpage .background {
+    background-image: linear-gradient(#584C5C, #483C4C);
+}
+
+.purple .rootpage h1 {
+    color: #FFFFFF;
+}
+
+/* Nav Bar Section */
+.purple .navBar .links a {
+    color: #FFFFFF;
+}
+
+/* Profiles Section */
+.purple .profiles .links a {
+    color: #FFFFFF;
+}
+
+.purple a {
+    color: #FFFFFF;
+}
+
+.purple .homepage .contact-me a:hover {
+    color: #483C4C;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+}
+
+.purple .homepage .contact-me a {
+    color: #FFFFFF;
+    background-color: none;
+    border-color: #FFFFFF;
+}
+
+.purple .navBar .gradient-wrapper .gradient-1 {
+    background-image: linear-gradient(#584C5C, #483C4C);
+}
+
+.purple .recent-track.loading-shimmer .animate {
+    background-image: linear-gradient(to right, #483C4C 4%, #584C5C 25%, #483C4C 36%);
+}
+
+.purple .recent-track .display-photo.fa > svg {
+    color: #483C4C;
+}
+
+.purple .lastfm-creep .recent-track {
+    background-color: #584C5C;
+}
