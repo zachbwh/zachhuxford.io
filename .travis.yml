@@ -6,6 +6,8 @@ cache:
   - node_modules
 script:
 - npm test
+- ls
+- ls ./build
 - npm run build
 deploy:
   provider: s3
@@ -15,6 +17,6 @@ deploy:
   bucket: "zachhuxford-io"
   local-dir: ./build
   upload-dir: public
-  acl: public read, bucket owner full control
+  acl: public_read, bucket_owner_full_control
   on:
     repo: zachbwh/zachhuxford.io
