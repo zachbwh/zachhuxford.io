@@ -43,7 +43,7 @@ class NavBar extends Component {
                         <NavLink to="/music">MUSIC</NavLink>
                         <NavLink to="/profiles">PROFILES</NavLink>
                         <NavLink to="/mates">MATES</NavLink>
-                        <a target="_blank" href="https://blog.zachhuxford.io">BLOG</a>
+                        <a target="_blank" rel="noopener noreferrer" href="https://blog.zachhuxford.io">BLOG</a>
                     </div>
                 </div>
                 <div className="mobile">

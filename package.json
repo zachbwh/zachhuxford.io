@@ -11,7 +11,6 @@
   "bugs": {
     "url": "https://github.com/zachbwh/zachhuxford.io/issues"
   },
-  "homepage": "https://github.com/zachbwh/zachhuxford.io#readme",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.21",

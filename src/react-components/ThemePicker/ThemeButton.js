@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import './ThemeButton.css';
 
 class ThemeButton extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleClick() {
         if (this.props.updateColorClass && typeof this.props.updateColorClass === "function") {
             this.props.updateColorClass(this.props.themeName);

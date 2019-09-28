@@ -6,10 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 class ThemePicker extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="theme-picker">

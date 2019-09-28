@@ -5,15 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 class RecentTrackTile extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         if (this.props.recentTrack) {
             var displayPhoto
             if (this.props.displayPhoto) {
-                displayPhoto = <img className="display-photo" src={this.props.displayPhoto} />
+                displayPhoto = <img className="display-photo" alt={this.props.name + "'s display photo"} src={this.props.displayPhoto} />
             } else {
                 displayPhoto = <div className="display-photo fa"><FontAwesomeIcon icon={faUser}></FontAwesomeIcon></div>
             }

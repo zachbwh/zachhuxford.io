@@ -89,7 +89,7 @@ class Startpage extends Component {
     onKeyPress(event) {
         var searchString = event.target.value;
         console.log(event.which);
-        if (event.which == 13) {
+        if (event.which === 13) {
             var bangIndex = searchString.indexOf("!");
             if(bangIndex > -1) {
                 var searchSite = searchString.slice(bangIndex + 1),

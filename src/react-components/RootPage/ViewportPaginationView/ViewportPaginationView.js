@@ -85,23 +85,21 @@ class Music extends Component {
     }
 
     scrollToNextRef = () => {
-        var nextRefIndex,
-            currentIndex = this.state.currentIndex,
+        var currentIndex = this.state.currentIndex,
+            nextRefIndex = currentIndex < this.hashes.length - 1 ? currentIndex + 1 : this.hashes.length - 1;
 
-        nextRefIndex = currentIndex < this.hashes.length - 1 ? currentIndex + 1 : this.hashes.length - 1;
         window.location.hash = this.hashes[nextRefIndex];
 
         this.setState({currentIndex: nextRefIndex});
     }
 
     scrollToPrevRef = () => {
-        var nextRefIndex,
-            currentIndex = this.state.currentIndex,
+        var currentIndex = this.state.currentIndex,
+            prevRefIndex = currentIndex > 0 ? currentIndex - 1 : 0;
 
-        nextRefIndex = currentIndex > 0 ? currentIndex - 1 : 0;
-        window.location.hash = this.hashes[nextRefIndex];
+        window.location.hash = this.hashes[prevRefIndex];
 
-        this.setState({currentIndex: nextRefIndex});
+        this.setState({currentIndex: prevRefIndex});
     }
 
     scrollCooldownMilliSeconds = 500;

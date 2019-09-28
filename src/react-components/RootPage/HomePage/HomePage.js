@@ -11,7 +11,7 @@ class HomePage extends Component {
                             <p className="d1">It's me!</p>
                             <h1 className="d2">Zach Huxford<span className="highlight-full-stop">.</span></h1>
                             <div className="display-photo d2" >
-                                <img src="https://s3-ap-southeast-2.amazonaws.com/zachhuxford-io/home/cropped_me.jpg" />
+                                <img alt="Headshot of Zach Huxford" src="https://s3-ap-southeast-2.amazonaws.com/zachhuxford-io/home/cropped_me.jpg" />
                             </div>
                         </div>
                         <p className="d3">

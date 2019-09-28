@@ -10,7 +10,7 @@ class Mates extends Component {
             <h1>My Mates<span className="highlight-full-stop">.</span></h1>
             <p>
                 This page is a list of my friends who also have their own websites.
-                (Please offer me work first though <Twemoji options={{ className: 'twemoji' }} noWrapper={ true }><span>💕</span></Twemoji>)<br /><br />
+                (Please offer me work first though <Twemoji options={{ className: 'twemoji' }} noWrapper={ true }><span role="img" aria-label="heart">💕</span></Twemoji>)<br /><br />
                 
             </p>
         </div>
