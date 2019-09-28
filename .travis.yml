@@ -6,9 +6,8 @@ cache:
   - node_modules
 script:
 - npm test
-- ls
-- ls ./build
 - npm run build
+- ls ./build
 deploy:
   provider: s3
   access_key_id: "AKIAIGWRXLWWJ2QAYE4A"
@@ -17,7 +16,6 @@ deploy:
   bucket: "zachhuxford-io"
   skip_cleanup: true
   local-dir: build
-  upload-dir: public
   acl: public_read, bucket_owner_full_control
   on:
     repo: zachbwh/zachhuxford.io
