@@ -52,5 +52,9 @@
 }
 
 .all-star .recent-track .display-photo.fa > svg {
-    color: rgb(31, 67, 193);
+    color: #2E5DFF;
+}
+
+.all-star .lastfm-creep .recent-track {
+    background-color: #274AC4;;
 }

@@ -28,9 +28,9 @@ class RecentTrackTile extends Component {
                         </div>
                     </div>
                     <div className="text-block">
-                        <p className="string">{this.props.recentTrack.name}</p>
-                        <p className="string">{this.props.recentTrack.artist["#text"]}</p>
-                        <p className="string">{this.props.recentTrack.album["#text"]}</p>
+                        <p className="string">{this.props.recentTrack.name || "\u00A0"}</p>
+                        <p className="string">{this.props.recentTrack.artist["#text"] || "\u00A0"}</p>
+                        <p className="string">{this.props.recentTrack.album["#text"] || "\u00A0"}</p>
                     </div>
                 </div>
             );

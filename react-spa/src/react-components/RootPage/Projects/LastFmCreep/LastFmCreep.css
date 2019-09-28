@@ -2,12 +2,25 @@
     min-height: 100vh;
     height: 100vh;
     max-height: 100vh;
-    overflow-y: scroll;
+    padding-top: 60px;
 }
 
 .lastfm-creep .recent-track {
     text-overflow: ellipsis;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 1px solid black;
+    border-radius: 4px;
+    padding: 10px 0;
+}
+
+.lastfm-creep .recent-track-tile-container {
+    position: absolute;
+    left: 50%;
+    max-width: 400px;
+    width: 400px;
+    transition: transform 1s ease-in-out;
+}
+
+@media (max-width: 601px) {
+    .lastfm-creep {
+        padding-top: 120px;
+    }
 }

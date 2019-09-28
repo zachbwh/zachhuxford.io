@@ -54,3 +54,7 @@
 .purple .recent-track .display-photo.fa > svg {
     color: #483C4C;
 }
+
+.purple .lastfm-creep .recent-track {
+    background-color: #584C5C;
+}
