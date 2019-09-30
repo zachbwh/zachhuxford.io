@@ -8,6 +8,7 @@ import ViewportPaginationView from '../ViewportPaginationView/ViewportPagination
 import '../ViewportPaginationView/ViewportPaginationView.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import IndexIndicator from '../ViewportPaginationView/IndexIndicator/IndexIndicator';
 
 class Music extends ViewportPaginationView {
     onComponentDidMount() {
@@ -38,6 +39,7 @@ class Music extends ViewportPaginationView {
     render() {
         return (
             <div className="viewport-pagination-view music" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
+                <IndexIndicator hashes={this.hashes} activeIndex={this.state.currentIndex} setIndex={this.setIndex.bind(this)}></IndexIndicator>
                 <div style={{transform: "translateY(-" + this.state.currentIndex + "00vh)"}}>
                     <div className="viewport">
                         <div>

@@ -69,3 +69,9 @@
         background-position-x: 500px;
     }
 }
+
+@media (max-width: 601px) {
+    .recent-track {
+        text-align: left;
+    }
+}
