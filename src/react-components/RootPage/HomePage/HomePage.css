@@ -1,7 +1,9 @@
-.homepage .body {
+.homepage {
+    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
     display: flex;
     align-items: center;
-    min-height: 100vh;
 }
 
 .homepage .display-photo {
@@ -19,7 +21,6 @@
 }
 
 .homepage .contact-me {
-    /* transition: all 150ms ease-in-out; */
     padding-bottom: 2em;
 }
 
@@ -37,19 +38,21 @@
 }
 
 @media (max-width: 601px) {
+    .homepage {
+        padding-top: 120px;
+        overflow-y: scroll;
+        display: block;
+        align-items: none;
+        text-align: center;
+    }
+
+    .homepage .body {
+        padding-bottom: 120px;
+    }
+
     .homepage .display-photo {
         width: 100%;
         padding: 0px;
-    }
-
-    .homepage .body {
-        display: flex;
-        align-items: none;
-        min-height: 0;
-    }
-
-    .homepage .body {
-        text-align: center;
     }
 
     .homepage a.contact-me {
