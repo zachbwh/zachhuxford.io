@@ -1,0 +1,21 @@
+.index-indicator {
+    width: 40px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    right: 0px;
+    z-index: 200;
+}
+
+.index-indicator .index-indicator-circle {
+    margin: 16px 8px;
+}
+
+@media (max-width: 601px) {
+    .index-indicator {
+        top: 120px;
+        min-height: 0;
+    }
+}

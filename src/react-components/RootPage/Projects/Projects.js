@@ -5,6 +5,7 @@ import ViewportPaginationView from '../ViewportPaginationView/ViewportPagination
 import '../ViewportPaginationView/ViewportPaginationView.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import IndexIndicator from '../ViewportPaginationView/IndexIndicator/IndexIndicator';
 
 class Projects extends ViewportPaginationView {
     hashes = ["", "tatai", "util", "lastfm"]
@@ -12,11 +13,12 @@ class Projects extends ViewportPaginationView {
     render() {
         return (
             <div className="viewport-pagination-view projects" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
+                <IndexIndicator hashes={this.hashes} activeIndex={this.state.currentIndex} setIndex={this.setIndex.bind(this)}></IndexIndicator>
                 <div style={{transform: "translateY(-" + this.state.currentIndex + "00vh)"}}>
                     <div className="viewport">
                         <div>
                             <h1>My Projects<span className="highlight-full-stop">.</span></h1>
-                            <p>
+                            {/* <p>
                                 The character of my personal projects tends to be self driven, centered around web development and well, personal in nature.
                                 Each project I do I try to extend my set of skills and improve the ones that I have. Most recently I have been trying to
                                     get a good grasp of Client/Server Software Architecture, JavaScript Frameworks, and Visual Design.<br /><br />
@@ -24,7 +26,7 @@ class Projects extends ViewportPaginationView {
                                 I want my next challenge to be related to an open source or monetizeable product BUT fundamentally something that other
                                     people will use because it is both useful and well marketed.<br /><br />
                                 In other words I'm sick of doing seemingly pointless personal and uni projects (but please have a look at them).
-                            </p>
+                            </p> */}
                             <div className="scroll-down">
                                 <p>SCROLL DOWN</p>
                                 <FontAwesomeIcon icon={faChevronDown} />
@@ -35,7 +37,7 @@ class Projects extends ViewportPaginationView {
                     <div className="viewport">
                         <div>
                             <h1>Tatai</h1>
-                            <p>
+                            {/* <p>
                                 Tatai is an award winning, open source Te Reo Maori number pronunciation aid targeted both at people
                                 who want to learn Maori for the first time and for people who simply want to improve. Tatai runs on
                                     Linux and Windows and any other operating system that supports Java 8, JavaFX 8 and the voice recognition software HTK.<br /><br />
@@ -45,7 +47,7 @@ class Projects extends ViewportPaginationView {
                                 the major project in the paper. As a consequence, an online search will show many projects of the same name,
                                     however our project won both First Place and the People's Choice awards.<br /><br />
                                 COMPLETE
-                            </p>
+                            </p> */}
                         </div>
                     </div>
     
@@ -66,13 +68,13 @@ class Projects extends ViewportPaginationView {
                     <div className="viewport">
                         <div>
                             <h1>last.fm creeper</h1>
-                            <p>
+                            {/* <p>
                                 An emulation of the spotify "creeper" or socializer bar but for last.fm which shows what your
                                     friends are listening to in real time or what they listened to most recently.<br /><br />
                                 Goals for the future are to implement animations to change the order of users as what they are
                                     listening to changes in a similar fashion to the spotify creeper bar.<br /><br />
                                 WIP
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                 </div>

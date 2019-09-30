@@ -102,6 +102,12 @@ class Music extends Component {
         this.setState({currentIndex: prevRefIndex});
     }
 
+    setIndex(nextIndex) {
+        window.location.hash = this.hashes[nextIndex];
+
+        this.setState({currentIndex: nextIndex});
+    }
+
     scrollCooldownMilliSeconds = 500;
 
     /* Override this in child */

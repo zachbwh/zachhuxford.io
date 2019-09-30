@@ -25,3 +25,9 @@
     position: relative;
     top: 100px;
 }
+
+@media (max-width: 601px) {
+    .viewport-pagination-view {
+        text-align: center;
+    }
+}

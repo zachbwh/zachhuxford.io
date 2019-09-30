@@ -58,3 +58,11 @@
 .purple .lastfm-creep .recent-track {
     background-color: #584C5C;
 }
+
+.purple .index-indicator-circle {
+    border-color: #FFFFFF;
+}
+
+.purple .index-indicator-circle.active {
+    background-color: #FFFFFF;
+}

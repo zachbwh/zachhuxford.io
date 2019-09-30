@@ -56,5 +56,13 @@
 }
 
 .all-star .lastfm-creep .recent-track {
-    background-color: #274AC4;;
+    background-color: #274AC4;
+}
+
+.all-star .index-indicator-circle {
+    border-color: #F0F0F0;
+}
+
+.all-star .index-indicator-circle.active {
+    background-color: #F0F0F0;
 }
