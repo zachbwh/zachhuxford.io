@@ -78,7 +78,7 @@ class LastFmCreep extends Component {
             )
             );
         } else {
-            friendsRecentTracks = <p>placeholder</p>
+            friendsRecentTracks = <div></div>
         }
 
 

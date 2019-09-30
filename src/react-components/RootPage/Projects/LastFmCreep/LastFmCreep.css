@@ -15,7 +15,7 @@
     position: absolute;
     left: 50%;
     max-width: 400px;
-    width: 400px;
+    width: 100%;
     transition: transform 1s ease-in-out;
 }
 
