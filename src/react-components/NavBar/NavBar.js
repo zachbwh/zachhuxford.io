@@ -39,7 +39,7 @@ class NavBar extends Component {
                         <NavLink to="/">HOME</NavLink>
                         <NavLink to="/projects">PROJECTS</NavLink>
                         <NavLink to="/rice">RICE</NavLink>
-                        <NavLink to="/tech-tastes">TECH-TASTES</NavLink>
+                        <NavLink to="/tech-tastes">TECH TASTES</NavLink>
                         <NavLink to="/music">MUSIC</NavLink>
                         <NavLink to="/profiles">PROFILES</NavLink>
                         <NavLink to="/mates">MATES</NavLink>
@@ -51,7 +51,7 @@ class NavBar extends Component {
                         <NavLink to="/">HOME</NavLink>
                         <NavLink to="/projects">PROJECTS</NavLink>
                         <NavLink to="/rice">RICE</NavLink>
-                        <NavLink to="/tech-tastes">TECH-TASTES</NavLink>
+                        <NavLink to="/tech-tastes">TECH TASTES</NavLink>
                     </div>
                     <div className="row-2 links">
                         <NavLink to="/music">MUSIC</NavLink>

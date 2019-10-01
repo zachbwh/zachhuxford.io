@@ -29,6 +29,7 @@
     padding: 0.75em;
     font-weight: 700;
     user-select: none;
+    white-space: nowrap;
 }
 
 .navBar .desktop {
@@ -69,6 +70,12 @@
     }
 
     .navBar.hidden-navbar {
-        transform: translateY(-120px);
+        /* transform: translateY(-120px); */
+    }
+}
+
+@media (max-width: 401px) {
+    .navBar .links a {
+        padding: 0.5em;
     }
 }

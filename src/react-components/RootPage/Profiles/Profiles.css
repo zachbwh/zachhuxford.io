@@ -27,14 +27,25 @@
 
 @media (max-width: 601px) {
     .profiles .links a {
-        font-size: 3em;
+        font-size: 4em;
     }
 
     .profiles {
-        padding-top: 120px;
-        overflow-y: scroll;
-        display: block;
-        align-items: none;
         text-align: center;
+    }
+
+    .profiles .body {
+        position: fixed;
+        height: 100%;
+    }
+
+    .profiles .body > div {
+        padding-top: 120px;
+    }
+}
+
+@media (max-width: 401px) {
+    .profiles .links a {
+        font-size: 3em;
     }
 }
