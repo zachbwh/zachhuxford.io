@@ -6,7 +6,8 @@ class Music extends Component {
 
         this.state = {
             currentIndex: 0,
-			lastScrollTime: new Date()
+            lastScrollTime: new Date(),
+            windowHeight: window.innerHeight
         };
     }
 
@@ -27,9 +28,16 @@ class Music extends Component {
             this.setState({currentIndex: 0});
             window.location.hash = "";
         }
+
+        window.addEventListener("resize", this.handleWindowResize.bind(this));
+
         if (this.onComponentDidMount && typeof this.onComponentDidMount === "function") {
             this.onComponentDidMount();
         }
+    }
+
+    onComponentWillUnmount() {
+        window.removeEventListener("resize", this.handleWindowResize.bind(this));
     }
     
     handleScroll(event) {
@@ -108,6 +116,17 @@ class Music extends Component {
         this.setState({currentIndex: nextIndex});
     }
 
+    handleWindowResize(event) {
+        var that = this;
+        if ( !this.eventTimeout ) {
+            this.eventTimeout = setTimeout(function() {
+                that.eventTimeout = null;
+                console.log("resize event handled");
+                that.setState({windowHeight: window.innerHeight});
+             }, 66);
+        }
+    }
+
     scrollCooldownMilliSeconds = 500;
 
     /* Override this in child */
@@ -116,12 +135,12 @@ class Music extends Component {
     render() {
         return (
             <div className="viewport-pagination-view" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
-                <div style={{transform: "translateY(-" + this.state.currentIndex + "00vh)"}}>
-                    <div className="viewport">
+                <div style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
+                    <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>
                         </div>
                     </div>
-                    <div className="viewport">
+                    <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>
                         </div>
                     </div>

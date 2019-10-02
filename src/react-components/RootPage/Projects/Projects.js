@@ -14,8 +14,8 @@ class Projects extends ViewportPaginationView {
         return (
             <div className="viewport-pagination-view projects" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
                 <IndexIndicator hashes={this.hashes} activeIndex={this.state.currentIndex} setIndex={this.setIndex.bind(this)}></IndexIndicator>
-                <div style={{transform: "translateY(-" + this.state.currentIndex + "00vh)"}}>
-                    <div className="viewport">
+                <div style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
+                    <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>
                             <h1>My Projects<span className="highlight-full-stop">.</span></h1>
                             {/* <p>
@@ -34,7 +34,7 @@ class Projects extends ViewportPaginationView {
                         </div>
                     </div>
     
-                    <div className="viewport">
+                    <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>
                             <h1>Tatai</h1>
                             {/* <p>
@@ -51,7 +51,7 @@ class Projects extends ViewportPaginationView {
                         </div>
                     </div>
     
-                    <div className="viewport">
+                    <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>
                             <h1>Utilities</h1>
                             <p>
@@ -65,7 +65,7 @@ class Projects extends ViewportPaginationView {
                         </div>
                     </div>
     
-                    <div className="viewport">
+                    <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>
                             <h1>last.fm creeper</h1>
                             {/* <p>

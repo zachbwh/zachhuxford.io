@@ -35,7 +35,7 @@ class RootPage extends Component {
             <div className="rootpage">
                 <div className="background"></div>
                 <div className="container" onScroll={this.handleBodyScroll}>
-                    <TransitionGroup>
+                    <TransitionGroup className="transition-group">
                         <CSSTransition timeout={duration} key={this.props.location.key} classNames="anim-fade">
                             <Switch location={this.props.location}>
                                 <Route exact path="/" component={HomePage} />
