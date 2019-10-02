@@ -23,7 +23,6 @@ class LastFmCreep extends Component {
         this.socket = io(`${config.apiDomain}/lastfmcreep`);
 
         this.socket.on("recent-track-update", function(message) {
-            console.log(message);
             var friendRecentTrack = JSON.parse(message);
             if (that.state.friends) {
                 var changedIndex = that.state.friends.findIndex(function(stateFriendRecentTrack) {
@@ -68,7 +67,7 @@ class LastFmCreep extends Component {
         var friendsRecentTracks
         if (this.state.friends) {
             friendsRecentTracks = this.state.friends.map((friendRecentTrack, index) => (
-            <div className="recent-track-tile-container" key={friendRecentTrack.name} style={{"transform": "translate(-50%," + index * 252.8 + "px)", "zIndex": 100 - index}}>
+            <div className="recent-track-tile-container" key={friendRecentTrack.name} style={{"zIndex": 100 - index}}>
                 <RecentTrackTile
                     name={friendRecentTrack.realname ? friendRecentTrack.realname : friendRecentTrack.name}
                     displayPhoto={friendRecentTrack.image["#text"]}
@@ -84,7 +83,7 @@ class LastFmCreep extends Component {
 
         return (
             <div className="lastfm-creep">
-                {friendsRecentTracks}
+                <div className="list-container">{friendsRecentTracks}</div>
             </div>
         );
     }

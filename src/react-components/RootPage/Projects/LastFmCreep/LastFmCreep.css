@@ -2,6 +2,10 @@
     min-height: 100vh;
     height: 100vh;
     max-height: 100vh;
+    overflow-y: scroll;
+}
+
+.lastfm-creep .list-container {
     padding-top: 60px;
 }
 
@@ -12,15 +16,17 @@
 }
 
 .lastfm-creep .recent-track-tile-container {
-    position: absolute;
-    left: 50%;
+    /* position: absolute; */
+    /* left: 50%; */
+    margin: 8px auto;
     max-width: 400px;
     width: 100%;
     transition: transform 1s ease-in-out;
 }
 
 @media (max-width: 601px) {
-    .lastfm-creep {
+    .lastfm-creep .list-container {
         padding-top: 120px;
+        padding-bottom: 60px;
     }
 }
