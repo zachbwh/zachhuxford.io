@@ -40,7 +40,7 @@ class Music extends ViewportPaginationView {
         return (
             <div className="viewport-pagination-view music" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
                 <IndexIndicator hashes={this.hashes} activeIndex={this.state.currentIndex} setIndex={this.setIndex.bind(this)}></IndexIndicator>
-                <div style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
+                <div className="viewport-container" style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>
                             <RecentTrackTile name="Zach Huxford" displayPhoto="/cropped_me.jpg" recentTrack={this.state.recentTrack}></RecentTrackTile>

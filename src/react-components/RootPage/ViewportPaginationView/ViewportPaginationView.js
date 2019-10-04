@@ -135,7 +135,7 @@ class Music extends Component {
     render() {
         return (
             <div className="viewport-pagination-view" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
-                <div style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
+                <div className="viewport-container" style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>
                         </div>

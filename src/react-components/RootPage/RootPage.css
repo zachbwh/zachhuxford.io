@@ -1,7 +1,6 @@
 .rootpage {
     height: 100%;
-    min-height: 100%;
-    max-height: 100%;
+    max-height: 100vh;
     overflow-y: auto;
     width: 100vw;
 }
@@ -18,7 +17,6 @@
     margin: auto;
     height: 100%;
     min-height: 100%;
-    max-height: 100%;
     width: 100vw;
     max-width: 980px;
     overflow-y: hidden;
