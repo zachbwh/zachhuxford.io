@@ -16,7 +16,7 @@ class App extends Component {
 		
 		var initialColorClass = localStorage.getItem("colorClass");
 		if (!initialColorClass) {
-			initialColorClass = "all-star";
+			initialColorClass = "purple";
 		}
 
 		this.state = {
