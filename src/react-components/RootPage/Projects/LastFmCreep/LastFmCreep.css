@@ -16,12 +16,11 @@
 }
 
 .lastfm-creep .recent-track-tile-container {
-    /* position: absolute; */
-    /* left: 50%; */
+    position: relative;
     margin: 8px auto;
     max-width: 400px;
     width: 100%;
-    transition: transform 1s ease-in-out;
+    transition: transform 1s ease-in-out, top 1s ease-in-out;
 }
 
 @media (max-width: 601px) {

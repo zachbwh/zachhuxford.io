@@ -60,14 +60,18 @@ class LastFmCreep extends Component {
             }
             return a.recenttrack.date.uts < b.recenttrack.date.uts ? 1 : a.recenttrack.date.uts > b.recenttrack.date.uts ? -1 : 0;
         });
+        friendsList = friendsList.map(function(friend, index) {
+            friend.index = index;
+            return  friend;
+        });
         return friendsList;
     }
 
     render() {
-        var friendsRecentTracks
+        var friendsRecentTracks;
         if (this.state.friends) {
-            friendsRecentTracks = this.state.friends.map((friendRecentTrack, index) => (
-            <div className="recent-track-tile-container" key={friendRecentTrack.name} style={{"zIndex": 100 - index}}>
+            friendsRecentTracks = this.state.friends.sort((a, b) => { return a.name > b.name ? 1 : b.name > a.name ? -1 : 0; }).map((friendRecentTrack, index) => (
+            <div className="recent-track-tile-container" key={friendRecentTrack.name} style={{top: (friendRecentTrack.index - index) * 252.8 + "px", zIndex: 100 - friendRecentTrack.index}}>
                 <RecentTrackTile
                     name={friendRecentTrack.realname ? friendRecentTrack.realname : friendRecentTrack.name}
                     displayPhoto={friendRecentTrack.image["#text"]}
@@ -83,7 +87,9 @@ class LastFmCreep extends Component {
 
         return (
             <div className="lastfm-creep">
-                <div className="list-container">{friendsRecentTracks}</div>
+                <div className="list-container">
+                    {friendsRecentTracks}
+                </div>
             </div>
         );
     }
