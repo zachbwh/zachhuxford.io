@@ -3,6 +3,7 @@
     height: 100vh;
     max-height: 100vh;
     display: flex;
+    overflow: hidden;
     align-items: center;
 }
 
@@ -40,10 +41,13 @@
 @media (max-width: 601px) {
     .homepage {
         padding-top: 120px;
-        overflow-y: scroll;
+        overflow-y: auto;
+        overflow-x: hidden;
         display: block;
         align-items: none;
         text-align: center;
+        min-height: 0;
+        height: initial;
     }
 
     .homepage .body {

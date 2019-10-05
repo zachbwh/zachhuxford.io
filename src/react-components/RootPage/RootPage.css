@@ -17,9 +17,9 @@
     margin: auto;
     height: 100%;
     min-height: 100%;
-    width: 100vw;
+    width: 100%;
     max-width: 980px;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .rootpage .container > * {
