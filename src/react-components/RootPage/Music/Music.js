@@ -13,13 +13,13 @@ import IndexIndicator from '../ViewportPaginationView/IndexIndicator/IndexIndica
 class Music extends ViewportPaginationView {
     onComponentDidMount() {
         var that = this;
-        fetch(`${config.apiDomain}/lastfm/getMyRecentTrack`).then(function(response) {
-            return response.json();
-        }).then(function(json) {
-            that.setState({recentTrack: json});
-        });
-
         this.socket = io(`${config.apiDomain}/lastfm`);
+
+        this.socket.on("load-my-recent-track", function(message) {
+            console.log("first push recent track");
+            var recentTrack = JSON.parse(message);
+            that.setState({ recentTrack: recentTrack });
+        });
 
         this.socket.on("recent-track-update", function(message) {
             var newRecentTrack = JSON.parse(message);

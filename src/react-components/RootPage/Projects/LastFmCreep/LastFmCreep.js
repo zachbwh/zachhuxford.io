@@ -13,14 +13,15 @@ class LastFmCreep extends Component {
 
     componentDidMount() {
         var that = this;
-        fetch(`${config.apiDomain}/lastfm/getFriends`).then(function (response) {
-            return response.json();
-        }).then(function (json) {
-            json = that.sortResultsAndAssignIndices(json);
-            that.setState({ friends: json });
-        });
 
         this.socket = io(`${config.apiDomain}/lastfmcreep`);
+
+        this.socket.on("load-friend-recent-tracks", function(message) {
+            console.log("loaded fresh friends list");
+            var friends = JSON.parse(message);
+            friends = that.sortResultsAndAssignIndices(friends);
+            that.setState({ friends: friends });
+        });
 
         this.socket.on("recent-track-update", function(message) {
             var friendRecentTrack = JSON.parse(message);
@@ -34,10 +35,11 @@ class LastFmCreep extends Component {
                 newFriendsList = that.sortResultsAndAssignIndices(newFriendsList, friendRecentTrack);
                 that.setState({friends: newFriendsList});
             }
-        })
+        });
+
         this.socket.on("connected", function(msg) {
             console.log(msg);
-        })
+        });
     }
 
     componentWillUnmount() {
