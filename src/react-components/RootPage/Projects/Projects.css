@@ -1,0 +1,20 @@
+.projects .project {
+    margin: 20px;
+}
+
+.projects .project > * {
+    padding: 10px 0;
+}
+
+.projects .project-link a {
+    border: 2px solid;
+    padding: 0.5em 1.5em;
+    border-radius: 1.5em;
+    font-size: 1em;
+    user-select: none;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+}
+
+.projects .project-link a:hover {
+    text-decoration: none;
+}

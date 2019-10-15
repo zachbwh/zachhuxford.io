@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './TechTastes.css';
-import IconAmazonwebservices from 'react-devicon/amazonwebservices/original-wordmark'
 
 class TechTastes extends Component {
   render() {
@@ -10,10 +9,9 @@ class TechTastes extends Component {
                 <div>
                     <h1>My Tech Tastes<span className="highlight-full-stop">.</span></h1>
                     <p>
-                        Click to find out more
+                        A graphical list of all the technologies I prefer to use and/or am familiar with.
                     </p>
                     <div>
-                        <IconAmazonwebservices width={100} height={100}/>
                     </div>
                 </div>
             </div>

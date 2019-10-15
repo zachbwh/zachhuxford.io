@@ -17,6 +17,11 @@
 }
 
 @media (max-width: 601px) {
+    .lastfm-creep {
+        max-height: 100vh;
+        overflow-y: scroll;
+    }
+
     .lastfm-creep .list-container {
         padding-top: 120px;
         padding-bottom: 60px;

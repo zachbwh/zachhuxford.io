@@ -35,7 +35,6 @@
 
 .homepage .contact-me a:hover {
     text-decoration: none;
-    transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
 @media (max-width: 601px) {

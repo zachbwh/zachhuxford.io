@@ -31,14 +31,25 @@
     min-height: 100%;
 }
 
-.rootpage h1 {
+.rootpage h1, .rootpage h2, .rootpage h3, .rootpage h4, .rootpage h5, .rootpage h6 {
     font-family: 'Karla', sans-serif;
     font-weight: 400;
-    font-size: 5em;
     margin: 0 20px;
     display: inline-block;
     vertical-align: middle;
     user-select: none;
+}
+
+.rootpage h1 {
+    font-size: 5em;
+}
+
+.rootpage h2 {
+    font-size: 3.5em;
+}
+
+.rootpage h2 {
+    font-size: 3em;
 }
 
 .rootpage p {
@@ -63,8 +74,16 @@
 }
 @media (max-width: 601px) {
     .rootpage h1 {
-       font-size: 4em;
+       font-size: 3.5em;
     }
+
+    .rootpage h2 {
+        font-size: 3em;
+     }
+
+     .rootpage h3 {
+        font-size: 1.5em;
+     }
 
     .rootpage {
         overflow-y: hidden;

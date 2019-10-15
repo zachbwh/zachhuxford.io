@@ -31,13 +31,13 @@
     color: #F0F0F0;
 }
 
-.all-star .homepage .contact-me a:hover {
+.all-star .homepage .contact-me a:hover, .all-star .projects .project-link a:hover {
     color: #2E5DFF;
     background-color: #F0F0F0;
     border-color: #F0F0F0;
 }
 
-.all-star .homepage .contact-me a {
+.all-star .homepage .contact-me a, .all-star .projects .project-link a {
     color: #F0F0F0;
     background-color: none;
     border-color: #F0F0F0;

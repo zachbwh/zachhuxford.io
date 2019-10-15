@@ -31,13 +31,13 @@
     color: #FFFFFF;
 }
 
-.purple .homepage .contact-me a:hover {
+.purple .homepage .contact-me a:hover, .purple .projects .project-link a:hover {
     color: #483C4C;
     background-color: #FFFFFF;
     border-color: #FFFFFF;
 }
 
-.purple .homepage .contact-me a {
+.purple .homepage .contact-me a, .purple .projects .project-link a {
     color: #FFFFFF;
     background-color: none;
     border-color: #FFFFFF;

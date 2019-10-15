@@ -31,13 +31,13 @@
     color: #222222;
 }
 
-.yellow .homepage .contact-me a:hover {
-    color: #483C4C;
+.yellow .homepage .contact-me a:hover, .yellow .projects .project-link a:hover {
+    color: #FFFF8C;
     background-color: #222222;
     border-color: #222222;
 }
 
-.yellow .homepage .contact-me a {
+.yellow .homepage .contact-me a, .yellow .projects .project-link a {
     color: #222222;
     background-color: none;
     border-color: #222222;
