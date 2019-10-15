@@ -11,8 +11,6 @@ class TechTastes extends Component {
                     <p>
                         A graphical list of all the technologies I prefer to use and/or am familiar with.
                     </p>
-                    <div>
-                    </div>
                 </div>
             </div>
         </div>
