@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './TopAlbumTile.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRecordVinyl } from '@fortawesome/free-solid-svg-icons';
 
 class TopAlbumTile extends Component {
     clickHandler() {
