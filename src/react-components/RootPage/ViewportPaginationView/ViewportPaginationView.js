@@ -123,6 +123,9 @@ class Music extends Component {
                 that.eventTimeout = null;
                 console.log("resize event handled");
                 that.setState({windowHeight: window.innerHeight});
+                if (typeof that.onHandleWindowResize === "function") {
+                    that.onHandleWindowResize()
+                }
              }, 66);
         }
     }

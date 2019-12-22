@@ -30,9 +30,7 @@ class Music extends ViewportPaginationView {
             console.log(msg);
         })
 
-        window.addEventListener("resize", this.handleWindowResize.bind(this));
-        this.handleWindowResize();
-
+        this.onHandleWindowResize();
 
         fetch(`${config.apiDomain}/topAlbums`).then(response => {
             response.json().then(responseJson => this.setState({topAlbums: responseJson}))
@@ -45,7 +43,7 @@ class Music extends ViewportPaginationView {
         this.socket.close();
     }
 
-    handleWindowResize() {
+    onHandleWindowResize() {
         if (window.innerWidth < 601) {
             this.setState({
                 height: window.innerHeight - 290,
