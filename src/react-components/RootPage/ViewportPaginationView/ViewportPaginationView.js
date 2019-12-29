@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Music extends Component {
+class ViewportPaginationView extends Component {
     constructor(props) {
         super(props);
 
@@ -65,7 +65,10 @@ class Music extends Component {
 
     registerTouchStart(event) {
         event.preventDefault();
-        this.setState({touchStartPos: event.targetTouches[0].pageY});
+        this.setState({
+            touchStartPosY: event.targetTouches[0].pageY,
+            touchStartPosX: event.targetTouches[0].pageX
+        });
     }
     
     handleTouchMove(event) {
@@ -73,17 +76,21 @@ class Music extends Component {
     
         var currentDate = new Date(),
             lastScrollTime = this.state.lastScrollTime,
-            currentPageY = event.targetTouches[0].pageY;;
-    
+            currentPageX = event.targetTouches[0].pageX,
+            currentPageY = event.targetTouches[0].pageY,
+            deltaX = this.state.touchStartPosX - currentPageX,
+            deltaY = this.state.touchStartPosY - currentPageY;
+        
         if (typeof lastScrollTime !== "undefined" && lastScrollTime != null && new Date(lastScrollTime.getTime() + this.scrollCooldownMilliSeconds) < currentDate) {
-            
-            if (this.state.touchStartPos < currentPageY) {
-                console.log("scroll up");
-                this.scrollToPrevRef();
-    
-            } else if (this.state.touchStartPos > currentPageY) {
-                console.log("scroll down");
-                this.scrollToNextRef();
+            if (Math.abs(deltaY) > Math.abs(deltaX)) {
+                if (this.state.touchStartPosY < currentPageY) {
+                    console.log("scroll up");
+                    this.scrollToPrevRef();
+        
+                } else if (this.state.touchStartPosY > currentPageY) {
+                    console.log("scroll down");
+                    this.scrollToNextRef();
+                }
             }
     
             this.setState({
@@ -154,4 +161,4 @@ class Music extends Component {
     /* End of Override this in child */ 
 }
 
-export default Music;
+export default ViewportPaginationView;
