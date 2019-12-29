@@ -66,3 +66,7 @@
 .purple .index-indicator-circle.active {
     background-color: #FFFFFF;
 }
+
+.purple .carousel-index-indicator-item {
+    background-color: #FFFFFF;
+}

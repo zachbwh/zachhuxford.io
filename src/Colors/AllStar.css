@@ -66,3 +66,7 @@
 .all-star .index-indicator-circle.active {
     background-color: #F0F0F0;
 }
+
+.all-star .carousel-index-indicator-item {
+    background-color: #F0F0F0;
+}

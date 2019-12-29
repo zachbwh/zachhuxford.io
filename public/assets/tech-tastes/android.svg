@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 200 200"
+   version="1.1"
+   sodipodi:docname="Android robot.svg"
+   width="200"
+   height="200"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14">
+  <metadata
+     id="metadata13">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Android robot</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1052"
+     id="namedview11"
+     showgrid="false"
+     inkscape:zoom="2.6100978"
+     inkscape:cx="83.653851"
+     inkscape:cy="140.61212"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:#3ddc84;}</style>
+  </defs>
+  <title
+     id="title6">Android robot</title>
+  <path
+     class="cls-1"
+     d="m 144.68528,122.43966 a 8.06664,8.06664 0 1 1 8.06512,-8.06816 8.07728,8.07728 0 0 1 -8.06512,8.06816 m -89.154071,0 a 8.06664,8.06664 0 1 1 8.06512,-8.06816 8.07576,8.07576 0 0 1 -8.06512,8.06816 m 92.046631,-48.586793 16.1196,-27.919359 a 3.3543237,3.3543237 0 1 0 -5.80792,-3.35768 l -16.32328,28.272 c -12.48224,-5.69696 -26.5012,-8.8692 -41.45952,-8.8692 -14.958313,0 -28.975751,3.1768 -41.457991,8.8692 l -16.32176,-28.272 a 3.3538414,3.3538414 0 1 0 -5.80944,3.35312 l 16.12112,27.923919 C 24.957929,88.908467 6.0248085,116.93118 3.2553684,150.03983 H 196.96112 C 194.18864,116.93118 175.25704,88.908467 147.57784,73.852867"
+     id="path8"
+     inkscape:connector-curvature="0"
+     style="fill:#3ddc84;stroke-width:0.152" />
+</svg>

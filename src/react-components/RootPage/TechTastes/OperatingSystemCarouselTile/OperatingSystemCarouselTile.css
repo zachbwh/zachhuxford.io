@@ -1,0 +1,48 @@
+.operating-system-carousel-tile > * {
+    align-self: center;
+}
+
+.operating-system-carousel-tile:hover .tech-svg {
+    filter: none;
+}
+
+.operating-system-carousel-tile .tech-svg {
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+    position: relative;
+    top: 0.15em;
+}
+
+.operating-system-carousel-tile .os-name {
+    font-family: 'Karla', sans-serif;
+    margin: 0 20px;
+    font-size: 4em;
+}
+
+.operating-system-carousel-tile .os-name img {
+    padding-right: 0.15em;
+}
+
+.operating-system-carousel-tile .os-usage {
+    font-size: 1.5em;
+    line-height: 1;
+    display: inline-block;
+    opacity: 0.9;
+}
+
+.operating-system-carousel-tile .os-usage > * {
+    padding: 0 0.5em;
+}
+
+.operating-system-carousel-tile .os-usage svg {
+    width: 30px;
+}
+
+@media (max-width: 601px) {
+    .operating-system-carousel-tile .os-usage, .operating-system-carousel-tile .os-name {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+}

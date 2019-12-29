@@ -66,3 +66,7 @@
 .yellow .index-indicator-circle.active {
     background-color: #222222;
 }
+
+.yellow .carousel-index-indicator-item {
+    background-color: #222222;
+}

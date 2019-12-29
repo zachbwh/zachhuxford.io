@@ -4,22 +4,4 @@
     min-height: 100vh;
 }
 
-.tech-tastes .links {
-    text-align: center;
-}
 
-.tech-tastes h1 {
-    text-align: center;
-}
-
-.tech-tastes .links a {
-    font-size: 80px;
-    margin: 0.5em;
-    line-height: 2em;
-}
-
-@media (max-width: 601px) {
-    .tech-tastes .links a {
-        font-size: 3em;
-    }
-}
