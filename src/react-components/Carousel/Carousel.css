@@ -1,0 +1,27 @@
+.carousel {
+    min-height: 100%;
+    max-height: 100vh;
+    height: 100%;
+    user-select: none;
+}
+
+.carousel .carousel-container {
+    transition: transform 1s ease;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.carousel .carousel-item {
+    min-height: 100%;
+}
+
+.carousel .carousel-item > *{
+    width: 100%;
+}
+
+@media (max-width: 601px) {
+    .carousel {
+        text-align: center;
+    }
+}
