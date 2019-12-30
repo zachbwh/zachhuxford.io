@@ -14,17 +14,20 @@ class ViewportPaginationView extends Component {
     componentDidMount() {
         this.loadCurrentPageFromHash();
 
-        window.addEventListener("resize", this.handleWindowResize.bind(this));
-        window.addEventListener("hashchange", this.onHashChange.bind(this));
+        this.boundFunctionInstances = {}
+        this.boundFunctionInstances.handleWindowResize = this.handleWindowResize.bind(this)
+        this.boundFunctionInstances.onHashChange = this.onHashChange.bind(this)
+        window.addEventListener("resize", this.boundFunctionInstances.handleWindowResize);
+        window.addEventListener("hashchange", this.boundFunctionInstances.onHashChange);
 
         if (this.onComponentDidMount && typeof this.onComponentDidMount === "function") {
             this.onComponentDidMount();
         }
     }
 
-    onComponentWillUnmount() {
-        window.removeEventListener("resize", this.handleWindowResize.bind(this));
-        window.removeEventListener("hashchange", this.onHashChange.bind(this));
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.boundFunctionInstances.handleWindowResize);
+        window.removeEventListener("hashchange", this.boundFunctionInstances.onHashChange);
     }
 
     onHashChange() {

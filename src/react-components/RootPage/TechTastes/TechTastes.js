@@ -127,7 +127,6 @@ class TechTastes extends ViewportPaginationView {
         }
     ]
 
-
     render() {
         var operatingSystemCarouselTiles = this.operatingSystemsList.map(operatingSystem => (
             <OperatingSystemCarouselTile osName={operatingSystem.osName} usageIcons={operatingSystem.usageIcons} />

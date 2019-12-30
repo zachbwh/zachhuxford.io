@@ -33,12 +33,15 @@ class Music extends ViewportPaginationView {
         this.onHandleWindowResize();
 
         fetch(`${config.apiDomain}/topAlbums`).then(response => {
-            response.json().then(responseJson => this.setState({topAlbums: responseJson}))
+            response.json().then(responseJson => {
+                that.setState({topAlbums: responseJson})
+            })
         })
     }
 
     componentWillUnmount() {
-        window.removeEventListener("resize", this.handleWindowResize.bind(this));
+        window.removeEventListener("resize", this.boundFunctionInstances.handleWindowResize);
+        window.removeEventListener("hashchange", this.boundFunctionInstances.onHashChange);
 
         this.socket.close();
     }
