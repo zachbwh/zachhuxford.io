@@ -104,7 +104,10 @@ class TechTastes extends ViewportPaginationView {
             toolIcons: [
                 {
                     name: "Travis CI",
-                    toolIconFilePath: "/assets/tech-tastes/travis-ci.png"
+                    toolIconFilePath: "/assets/tech-tastes/travis-ci.png",
+                    positionAdjustment: {
+                        right: "3.25%"
+                    }
                 },
                 {
                     name: "Team City"

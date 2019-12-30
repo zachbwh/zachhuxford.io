@@ -12,6 +12,7 @@ class ToolCarouselTile extends Component {
                     toolIconClassName: toolIcon.name.toLowerCase().replace(/ /g, "-"),
                     toolIconFilePath: toolIcon.toolIconFilePath ? toolIcon.toolIconFilePath : "/assets/tech-tastes/" + toolIcon.name.toLowerCase().replace(/ /g, "-") + ".svg",
                     toolIconAltText: toolIcon.name + " Logo",
+                    positionAdjustment: toolIcon.positionAdjustment,
                     name: toolIcon.name
                 }
             }),
@@ -23,7 +24,7 @@ class ToolCarouselTile extends Component {
         if (this.state.toolIcons.length > 0) {
             toolIcons = this.state.toolIcons.map((toolIcon, index) => (
                 <div className="tool" key={index} style={{width: (100 / this.state.toolIcons.length) + "%"}} >
-                    <img className={toolIcon.toolIconClassName + " tech-svg"} src={toolIcon.toolIconFilePath} alt={toolIcon.toolIconAltText}></img>
+                    <img className={toolIcon.toolIconClassName + " tech-svg"} src={toolIcon.toolIconFilePath} alt={toolIcon.toolIconAltText} style={toolIcon.positionAdjustment && toolIcon.positionAdjustment.right ? {right: toolIcon.positionAdjustment.right} : {}}></img>
                     <h3 className="tool-name">{toolIcon.name}</h3>
                 </div>
             ));

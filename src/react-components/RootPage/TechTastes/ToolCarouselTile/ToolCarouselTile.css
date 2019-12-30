@@ -19,6 +19,7 @@
     max-width: 70%;
     margin: auto;
     display: inline-block;
+    position: relative;
 }
 
 .tool-carousel-tile .tool-name {
