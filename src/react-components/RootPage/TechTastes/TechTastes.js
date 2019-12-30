@@ -5,6 +5,7 @@ import ViewportPaginationView from '../ViewportPaginationView/ViewportPagination
 import '../ViewportPaginationView/ViewportPaginationView.css';
 import Carousel from '../../Carousel/Carousel';
 import OperatingSystemCarouselTile from './OperatingSystemCarouselTile/OperatingSystemCarouselTile';
+import ToolCarouselTile from './ToolCarouselTile/ToolCarouselTile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faHome, faBriefcase, faServer, faMobileAlt, faLaptopCode, faGamepad } from '@fortawesome/free-solid-svg-icons';
@@ -97,10 +98,39 @@ class TechTastes extends ViewportPaginationView {
         }
     ];
 
+    toolList = [
+        {
+            title: "CI/CD Tools",
+            toolIcons: [
+                {
+                    name: "Travis CI",
+                    toolIconFilePath: "/assets/tech-tastes/travis-ci.png"
+                },
+                {
+                    name: "Team City"
+                }
+            ]
+        },
+        {
+            title: "Version Control",
+            toolIcons: [
+                {
+                    name: "Github"
+                },
+                {
+                    name: "Bitbucket"
+                }
+            ]
+        }
+    ]
+
 
     render() {
         var operatingSystemCarouselTiles = this.operatingSystemsList.map(operatingSystem => (
             <OperatingSystemCarouselTile osName={operatingSystem.osName} usageIcons={operatingSystem.usageIcons} />
+        ))
+        var toolCarouselTiles = this.toolList.map(tool => (
+            <ToolCarouselTile title={tool.title} toolIcons={tool.toolIcons} />
         ))
         return (
             <div className="viewport-pagination-view tech-tastes" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
@@ -133,7 +163,7 @@ class TechTastes extends ViewportPaginationView {
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>
                             <h1>Dev Ops</h1>
-                            <div className="os-grid"></div>
+                            <Carousel carouselItems={toolCarouselTiles} />
                         </div>
                     </div>
                 </div>

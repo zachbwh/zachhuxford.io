@@ -2,10 +2,6 @@
     align-self: center;
 }
 
-.operating-system-carousel-tile:hover .tech-svg {
-    filter: none;
-}
-
 .operating-system-carousel-tile .tech-svg {
     height: 1em;
     width: 1em;

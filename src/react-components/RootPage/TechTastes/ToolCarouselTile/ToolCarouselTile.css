@@ -1,0 +1,35 @@
+.tool-carousel-tile {
+    max-width: 980px;
+}
+
+.tool-carousel-tile .tool-icons {
+    display: flex;
+    flex-direction: row;
+}
+
+.tool-carousel-tile > * {
+    align-self: center;
+}
+
+.tool-carousel-tile .tool {
+    text-align: center;
+}
+
+.tool-carousel-tile .tech-svg {
+    max-width: 70%;
+    margin: auto;
+    display: inline-block;
+}
+
+.tool-carousel-tile .tool-name {
+    width: 100%;
+    margin: 0;
+}
+
+@media (max-width: 601px) {
+    .tool-carousel-tile .os-usage, .tool-carousel-tile .os-name {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+}
