@@ -13,7 +13,8 @@ class ToolCarouselTile extends Component {
                     toolIconFilePath: toolIcon.toolIconFilePath ? toolIcon.toolIconFilePath : "/assets/tech-tastes/" + toolIcon.name.toLowerCase().replace(/ /g, "-") + ".svg",
                     toolIconAltText: toolIcon.name + " Logo",
                     positionAdjustment: toolIcon.positionAdjustment,
-                    name: toolIcon.name
+                    name: toolIcon.name,
+                    url: toolIcon.url,
                 }
             }),
         };
@@ -24,8 +25,8 @@ class ToolCarouselTile extends Component {
         if (this.state.toolIcons.length > 0) {
             toolIcons = this.state.toolIcons.map((toolIcon, index) => (
                 <div className="tool" key={index} style={{width: (100 / this.state.toolIcons.length) + "%"}} >
-                    <img className={toolIcon.toolIconClassName + " tech-svg"} src={toolIcon.toolIconFilePath} alt={toolIcon.toolIconAltText} style={toolIcon.positionAdjustment && toolIcon.positionAdjustment.right ? {right: toolIcon.positionAdjustment.right} : {}}></img>
-                    <h3 className="tool-name">{toolIcon.name}</h3>
+                    <a target="_blank" rel="noopener noreferrer" href={toolIcon.url}><img className={toolIcon.toolIconClassName + " tech-svg"} src={toolIcon.toolIconFilePath} alt={toolIcon.toolIconAltText} style={toolIcon.positionAdjustment && toolIcon.positionAdjustment.right ? {right: toolIcon.positionAdjustment.right} : {}}></img></a>
+                    <p><a href={toolIcon.url} className="tool-name" target="_blank" rel="noopener noreferrer">{toolIcon.name}</a></p>
                 </div>
             ));
         } else {

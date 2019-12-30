@@ -20,6 +20,7 @@ class TechTastes extends ViewportPaginationView {
     operatingSystemsList = [
         {
             osName: "Arch Linux",
+            url: "https://www.archlinux.org/",
             usageIcons: [
                 {
                     icon: faHome,
@@ -37,6 +38,7 @@ class TechTastes extends ViewportPaginationView {
         },
         {
             osName: "Windows",
+            url: "https://www.microsoft.com/windows/",
             usageIcons: [
                 {
                     icon: faBriefcase,
@@ -54,6 +56,7 @@ class TechTastes extends ViewportPaginationView {
         },
         {
             osName: "Ubuntu",
+            url: "https://ubuntu.com/",
             usageIcons: [
                 {
                     icon: faServer,
@@ -67,6 +70,7 @@ class TechTastes extends ViewportPaginationView {
         },
         {
             osName: "Android",
+            url: "https://www.android.com/",
             usageIcons: [
                 {
                     icon: faHome,
@@ -80,6 +84,7 @@ class TechTastes extends ViewportPaginationView {
         },
         {
             osName: "Raspbian",
+            url: "https://www.raspberrypi.org/downloads/raspbian/",
             usageIcons: [
                 {
                     icon: faServer,
@@ -89,6 +94,7 @@ class TechTastes extends ViewportPaginationView {
         },
         {
             osName: "EC2 AMI",
+            url: "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html",
             usageIcons: [
                 {
                     icon: faServer,
@@ -104,13 +110,15 @@ class TechTastes extends ViewportPaginationView {
             toolIcons: [
                 {
                     name: "Travis CI",
+                    url: "https://travis-ci.com/",
                     toolIconFilePath: "/assets/tech-tastes/travis-ci.png",
                     positionAdjustment: {
                         right: "3.25%"
                     }
                 },
                 {
-                    name: "Team City"
+                    name: "Team City",
+                    url: "https://www.jetbrains.com/teamcity/"
                 }
             ]
         },
@@ -118,10 +126,12 @@ class TechTastes extends ViewportPaginationView {
             title: "Version Control",
             toolIcons: [
                 {
-                    name: "Github"
+                    name: "Github",
+                    url: "https://github.com/"
                 },
                 {
-                    name: "Bitbucket"
+                    name: "Bitbucket",
+                    url: "https://bitbucket.org/"
                 }
             ]
         }
@@ -129,7 +139,7 @@ class TechTastes extends ViewportPaginationView {
 
     render() {
         var operatingSystemCarouselTiles = this.operatingSystemsList.map(operatingSystem => (
-            <OperatingSystemCarouselTile osName={operatingSystem.osName} usageIcons={operatingSystem.usageIcons} />
+            <OperatingSystemCarouselTile osName={operatingSystem.osName} usageIcons={operatingSystem.usageIcons} url={operatingSystem.url} />
         ))
         var toolCarouselTiles = this.toolList.map(tool => (
             <ToolCarouselTile title={tool.title} toolIcons={tool.toolIcons} />

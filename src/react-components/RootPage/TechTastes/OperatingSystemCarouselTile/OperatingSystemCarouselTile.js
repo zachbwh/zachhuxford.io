@@ -12,6 +12,7 @@ class OperatingSystemCarouselTile extends Component {
             osIconClassName: props.osName.toLowerCase().replace(/ /g, "-"),
             osIconFilePath: "/assets/tech-tastes/" + (props.osName.toLowerCase().replace(/ /g, "-")) + ".svg",
             osIconAltText: props.osName + " Logo",
+            url: props.url,
             usageIcons: props.usageIcons
         };
     }
@@ -29,7 +30,7 @@ class OperatingSystemCarouselTile extends Component {
             <div className="operating-system-carousel-tile">
                 <div className="os-name">
                     <img className={this.state.osIconClassName + " tech-svg"} src={this.state.osIconFilePath} alt={this.state.osIconAltText}></img>
-                    {this.state.osName}
+                    <a href={this.state.url} target="_blank" rel="noopener noreferrer" >{this.state.osName}</a>
                 </div>
                 <div className="os-usage">
                     {usageIcons}
