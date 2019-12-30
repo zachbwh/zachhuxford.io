@@ -12,24 +12,10 @@ class ViewportPaginationView extends Component {
     }
 
     componentDidMount() {
-        var hash = window.location.hash.slice(1);
-        
-        if (hash) {
-            console.log(hash);
-            var currentIndex = this.hashes.indexOf(hash);
-            console.log(currentIndex);
-            if (currentIndex < 0) {
-                this.setState({currentIndex: 0});
-                window.location.hash = ""
-            } else {
-                this.setState({currentIndex: currentIndex});
-            }
-        } else {
-            this.setState({currentIndex: 0});
-            window.location.hash = "";
-        }
+        this.loadCurrentPageFromHash();
 
         window.addEventListener("resize", this.handleWindowResize.bind(this));
+        window.addEventListener("hashchange", this.onHashChange.bind(this));
 
         if (this.onComponentDidMount && typeof this.onComponentDidMount === "function") {
             this.onComponentDidMount();
@@ -38,6 +24,30 @@ class ViewportPaginationView extends Component {
 
     onComponentWillUnmount() {
         window.removeEventListener("resize", this.handleWindowResize.bind(this));
+        window.removeEventListener("hashchange", this.onHashChange.bind(this));
+    }
+
+    onHashChange() {
+        this.loadCurrentPageFromHash()
+    }
+
+    loadCurrentPageFromHash() {
+        var hash = window.location.hash.slice(1);
+        
+        if (hash) {
+            console.log(hash);
+            var currentIndex = this.hashes.indexOf(hash);
+            console.log(currentIndex);
+            if (currentIndex < 0) {
+                this.setState({currentIndex: 0});
+                window.location.hash = "";
+            } else {
+                this.setState({currentIndex: currentIndex});
+            }
+        } else {
+            this.setState({currentIndex: 0});
+            window.location.hash = "";
+        }
     }
     
     handleScroll(event) {
