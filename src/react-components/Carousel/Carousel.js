@@ -87,14 +87,14 @@ class Carousel extends Component {
 
     scrollToNextRef = () => {
         var currentIndex = this.state.currentIndex,
-            nextRefIndex = currentIndex < this.state.carouselItems.length - 1 ? currentIndex + 1 : this.state.carouselItems.length - 1;
+            nextRefIndex = currentIndex < this.state.carouselItems.length - 1 ? currentIndex + 1 : 0;
 
         this.setState({currentIndex: nextRefIndex});
     }
 
     scrollToPrevRef = () => {
         var currentIndex = this.state.currentIndex,
-            prevRefIndex = currentIndex > 0 ? currentIndex - 1 : 0;
+            prevRefIndex = currentIndex > 0 ? currentIndex - 1 : this.state.carouselItems.length - 1;
 
         this.setState({currentIndex: prevRefIndex});
     }

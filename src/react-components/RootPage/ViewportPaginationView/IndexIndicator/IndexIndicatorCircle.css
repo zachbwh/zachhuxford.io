@@ -1,7 +1,6 @@
 .index-indicator-circle {
     border: 2px solid;
     border-radius: 20px;
-    transition: border 150ms linear;
     height: 20px;
     width: 20px;
     overflow: hidden;

@@ -1,9 +1,15 @@
+.carousel-index-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .carousel-index-indicator .container {
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     z-index: 200;
+    width: unset;
 }
 
 @media (max-width: 601px) {

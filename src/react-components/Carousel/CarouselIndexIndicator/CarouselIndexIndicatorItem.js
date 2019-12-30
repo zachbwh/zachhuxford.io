@@ -10,7 +10,7 @@ class CarouselIndexIndicatorItem extends Component {
 
     render() {
         return (
-            <div className={"carousel-index-indicator-item " + (this.props.isActive === true ? "active" : "")} onClick={this.handleClick.bind(this)} style={{width: this.props.width}}>
+            <div className={"carousel-index-indicator-item " + (this.props.isActive === true ? "active" : "")} onClick={this.handleClick.bind(this)}>
             </div>
         );
     }
