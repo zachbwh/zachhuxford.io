@@ -41,9 +41,49 @@ class Rice extends ViewportPaginationView {
 
     redSpotRiceImageList = [
         {
-            name: "Arch Linux",
-            filePath: "/assets/rice/current-rice-telegram-termite.png",
-            caption: "Arch Linux, GNOME, Arc GTK and Gnome Shell, Dash To Dock, Termite, Telegram"
+            name: "Red Spot Rice",
+            filePath: "/assets/rice/red-spot-rice-clean.png",
+            caption: "Arch Linux, BSPWM, Polybar"
+        },
+        {
+            name: "Red Spot Rice",
+            filePath: "/assets/rice/red-spot-rice-dmenu2.png",
+            caption: "Arch Linux, BSPWM, Polybar, Dmenu2"
+        },
+        {
+            name: "Red Spot Rice",
+            filePath: "/assets/rice/red-spot-rice-instagram.png",
+            caption: "Arch Linux, BSPWM, Firefox, Instagram (with custom userstyle)"
+        },
+        {
+            name: "Red Spot Rice",
+            filePath: "/assets/rice/red-spot-rice-instagram-chrome.png",
+            caption: "Arch Linux, BSPWM, Polybar, Chrome, Instagram (with custom userstyle)"
+        },
+        {
+            name: "Red Spot Rice",
+            filePath: "/assets/rice/red-spot-rice-spotify.png",
+            caption: "Arch Linux, BSPWM, Polybar, Spotify (with custom oomox style)"
+        },
+        {
+            name: "Red Spot Rice",
+            filePath: "/assets/rice/red-spot-rice-stallman.org.png",
+            caption: "Arch Linux, BSPWM, Polybar, Firefox, Spotify"
+        },
+        {
+            name: "Red Spot Rice",
+            filePath: "/assets/rice/red-spot-rice-startpage.png",
+            caption: "Arch Linux, BSPWM, Polybar, Firefox, Custom Startpage"
+        },
+        {
+            name: "Red Spot Rice",
+            filePath: "/assets/rice/red-spot-rice-telegram.png",
+            caption: "Arch Linux, BSPWM, Polybar, Telegram (with custom theme)"
+        },
+        {
+            name: "Red Spot Rice",
+            filePath: "/assets/rice/red-spot-rice-termite.png",
+            caption: "Arch Linux, BSPWM, Polybar, Termite"
         }
     ];
 
