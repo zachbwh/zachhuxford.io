@@ -1,0 +1,28 @@
+.focusable-image-carousel-tile {
+    width: 100%;
+}
+
+.focusable-image-carousel-tile img {
+    width: 100%;
+    max-width: 980px;
+    height: auto;
+    max-height: 100vh;
+}
+
+.focused-image-carousel-tile {
+    position: sticky;
+    width: 100vw;
+    /* height: 100vh; */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.focused-image-carousel-tile img {
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+    max-height: 100vh;
+}

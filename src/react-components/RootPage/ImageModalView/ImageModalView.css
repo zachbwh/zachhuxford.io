@@ -1,0 +1,67 @@
+.image-modal-view {
+    height: 100vh;
+    max-height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 99999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(50, 50, 50, 0.4);
+}
+
+.image-modal-view img {
+    height: auto;
+    max-height: 100%;
+    width: 100%;
+    max-width: 100%;
+}
+
+.image-modal-view .image-caption {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background-color: rgba(50, 50, 50, 0.7);
+    margin: 0px;
+    padding: 20px 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.image-modal-view .image-controls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: rgba(50, 50, 50, 0.7);
+    margin: 0px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+.image-modal-view .image-controls .left {
+    float: left;
+}
+
+.image-modal-view .image-controls .right {
+    float: right;
+}
+
+.image-modal-view .image-controls svg {
+    padding: 20px;
+    cursor: pointer;
+}
+
+.image-modal-view .image-controls svg:hover {
+    background-color: rgba(50, 50, 50, 0.7);
+}
+
+.image-modal-view .image-controls, .image-modal-view .image-caption {
+    transition: opacity 100ms linear;
+}

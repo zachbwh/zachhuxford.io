@@ -10,6 +10,7 @@ import TechTastes from './TechTastes/TechTastes';
 import Music from './Music/Music';
 import Profiles from './Profiles/Profiles';
 import Mates from './Mates/Mates';
+import ImageModalView from './ImageModalView/ImageModalView';
 import { Route, Switch } from "react-router-dom";
 import { withRouter } from "react-router";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -31,6 +32,7 @@ class RootPage extends Component {
     }
 
     render() {
+        if (this.state)
         return (
             <div className="rootpage">
                 <div className="background"></div>
@@ -40,7 +42,7 @@ class RootPage extends Component {
                             <Switch location={this.props.location}>
                                 <Route exact path="/" component={HomePage} />
                                 <Route exact path="/projects" component={Projects} />
-                                <Route path="/projects/startpage" component={Startpage} />
+                                <Route path="/projects/startpage" cMatesomponent={Startpage} />
                                 <Route path="/projects/lastfmcreep" component={LastFmCreep} />
                                 <Route path="/rice" component={Rice} />
                                 <Route path="/tech-tastes" component={TechTastes} />
@@ -51,6 +53,7 @@ class RootPage extends Component {
                         </CSSTransition>
                     </TransitionGroup>
                 </div>
+                <ImageModalView />
             </div>
         );
     }
