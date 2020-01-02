@@ -134,8 +134,23 @@ class ImageModalView extends Component {
             var deltaX = this.deltaX + event.movementX,
                 deltaY = this.deltaY + event.movementY;
 
-            var maxDeltaX = ((zoomValue - 1) * event.target.width) / 2;
-            var maxDeltaY = ((zoomValue - 1) * event.target.height) / 2;
+            var maxDeltaX,
+                maxDeltaY;
+
+            var scaleWidth = zoomValue * event.target.width,
+                scaleHeight = zoomValue * event.target.height;
+
+            if (scaleWidth < window.innerWidth) {
+                maxDeltaX = 0;
+            } else {
+                maxDeltaX = (Math.abs((window.innerWidth - scaleWidth)) / 2) / zoomValue;
+            }
+
+            if (scaleHeight < window.innerHeight) {
+                maxDeltaY = 0;
+            } else {
+                maxDeltaY = (Math.abs((window.innerHeight - scaleHeight)) / 2) / zoomValue;
+            }
 
             if (Math.abs(deltaX) > maxDeltaX && deltaX > 0) {
                 deltaX = maxDeltaX;
