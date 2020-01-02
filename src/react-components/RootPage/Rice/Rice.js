@@ -168,29 +168,29 @@ class Rice extends ViewportPaginationView {
                     </div>
     
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
-                        <div>
-                            <h1>Current Rice</h1>
+                        <div className="rice-pane">
+                            <h1 className="carousel-heading">Current Rice</h1>
                             <Carousel carouselItems={currentRiceTiles} />
                         </div>
                     </div>
 
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
-                        <div>
-                            <h1>Android Homescreen</h1>
+                        <div className="rice-pane">
+                            <h1 className="carousel-heading">Android Homescreen</h1>
                             <Carousel carouselItems={androidHomescreenTiles} />
                         </div>
                     </div>
 
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
-                        <div>
-                            <h1>Red Spot Rice</h1>
+                        <div className="rice-pane">
+                            <h1 className="carousel-heading">Red Spot Rice</h1>
                             <Carousel carouselItems={redSpotRiceTiles} />
                         </div>
                     </div>
 
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
-                        <div>
-                            <h1>BSPWM Rice</h1>
+                        <div className="rice-pane">
+                            <h1 className="carousel-heading">BSPWM Rice</h1>
                             <Carousel carouselItems={bspwmRiceTiles} />
                         </div>
                     </div>

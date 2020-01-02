@@ -90,6 +90,24 @@
     }
 }
 
+@media (max-width: 400px) {
+    .rootpage h1 {
+       font-size: 2.75em;
+    }
+
+    .rootpage h2 {
+        font-size: 2.5em;
+     }
+
+     .rootpage h3 {
+        font-size: 1.3em;
+     }
+
+    .rootpage {
+        overflow-y: hidden;
+    }
+}
+
 .anim-fade-enter, .anim-fade-enter .d1, .anim-fade-enter .d2, .anim-fade-enter .d3, .anim-fade-enter .d4, .anim-fade-enter .d5 {
     opacity: 0;
 }

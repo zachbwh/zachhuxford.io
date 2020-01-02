@@ -25,7 +25,7 @@ class FocusableImageCarouselTile extends Component {
         return (
             <div className="focusable-image-carousel-tile">
                 <img className={this.props.imageClassName} src={this.props.imageFilePath} alt={this.props.imageCaption} onClick={this.showImageModalView.bind(this)} style={{maxWidth: this.props.maxWidth}}></img>
-                <p>{this.props.imageCaption}</p>
+                <p style={{maxWidth: this.props.maxWidth}}>{this.props.imageCaption}</p>
             </div>
         );
     }
