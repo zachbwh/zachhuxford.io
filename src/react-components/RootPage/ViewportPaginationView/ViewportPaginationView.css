@@ -26,6 +26,11 @@
     top: 100px;
 }
 
+.viewport-pagination-view p, .viewport-pagination-view ol, .viewport-pagination-view h1, .viewport-pagination-view h2, .viewport-pagination-view h3, .viewport-pagination-view h4, .viewport-pagination-view h5, .viewport-pagination-view h6 {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
 @media (max-width: 601px) {
     .viewport-pagination-view {
         text-align: center;
