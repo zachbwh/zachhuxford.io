@@ -14,8 +14,13 @@ class ImageModalView extends Component {
             hidden: true,
             overlayHidden: false,
             fullScreen: false,
-            zoom: 1
+            zoom: 1,
+            deltaX: 0,
+            deltaY: 0
         };
+
+        this.deltaX = 0;
+        this.deltaY = 0;
 
         this.imageModalViewRef = React.createRef()
 
@@ -66,8 +71,13 @@ class ImageModalView extends Component {
         this.setState({
             hidden: true,
             overlayHidden: false,
-            zoom: 1
+            zoom: 1,
+            deltaX: 0,
+            deltaY: 0
         });
+
+        this.deltaX = 0;
+        this.deltaY = 0;
     }
 
     __setContent(newContent) {
@@ -91,7 +101,7 @@ class ImageModalView extends Component {
         }
     }
 
-    zoomIn() {
+    handleZoomInClick() {
         var currentZoomValue = this.state.zoom,
             newZoomValue = currentZoomValue + 0.2;
         if (newZoomValue > 2) {
@@ -100,13 +110,53 @@ class ImageModalView extends Component {
         this.setState({zoom: newZoomValue});
     }
 
-    zoomOut() {
+    handleZoomOutClick() {
         var currentZoomValue = this.state.zoom,
             newZoomValue = currentZoomValue - 0.2;
         if (newZoomValue < 1) {
             newZoomValue = 1
         }
         this.setState({zoom: newZoomValue});
+    }
+
+    handleImageMouseDown(event) {
+        event.preventDefault()
+        this.mouseDownOnImage = true;
+    }
+
+    handleImageMouseUp(event) {
+        this.mouseDownOnImage = false;
+    }
+
+    handleImageMouseMove(event) {
+        var zoomValue = this.state.zoom;
+        if (this.mouseDownOnImage && zoomValue > 1) {
+            var deltaX = this.deltaX + event.movementX,
+                deltaY = this.deltaY + event.movementY;
+
+            var maxDeltaX = ((zoomValue - 1) * event.target.width) / 2;
+            var maxDeltaY = ((zoomValue - 1) * event.target.height) / 2;
+
+            if (Math.abs(deltaX) > maxDeltaX && deltaX > 0) {
+                deltaX = maxDeltaX;
+            } else if (Math.abs(deltaX) > maxDeltaX && deltaX < 0) {
+                deltaX = -1 * maxDeltaX;
+            }
+
+            if (Math.abs(deltaY) > maxDeltaY && deltaY > 0) {
+                deltaY = maxDeltaY;
+            } else if (Math.abs(deltaY) > maxDeltaY && deltaY < 0) {
+                deltaY = -1 * maxDeltaY;
+            }
+
+            this.deltaX = deltaX;
+            this.deltaY = deltaY;
+
+            this.setState({
+                deltaX: deltaX,
+                deltaY: deltaY
+            });
+        }
     }
 
     render() {
@@ -118,14 +168,14 @@ class ImageModalView extends Component {
                         <div className="left">
                             <FontAwesomeIcon icon={this.state.fullScreen ? faCompress : faExpand} onClick={this.toggleFullScreen.bind(this)}></FontAwesomeIcon>
                         </div>
-                        <FontAwesomeIcon icon={faSearchMinus} onClick={this.zoomOut.bind(this)}></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faSearchMinus} onClick={this.handleZoomOutClick.bind(this)}></FontAwesomeIcon>
                         <span className="zoom-level">{Math.round(this.state.zoom * 100)}%</span>
-                        <FontAwesomeIcon icon={faSearchPlus} onClick={this.zoomIn.bind(this)}></FontAwesomeIcon>    
+                        <FontAwesomeIcon icon={faSearchPlus} onClick={this.handleZoomInClick.bind(this)}></FontAwesomeIcon>    
                         <div className="right">
                             <FontAwesomeIcon icon={faTimesCircle} onClick={ImageModalView.hide}></FontAwesomeIcon>
                         </div>
                     </div>
-                    <img className={this.state.imageClassName} src={this.state.imageFilePath} alt={this.state.imageCaption} onClick={this.toggleHideOverlay.bind(this)} style={{transform: "scale(" + this.state.zoom + ")"}}></img>
+                    <img className={this.state.imageClassName} src={this.state.imageFilePath} alt={this.state.imageCaption} onClick={this.toggleHideOverlay.bind(this)} style={{transform: "scale(" + this.state.zoom + ") translate(" + this.state.deltaX + "px, " + this.state.deltaY + "px)"}} onMouseMove={this.handleImageMouseMove.bind(this)} onMouseDown={this.handleImageMouseDown.bind(this)}  onMouseUp={this.handleImageMouseUp.bind(this)} onMouseOut={this.handleImageMouseUp.bind(this)}></img>
                     <p className="image-caption" style={{ opacity: this.state.overlayHidden ? "0" : "1" }}>
                         {this.state.imageCaption}
                     </p>

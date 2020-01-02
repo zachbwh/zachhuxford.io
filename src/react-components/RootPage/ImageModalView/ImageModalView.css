@@ -11,7 +11,9 @@
     position: fixed;
     top: 0;
     left: 0;
+    color: #FFFFFF;
     background-color: rgba(50, 50, 50, 0.4);
+    user-select: none;
 }
 
 .image-modal-view img {
@@ -60,10 +62,6 @@
 
 .image-modal-view .image-controls svg {
     cursor: pointer;
-}
-
-.image-modal-view .image-controls svg:hover {
-    background-color: rgba(50, 50, 50, 0.7);
 }
 
 .image-modal-view .image-controls, .image-modal-view .image-caption {
