@@ -42,7 +42,7 @@ class RootPage extends Component {
                             <Switch location={this.props.location}>
                                 <Route exact path="/" component={HomePage} />
                                 <Route exact path="/projects" component={Projects} />
-                                <Route path="/projects/startpage" cMatesomponent={Startpage} />
+                                <Route path="/projects/startpage" component={Startpage} />
                                 <Route path="/projects/lastfmcreep" component={LastFmCreep} />
                                 <Route path="/rice" component={Rice} />
                                 <Route path="/tech-tastes" component={TechTastes} />
