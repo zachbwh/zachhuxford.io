@@ -137,17 +137,18 @@ class Rice extends ViewportPaginationView {
 
 
     render() {
+        var imageCarouselTileWidth = this.state.windowWidth < 980 ? this.state.windowWidth : 980;
         var currentRiceTiles = this.currentRiceImageList.map(image => (
-            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} />
+            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} imageClassName={image.name.toLowerCase().replace(/ /g, "-")} maxWidth={imageCarouselTileWidth} />
         ));
         var androidHomescreenTiles = this.androidHomescreenImageList.map(image => (
-            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} />
+            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} imageClassName={image.name.toLowerCase().replace(/ /g, "-")} maxWidth={imageCarouselTileWidth} />
         ));
         var redSpotRiceTiles = this.redSpotRiceImageList.map(image => (
-            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} />
+            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} imageClassName={image.name.toLowerCase().replace(/ /g, "-")} maxWidth={imageCarouselTileWidth} />
         ));
         var bspwmRiceTiles = this.bspwmRiceImageList.map(image => (
-            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} />
+            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} imageClassName={image.name.toLowerCase().replace(/ /g, "-")} maxWidth={imageCarouselTileWidth} />
         ));
         return (
             <div className="viewport-pagination-view rice" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>

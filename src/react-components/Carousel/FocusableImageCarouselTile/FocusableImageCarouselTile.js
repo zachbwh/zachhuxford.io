@@ -8,19 +8,15 @@ class FocusableImageCarouselTile extends Component {
         super(props);
 
         this.state = {
-            name: props.name,
-            imageFilePath: props.imageFilePath,
-            imageClassName: props.name.toLowerCase().replace(/ /g, "-"),
-            imageCaption: props.imageCaption,
             focused: false
         };
     }
 
     showImageModalView() {
         ImageModalView.setContent({
-            imageFilePath: this.state.imageFilePath,
-            imageCaption: this.state.imageCaption,
-            imageClassName: this.state.imageCaption
+            imageFilePath: this.props.imageFilePath,
+            imageCaption: this.props.imageCaption,
+            imageClassName: this.props.imageCaption
         });
         ImageModalView.show();
     }
@@ -28,8 +24,8 @@ class FocusableImageCarouselTile extends Component {
     render() {
         return (
             <div className="focusable-image-carousel-tile">
-                <img className={this.state.imageClassName} src={this.state.imageFilePath} alt={this.state.imageCaption} onClick={this.showImageModalView.bind(this)}></img>
-                <p>{this.state.imageCaption}</p>
+                <img className={this.props.imageClassName} src={this.props.imageFilePath} alt={this.props.imageCaption} onClick={this.showImageModalView.bind(this)} style={{maxWidth: this.props.maxWidth}}></img>
+                <p>{this.props.imageCaption}</p>
             </div>
         );
     }

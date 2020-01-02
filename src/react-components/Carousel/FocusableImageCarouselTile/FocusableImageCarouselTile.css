@@ -1,12 +1,17 @@
 .focusable-image-carousel-tile {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 980px;
 }
 
 .focusable-image-carousel-tile img {
-    width: 100%;
+    width: auto;
     max-width: 980px;
     height: auto;
-    max-height: 100vh;
+    max-height: 40vh;
 }
 
 .focused-image-carousel-tile {

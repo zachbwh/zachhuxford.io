@@ -11,8 +11,7 @@ class Carousel extends Component {
         this.state = {
             currentIndex: 0,
             lastScrollTime: new Date(),
-            windowWidth: window.innerWidth,
-            carouselItems: props.carouselItems
+            windowWidth: window.innerWidth
         };
     }
 
@@ -90,14 +89,14 @@ class Carousel extends Component {
 
     scrollToNextRef = () => {
         var currentIndex = this.state.currentIndex,
-            nextRefIndex = currentIndex < this.state.carouselItems.length - 1 ? currentIndex + 1 : 0;
+            nextRefIndex = currentIndex < this.props.carouselItems.length - 1 ? currentIndex + 1 : 0;
 
         this.setState({currentIndex: nextRefIndex});
     }
 
     scrollToPrevRef = () => {
         var currentIndex = this.state.currentIndex,
-            prevRefIndex = currentIndex > 0 ? currentIndex - 1 : this.state.carouselItems.length - 1;
+            prevRefIndex = currentIndex > 0 ? currentIndex - 1 : this.props.carouselItems.length - 1;
 
         this.setState({currentIndex: prevRefIndex});
     }
@@ -123,12 +122,12 @@ class Carousel extends Component {
     scrollCooldownMilliSeconds = 500;
 
     render() {
-        var carouselItems = this.state.carouselItems.map((carouselItem, index) => (
+        var carouselItems = this.props.carouselItems.map((carouselItem, index) => (
             <div className="carousel-item" key={index} style={{minWidth: this.state.windowWidth + "px"}}>{carouselItem}</div>
         ))
         return (
             <div className="carousel" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
-                <div className="carousel-container" style={{width: (this.state.windowWidth * this.state.carouselItems.length) + "px",transform: "translateX(-" + this.state.currentIndex * this.state.windowWidth + "px)"}}>
+                <div className="carousel-container" style={{width: (this.state.windowWidth * this.props.carouselItems.length) + "px",transform: "translateX(-" + this.state.currentIndex * this.state.windowWidth + "px)"}}>
                     {carouselItems}
                 </div>
                 <CarouselIndexIndicator setIndex={this.setIndex.bind(this)} carouselItems={carouselItems} activeIndex={this.state.currentIndex}/>

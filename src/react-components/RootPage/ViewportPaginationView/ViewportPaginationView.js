@@ -7,7 +7,8 @@ class ViewportPaginationView extends Component {
         this.state = {
             currentIndex: 0,
             lastScrollTime: new Date(),
-            windowHeight: window.innerHeight
+            windowHeight: window.innerHeight,
+            windowWidth: window.innerWidth
         };
     }
 
@@ -142,7 +143,10 @@ class ViewportPaginationView extends Component {
             this.eventTimeout = setTimeout(function() {
                 that.eventTimeout = null;
                 console.log("resize event handled");
-                that.setState({windowHeight: window.innerHeight});
+                that.setState({
+                    windowHeight: window.innerHeight,
+                    windowWidth: window.innerWidth
+                });
                 if (typeof that.onHandleWindowResize === "function") {
                     that.onHandleWindowResize()
                 }
