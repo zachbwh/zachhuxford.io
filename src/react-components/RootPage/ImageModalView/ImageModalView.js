@@ -174,6 +174,67 @@ class ImageModalView extends Component {
         }
     }
 
+    registerImageTouchStart(event) {
+        event.preventDefault();
+        console.log("hi")
+        this.referenceTouch = {
+            touchStartPosY: event.targetTouches[0].pageY,
+            touchStartPosX: event.targetTouches[0].pageX
+        };
+    }
+
+    handleImageTouchMove(event) {
+        var zoomValue = this.state.zoom;
+        if (event.touches.length === 1 && zoomValue > 1) {
+            var newTouch = {
+                touchStartPosY: event.changedTouches[0].pageY,
+                touchStartPosX: event.changedTouches[0].pageX
+            }
+            var deltaX = this.deltaX - ((this.referenceTouch.touchStartPosX - newTouch.touchStartPosX) / zoomValue),
+                deltaY = this.deltaY - ((this.referenceTouch.touchStartPosY - newTouch.touchStartPosY) / zoomValue);
+
+
+            var maxDeltaX,
+                maxDeltaY;
+
+            var scaleWidth = zoomValue * event.target.width,
+                scaleHeight = zoomValue * event.target.height;
+
+            if (scaleWidth < window.innerWidth) {
+                maxDeltaX = 0;
+            } else {
+                maxDeltaX = (Math.abs((window.innerWidth - scaleWidth)) / 2) / zoomValue;
+            }
+
+            if (scaleHeight < window.innerHeight) {
+                maxDeltaY = 0;
+            } else {
+                maxDeltaY = (Math.abs((window.innerHeight - scaleHeight)) / 2) / zoomValue;
+            }
+
+            if (Math.abs(deltaX) > maxDeltaX && deltaX > 0) {
+                deltaX = maxDeltaX;
+            } else if (Math.abs(deltaX) > maxDeltaX && deltaX < 0) {
+                deltaX = -1 * maxDeltaX;
+            }
+
+            if (Math.abs(deltaY) > maxDeltaY && deltaY > 0) {
+                deltaY = maxDeltaY;
+            } else if (Math.abs(deltaY) > maxDeltaY && deltaY < 0) {
+                deltaY = -1 * maxDeltaY;
+            }
+
+            this.deltaX = deltaX;
+            this.deltaY = deltaY;
+            this.referenceTouch = newTouch;
+
+            this.setState({
+                deltaX: deltaX,
+                deltaY: deltaY
+            });
+        }
+    }
+
     render() {
         var content;
         if (this.state.imageFilePath) {
@@ -190,7 +251,7 @@ class ImageModalView extends Component {
                             <FontAwesomeIcon icon={faTimesCircle} onClick={ImageModalView.hide}></FontAwesomeIcon>
                         </div>
                     </div>
-                    <img className={this.state.imageClassName} src={this.state.imageFilePath} alt={this.state.imageCaption} onClick={this.toggleHideOverlay.bind(this)} style={{transform: "scale(" + this.state.zoom + ") translate(" + this.state.deltaX + "px, " + this.state.deltaY + "px)"}} onMouseMove={this.handleImageMouseMove.bind(this)} onMouseDown={this.handleImageMouseDown.bind(this)}  onMouseUp={this.handleImageMouseUp.bind(this)} onMouseOut={this.handleImageMouseUp.bind(this)}></img>
+                    <img className={this.state.imageClassName} src={this.state.imageFilePath} alt={this.state.imageCaption} onClick={this.toggleHideOverlay.bind(this)} style={{transform: "scale(" + this.state.zoom + ") translate(" + this.state.deltaX + "px, " + this.state.deltaY + "px)"}} onMouseMove={this.handleImageMouseMove.bind(this)} onMouseDown={this.handleImageMouseDown.bind(this)}  onMouseUp={this.handleImageMouseUp.bind(this)} onMouseOut={this.handleImageMouseUp.bind(this)} onTouchStart={this.registerImageTouchStart.bind(this)} onTouchMove={this.handleImageTouchMove.bind(this)}></img>
                     <p className="image-caption" style={{ opacity: this.state.overlayHidden ? "0" : "1" }}>
                         {this.state.imageCaption}
                     </p>
