@@ -19,6 +19,7 @@ class ImageModalView extends Component {
             deltaY: 0
         };
 
+        this.zoom = 1;
         this.deltaX = 0;
         this.deltaY = 0;
 
@@ -108,6 +109,7 @@ class ImageModalView extends Component {
             newZoomValue = 2
         }
         this.setState({zoom: newZoomValue});
+        this.zoom = newZoomValue;
     }
 
     handleZoomOutClick() {
@@ -117,6 +119,7 @@ class ImageModalView extends Component {
             newZoomValue = 1
         }
         this.setState({zoom: newZoomValue});
+        this.zoom = newZoomValue;
     }
 
     handleImageMouseDown(event) {
@@ -174,18 +177,39 @@ class ImageModalView extends Component {
         }
     }
 
+    calculateDistanceBetweenPoints(pointA, pointB) {
+        var deltaX = Math.abs(pointA.xCoordinate - pointB.xCoordinate),
+            deltaY = Math.abs(pointA.yCoordinate - pointB.yCoordinate);
+
+        return Math.sqrt((deltaX ^ 2) + (deltaY ^ 2))
+    }
+
     registerImageTouchStart(event) {
         event.preventDefault();
-        console.log("hi")
-        this.referenceTouch = {
-            touchStartPosY: event.targetTouches[0].pageY,
-            touchStartPosX: event.targetTouches[0].pageX
-        };
+        debugger;
+        if (event.targetTouches.length === 1) {
+            this.referenceTouch = {
+                touchStartPosY: event.targetTouches[0].pageY,
+                touchStartPosX: event.targetTouches[0].pageX
+            };
+        } else if (event.targetTouches.length === 2) {
+            var points = [{
+                xCoordinate: event.targetTouches[0].pageX,
+                yCoordinate: event.targetTouches[0].pageY
+            },
+            {
+                xCoordinate: event.targetTouches[1].pageX,
+                yCoordinate: event.targetTouches[1].pageY
+            }];
+
+            this.currentPinchDistance = this.calculateDistanceBetweenPoints(...points)
+        }
+        
     }
 
     handleImageTouchMove(event) {
-        var zoomValue = this.state.zoom;
-        if (event.touches.length === 1 && zoomValue > 1) {
+        var zoomValue = this.zoom;
+        if (event.touches.length === 1) {
             var newTouch = {
                 touchStartPosY: event.changedTouches[0].pageY,
                 touchStartPosX: event.changedTouches[0].pageX
@@ -232,6 +256,31 @@ class ImageModalView extends Component {
                 deltaX: deltaX,
                 deltaY: deltaY
             });
+        } else if (event.targetTouches.length === 2) {
+            var points = [{
+                xCoordinate: event.targetTouches[0].pageX,
+                yCoordinate: event.targetTouches[0].pageY
+            },
+            {
+                xCoordinate: event.targetTouches[1].pageX,
+                yCoordinate: event.targetTouches[1].pageY
+            }];
+
+            var newPinchDistance = this.calculateDistanceBetweenPoints(...points),
+                newZoomValue = (newPinchDistance / this.currentPinchDistance) * zoomValue;
+            
+            if (newZoomValue < 1) {
+                newZoomValue = 1;
+            } else if (newZoomValue > 2) {
+                newZoomValue = 2;
+            }
+
+            this.setState({
+                zoom: newZoomValue
+            });
+            this.zoom = newZoomValue;
+
+            this.currentPinchDistance = newPinchDistance;
         }
     }
 
