@@ -13,7 +13,8 @@ class ImageModalView extends Component {
         this.state = {
             hidden: true,
             overlayHidden: false,
-            fullScreen: false
+            fullScreen: false,
+            zoom: 1
         };
 
         this.imageModalViewRef = React.createRef()
@@ -64,7 +65,8 @@ class ImageModalView extends Component {
         }
         this.setState({
             hidden: true,
-            overlayHidden: false
+            overlayHidden: false,
+            zoom: 1
         });
     }
 
@@ -89,6 +91,24 @@ class ImageModalView extends Component {
         }
     }
 
+    zoomIn() {
+        var currentZoomValue = this.state.zoom,
+            newZoomValue = currentZoomValue + 0.2;
+        if (newZoomValue > 2) {
+            newZoomValue = 2
+        }
+        this.setState({zoom: newZoomValue});
+    }
+
+    zoomOut() {
+        var currentZoomValue = this.state.zoom,
+            newZoomValue = currentZoomValue - 0.2;
+        if (newZoomValue < 1) {
+            newZoomValue = 1
+        }
+        this.setState({zoom: newZoomValue});
+    }
+
     render() {
         var content;
         if (this.state.imageFilePath) {
@@ -98,13 +118,14 @@ class ImageModalView extends Component {
                         <div className="left">
                             <FontAwesomeIcon icon={this.state.fullScreen ? faCompress : faExpand} onClick={this.toggleFullScreen.bind(this)}></FontAwesomeIcon>
                         </div>
-                        <FontAwesomeIcon icon={faSearchMinus}></FontAwesomeIcon>
-                        <FontAwesomeIcon icon={faSearchPlus}></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faSearchMinus} onClick={this.zoomOut.bind(this)}></FontAwesomeIcon>
+                        <span className="zoom-level">{Math.round(this.state.zoom * 100)}%</span>
+                        <FontAwesomeIcon icon={faSearchPlus} onClick={this.zoomIn.bind(this)}></FontAwesomeIcon>    
                         <div className="right">
                             <FontAwesomeIcon icon={faTimesCircle} onClick={ImageModalView.hide}></FontAwesomeIcon>
                         </div>
                     </div>
-                    <img className={this.state.imageClassName} src={this.state.imageFilePath} alt={this.state.imageCaption} onClick={this.toggleHideOverlay.bind(this)}></img>
+                    <img className={this.state.imageClassName} src={this.state.imageFilePath} alt={this.state.imageCaption} onClick={this.toggleHideOverlay.bind(this)} style={{transform: "scale(" + this.state.zoom + ")"}}></img>
                     <p className="image-caption" style={{ opacity: this.state.overlayHidden ? "0" : "1" }}>
                         {this.state.imageCaption}
                     </p>
