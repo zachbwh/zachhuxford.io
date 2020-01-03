@@ -137,7 +137,7 @@ class Carousel extends Component {
             <div className="carousel-item" key={index} style={{minWidth: this.state.windowWidth + "px"}}>{carouselItem}</div>
         ))
         return (
-            <div className="carousel" onWheel={this.handleScroll} onTouchMove={this.handleTouchMove}>
+            <div className="carousel" onWheel={this.handleScroll} onTouchMove={this.handleTouchMove} onTouchStart={this.registerTouchStart}>
                 <div className="carousel-container" style={{width: (this.state.windowWidth * this.props.carouselItems.length) + "px",transform: "translateX(-" + this.state.currentIndex * this.state.windowWidth + "px)"}}>
                     {carouselItems}
                 </div>
