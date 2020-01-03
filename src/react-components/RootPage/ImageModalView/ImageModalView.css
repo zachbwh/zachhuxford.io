@@ -21,6 +21,7 @@
     max-height: 100%;
     width: auto;
     max-width: 100%;
+    transition: transform 100ms linear;
 }
 
 .image-modal-view .image-caption {
