@@ -14,7 +14,10 @@ class Carousel extends Component {
             windowWidth: window.innerWidth
         };
 
-        this.handleWindowResize = this.handleWindowResize.bind(this)
+        this.handleWindowResize = this.handleWindowResize.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
+        this.registerTouchStart = this.registerTouchStart.bind(this);
+        this.handleTouchMove = this.handleTouchMove.bind(this);
     }
 
     componentDidMount() {
@@ -87,6 +90,14 @@ class Carousel extends Component {
         }
     }
 
+    // handleKeyDown(event) {
+    //     if (event.keyCode === 37) { // left
+    //         this.scrollToPrevRef()
+    //     } else if (event.keyCode === 39) { // right
+    //         this.scrollToNextRef()
+    //     }
+    // }
+
     scrollToNextRef = () => {
         var currentIndex = this.state.currentIndex,
             nextRefIndex = currentIndex < this.props.carouselItems.length - 1 ? currentIndex + 1 : 0;
@@ -126,7 +137,7 @@ class Carousel extends Component {
             <div className="carousel-item" key={index} style={{minWidth: this.state.windowWidth + "px"}}>{carouselItem}</div>
         ))
         return (
-            <div className="carousel" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
+            <div className="carousel" onWheel={this.handleScroll} onTouchMove={this.handleTouchMove}>
                 <div className="carousel-container" style={{width: (this.state.windowWidth * this.props.carouselItems.length) + "px",transform: "translateX(-" + this.state.currentIndex * this.state.windowWidth + "px)"}}>
                     {carouselItems}
                 </div>
