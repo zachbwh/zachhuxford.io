@@ -91,47 +91,47 @@ class Rice extends ViewportPaginationView {
         {
             name: "Clean",
             filePath: "/assets/rice/bspwm-rice-clean.png",
-            caption: "Arch Linux, GNOME, Arc GTK and Gnome Shell, Dash To Dock, Termite, Telegram"
+            caption: "Arch Linux, BSPWM, Lemonbar"
         },
         {
             name: "Fake Dirty",
             filePath: "/assets/rice/bspwm-rice-fake-dirty.png",
-            caption: "Arch Linux, GNOME, Arc GTK and Gnome Shell, Dash To Dock, Termite, Telegram"
+            caption: "URXVT, screenfetch, htop, panes color script"
         },
         {
             name: "Firefox/Homepage",
             filePath: "/assets/rice/bspwm-rice-firefox-homepage.png",
-            caption: "Arch Linux, GNOME, Arc GTK and Gnome Shell, Dash To Dock, Termite, Telegram"
+            caption: "Firefox and Startpage"
         },
         {
             name: "i3lock",
             filePath: "/assets/rice/bspwm-rice-i3lock.png",
-            caption: "Arch Linux, GNOME, Arc GTK and Gnome Shell, Dash To Dock, Termite, Telegram"
+            caption: "i3lock"
         },
         {
             name: "MPD/NCMPCPP",
             filePath: "/assets/rice/bspwm-rice-mpd-ncmpcpp.png",
-            caption: "Arch Linux, GNOME, Arc GTK and Gnome Shell, Dash To Dock, Termite, Telegram"
+            caption: "mpd and ncmpcpp client"
         },
         {
             name: "Dunst Notifications",
             filePath: "/assets/rice/bspwm-rice-notifications-dunst.png",
-            caption: "Arch Linux, GNOME, Arc GTK and Gnome Shell, Dash To Dock, Termite, Telegram"
+            caption: "dunst notifcation"
         },
         {
             name: "Reddit Userstyle (Dark Naut)",
             filePath: "/assets/rice/bspwm-rice-reddit-dark-naut-userstyle.png",
-            caption: "Arch Linux, GNOME, Arc GTK and Gnome Shell, Dash To Dock, Termite, Telegram"
+            caption: "Firefox with Reddit and Dark Naut Userstyle"
         },
         {
             name: "Rofi",
             filePath: "/assets/rice/bspwm-rice-rofi.png",
-            caption: "Arch Linux, GNOME, Arc GTK and Gnome Shell, Dash To Dock, Termite, Telegram"
+            caption: "Rofi launcher"
         },
         {
             name: "Wikipedia Userstyle (Wikipedia Minimalismo)",
             filePath: "/assets/rice/bspwm-rice-wikipedia-minimalismo-userstyle.png",
-            caption: "Arch Linux, GNOME, Arc GTK and Gnome Shell, Dash To Dock, Termite, Telegram"
+            caption: "Firefox Wikipedia and Wikipedia Minimalismo Userstyle"
         },
     ];
 
