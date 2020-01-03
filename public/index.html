@@ -48,7 +48,7 @@
   </head>
   <body>
     <noscript>
-      You need to enable JavaScript to run this app.
+      You need to enable JavaScript to view zachhuxford.io
     </noscript>
     <div id="root"></div>
     <!--
@@ -63,3 +63,16 @@
     -->
   </body>
 </html>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker-custom.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+</script>
