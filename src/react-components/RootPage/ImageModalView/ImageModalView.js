@@ -24,6 +24,9 @@ class ImageModalView extends Component {
         this.zoom = 1;
         this.deltaX = 0;
         this.deltaY = 0;
+        this.maxZoom = 3;
+        this.minZoom = 1;
+        this.zoomIncrement = 0.2;
 
         this.imageModalViewRef = React.createRef()
 
@@ -133,17 +136,21 @@ class ImageModalView extends Component {
 
     handleZoomInClick() {
         var currentZoomValue = this.state.zoom,
-            newZoomValue = currentZoomValue + 0.2;
+            newZoomValue = currentZoomValue + this.zoomIncrement;
+
+        if (newZoomValue > this.maxZoom) {
+            newZoomValue = this.maxZoom;
+        }
         
         this.zoomTo(newZoomValue);
     }
 
     handleZoomOutClick() {
         var currentZoomValue = this.state.zoom,
-            newZoomValue = currentZoomValue - 0.2;
+            newZoomValue = currentZoomValue - this.zoomIncrement;
 
-        if (newZoomValue < 1) {
-            newZoomValue = 1;
+        if (newZoomValue < this.minZoom) {
+            newZoomValue = this.minZoom;
         }
         
         this.zoomTo(newZoomValue);
@@ -233,10 +240,10 @@ class ImageModalView extends Component {
     }
 
     handleImageTouchEnd(event) {
-        if (this.zoom < 1) {
+        if (this.zoom < this.minZoom) {
             this.setDefaultTransformPropertyValues(true);
-        } else if (this.zoom > 2) {
-            this.zoomTo(2);
+        } else if (this.zoom > this.maxZoom) {
+            this.zoomTo(this.maxZoom);
         }
     }
 
@@ -308,10 +315,13 @@ class ImageModalView extends Component {
     }
 
     zoomTo(newZoomValue) {
-        if (newZoomValue < 0.8) {
-            newZoomValue = 0.8;
-        } else if (newZoomValue > 2.2) {
-            newZoomValue = 2.2;
+        var minZoomTemporary = this.minZoom - this.zoomIncrement,
+            maxZoomTemporary = this.maxZoom + this.zoomIncrement;
+
+        if (newZoomValue < minZoomTemporary) {
+            newZoomValue = minZoomTemporary;
+        } else if (newZoomValue > maxZoomTemporary) {
+            newZoomValue = maxZoomTemporary;
         }
 
         this.setState({
@@ -330,7 +340,7 @@ class ImageModalView extends Component {
                             <FontAwesomeIcon icon={this.state.fullScreen ? faCompress : faExpand} onClick={this.toggleFullScreen.bind(this)}></FontAwesomeIcon>
                         </div>
                         <FontAwesomeIcon icon={faSearchMinus} onClick={this.handleZoomOutClick.bind(this)}></FontAwesomeIcon>
-                        <span className="zoom-level">{Math.round((this.state.zoom < 1 ? 1 : this.state.zoom > 2 ? 2 : this.state.zoom) * 100)}%</span>
+                        <span className="zoom-level">{Math.round((this.state.zoom < this.minZoom ? this.minZoom : this.state.zoom > this.maxZoom ? this.maxZoom : this.state.zoom) * 100)}%</span>
                         <FontAwesomeIcon icon={faSearchPlus} onClick={this.handleZoomInClick.bind(this)}></FontAwesomeIcon>    
                         <div className="right">
                             <FontAwesomeIcon icon={faTimesCircle} onClick={ImageModalView.hide}></FontAwesomeIcon>
