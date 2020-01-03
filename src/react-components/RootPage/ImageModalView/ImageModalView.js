@@ -31,6 +31,10 @@ class ImageModalView extends Component {
         this.imageModalViewRef = React.createRef()
 
         ImageModalView.__singletonRef = this;
+
+        this.handleFullScreenChange = this.handleFullScreenChange.bind(this);
+        this.handleWindowResize = this.handleWindowResize.bind(this);
+        this.handleHashChange = this.handleHashChange.bind(this);
     }
 
     static show() {
@@ -58,15 +62,16 @@ class ImageModalView extends Component {
 
     componentDidMount() {
         document.addEventListener("keydown", this.handleKeyDown, false);
-        document.addEventListener("fullscreenchange", this.handleFullScreenChange.bind(this), false);
-        window.addEventListener("resize", this.handleWindowResize.bind(this));
-
+        document.addEventListener("fullscreenchange", this.handleFullScreenChange, false);
+        window.addEventListener("resize", this.handleWindowResize);
+        window.addEventListener("hashchange", this.handleHashChange);
     }
 
     componentWillUnmount() {
         document.removeEventListener("keydown", this.handleKeyDown, false);
-        document.removeEventListener("fullscreenchange", this.handleFullScreenChange.bind(this), false);
-        window.removeEventListener("resize", this.handleWindowResize.bind(this));
+        document.removeEventListener("fullscreenchange", this.handleFullScreenChange, false);
+        window.removeEventListener("resize", this.handleWindowResize);
+        window.removeEventListener("hashchange", this.handleHashChange);
     }
 
     __show() {
@@ -132,6 +137,10 @@ class ImageModalView extends Component {
                 });
              }, 66);
         }
+    }
+
+    handleHashChange() {
+        ImageModalView.hide();
     }
 
     handleZoomInClick() {

@@ -13,17 +13,17 @@ class Carousel extends Component {
             lastScrollTime: new Date(),
             windowWidth: window.innerWidth
         };
+
+        this.handleWindowResize = this.handleWindowResize.bind(this)
     }
 
     componentDidMount() {
-        this.boundFunctionInstances = {}
-        this.boundFunctionInstances.handleWindowResize = this.handleWindowResize.bind(this)
-        window.addEventListener("resize", this.boundFunctionInstances.handleWindowResize);
+        window.addEventListener("resize", this.handleWindowResize);
 
     }
 
     componentWillUnmount() {
-        window.removeEventListener("resize", this.boundFunctionInstances.handleWindowResize);
+        window.removeEventListener("resize", this.handleWindowResize);
     }
     
     handleScroll(event) {

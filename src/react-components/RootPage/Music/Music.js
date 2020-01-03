@@ -39,10 +39,7 @@ class Music extends ViewportPaginationView {
         })
     }
 
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.boundFunctionInstances.handleWindowResize);
-        window.removeEventListener("hashchange", this.boundFunctionInstances.onHashChange);
-
+    onComponentWillUnmount() {
         this.socket.close();
     }
 
@@ -102,7 +99,7 @@ class Music extends ViewportPaginationView {
             selectedAlbum = <p className="album-text-placeholder">Tap an album to see my listening details from the past three months</p>
         }
         return (
-            <div className="viewport-pagination-view music" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
+            <div className="viewport-pagination-view music">
                 <IndexIndicator hashes={this.hashes} activeIndex={this.state.currentIndex} setIndex={this.setIndex.bind(this)}></IndexIndicator>
                 <div className="viewport-container" style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>

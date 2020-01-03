@@ -145,7 +145,7 @@ class TechTastes extends ViewportPaginationView {
             <ToolCarouselTile title={tool.title} toolIcons={tool.toolIcons} />
         ))
         return (
-            <div className="viewport-pagination-view tech-tastes" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
+            <div className="viewport-pagination-view tech-tastes">
                 <IndexIndicator hashes={this.hashes} activeIndex={this.state.currentIndex} setIndex={this.setIndex.bind(this)}></IndexIndicator>
                 <div className="viewport-container" style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>

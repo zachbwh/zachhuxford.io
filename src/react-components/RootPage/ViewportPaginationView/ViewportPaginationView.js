@@ -10,16 +10,24 @@ class ViewportPaginationView extends Component {
             windowHeight: window.innerHeight,
             windowWidth: window.innerWidth
         };
+
+        this.handleWindowResize = this.handleWindowResize.bind(this);
+        this.onHashChange = this.onHashChange.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
+        this.handleTouchMove = this.handleTouchMove.bind(this);
+        this.registerTouchStart = this.registerTouchStart.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
     }
 
     componentDidMount() {
         this.loadCurrentPageFromHash();
 
-        this.boundFunctionInstances = {}
-        this.boundFunctionInstances.handleWindowResize = this.handleWindowResize.bind(this)
-        this.boundFunctionInstances.onHashChange = this.onHashChange.bind(this)
-        window.addEventListener("resize", this.boundFunctionInstances.handleWindowResize);
-        window.addEventListener("hashchange", this.boundFunctionInstances.onHashChange);
+        window.addEventListener("resize", this.handleWindowResize);
+        window.addEventListener("hashchange", this.onHashChange);
+        document.addEventListener("wheel", this.handleScroll);
+        document.addEventListener("touchmove", this.handleTouchMove);
+        document.addEventListener("touchstart", this.registerTouchStart);
+        document.addEventListener("keydown", this.handleKeyDown);
 
         if (this.onComponentDidMount && typeof this.onComponentDidMount === "function") {
             this.onComponentDidMount();
@@ -27,8 +35,16 @@ class ViewportPaginationView extends Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener("resize", this.boundFunctionInstances.handleWindowResize);
-        window.removeEventListener("hashchange", this.boundFunctionInstances.onHashChange);
+        window.removeEventListener("resize", this.handleWindowResize);
+        window.removeEventListener("hashchange", this.onHashChange);
+        document.removeEventListener("wheel", this.handleScroll);
+        document.removeEventListener("touchmove", this.handleTouchMove);
+        document.removeEventListener("touchstart", this.registerTouchStart);
+        document.removeEventListener("keydown", this.handleKeyDown);
+
+        if (this.onComponentWillUnmount && typeof this.onComponentWillUnmount === "function") {
+            this.onComponentWillUnmount();
+        }
     }
 
     onHashChange() {
@@ -56,7 +72,10 @@ class ViewportPaginationView extends Component {
     
     handleScroll(event) {
         event.preventDefault();
-    
+        if (this.ignoreTouchAndScrollEvents(event)) {
+            return null;
+        }
+
         var currentDate = new Date(),
             lastScrollTime = this.state.lastScrollTime;
     
@@ -79,6 +98,10 @@ class ViewportPaginationView extends Component {
 
     registerTouchStart(event) {
         event.preventDefault();
+        if (this.ignoreTouchAndScrollEvents(event)) {
+            return null;
+        }
+
         this.setState({
             touchStartPosY: event.targetTouches[0].pageY,
             touchStartPosX: event.targetTouches[0].pageX
@@ -87,6 +110,9 @@ class ViewportPaginationView extends Component {
     
     handleTouchMove(event) {
         event.preventDefault();
+        if (this.ignoreTouchAndScrollEvents(event)) {
+            return null;
+        }
     
         var currentDate = new Date(),
             lastScrollTime = this.state.lastScrollTime,
@@ -111,6 +137,25 @@ class ViewportPaginationView extends Component {
                 lastScrollTime: currentDate
             });
         }
+    }
+
+    handleKeyDown(event) {
+        if (event.keyCode === 40 || event.keyCode === 34) { // down or page down
+            this.scrollToNextRef()
+        } else if (event.keyCode === 38 || event.keyCode === 33) { // up or page up
+            this.scrollToPrevRef()
+        }
+    }
+
+    ignoreTouchAndScrollEvents(event) {
+        // ignore touch and scroll events on image modal view and nav bar
+        if (event.target.closest(".image-modal-view")) {
+            return true;
+        } else if (event.target.closest(".navBar")) {
+            return true;
+        }
+
+        return false;
     }
 
     scrollToNextRef = () => {
@@ -161,7 +206,7 @@ class ViewportPaginationView extends Component {
 
     render() {
         return (
-            <div className="viewport-pagination-view" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
+            <div className="viewport-pagination-view">
                 <div className="viewport-container" style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>

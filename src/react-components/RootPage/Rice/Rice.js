@@ -151,7 +151,7 @@ class Rice extends ViewportPaginationView {
             <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} imageClassName={image.name.toLowerCase().replace(/ /g, "-")} maxWidth={imageCarouselTileWidth} />
         ));
         return (
-            <div className="viewport-pagination-view rice" onWheel={this.handleScroll.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchStart={this.registerTouchStart.bind(this)}>
+            <div className="viewport-pagination-view rice">
                 <IndexIndicator hashes={this.hashes} activeIndex={this.state.currentIndex} setIndex={this.setIndex.bind(this)}></IndexIndicator>
                 <div className="viewport-container" style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
