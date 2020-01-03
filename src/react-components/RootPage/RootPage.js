@@ -20,23 +20,11 @@ const duration = {
    };
 
 class RootPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: props.title,
-            body: props.body,
-            childPages: props.childPages,
-            location: props.location,
-            atTop: true
-        }
-    }
-
     render() {
-        if (this.state)
         return (
             <div className="rootpage">
                 <div className="background"></div>
-                <div className="container" onScroll={this.handleBodyScroll}>
+                <div className="container">
                     <TransitionGroup className="transition-group">
                         <CSSTransition timeout={duration} key={this.props.location.key} classNames="anim-fade">
                             <Switch location={this.props.location}>

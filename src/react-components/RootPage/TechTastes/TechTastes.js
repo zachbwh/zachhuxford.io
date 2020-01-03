@@ -136,11 +136,24 @@ class TechTastes extends ViewportPaginationView {
             ]
         }
     ]
+    
 
     render() {
         var operatingSystemCarouselTiles = this.operatingSystemsList.map(operatingSystem => (
-            <OperatingSystemCarouselTile osName={operatingSystem.osName} usageIcons={operatingSystem.usageIcons} url={operatingSystem.url} />
+            <OperatingSystemCarouselTile osName={operatingSystem.osName} usageIcons={operatingSystem.usageIcons} url={operatingSystem.url} osIconClassName={operatingSystem.osName.toLowerCase().replace(/ /g, "-")} osIconFilePath={"/assets/tech-tastes/" + (operatingSystem.osName.toLowerCase().replace(/ /g, "-")) + ".svg"} osIconAltText={operatingSystem.osName + " Logo"} />
         ))
+        this.toolList.forEach(tool => {
+            tool.toolIcons = tool.toolIcons.map(toolIcon => {
+                return {
+                    toolIconClassName: toolIcon.name.toLowerCase().replace(/ /g, "-"),
+                    toolIconFilePath: toolIcon.toolIconFilePath ? toolIcon.toolIconFilePath : "/assets/tech-tastes/" + toolIcon.name.toLowerCase().replace(/ /g, "-") + ".svg",
+                    toolIconAltText: toolIcon.name + " Logo",
+                    positionAdjustment: toolIcon.positionAdjustment,
+                    name: toolIcon.name,
+                    url: toolIcon.url,
+                }
+            });
+        });
         var toolCarouselTiles = this.toolList.map(tool => (
             <ToolCarouselTile title={tool.title} toolIcons={tool.toolIcons} />
         ))

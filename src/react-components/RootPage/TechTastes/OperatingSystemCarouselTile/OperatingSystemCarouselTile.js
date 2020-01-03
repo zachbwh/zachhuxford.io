@@ -4,23 +4,10 @@ import './OperatingSystemCarouselTile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class OperatingSystemCarouselTile extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            osName: props.osName,
-            osIconClassName: props.osName.toLowerCase().replace(/ /g, "-"),
-            osIconFilePath: "/assets/tech-tastes/" + (props.osName.toLowerCase().replace(/ /g, "-")) + ".svg",
-            osIconAltText: props.osName + " Logo",
-            url: props.url,
-            usageIcons: props.usageIcons
-        };
-    }
-
     render() {
         var usageIcons;
-        if (this.state.usageIcons.length > 0) {
-            usageIcons = this.state.usageIcons.map((usageIcon, index) => (
+        if (this.props.usageIcons.length > 0) {
+            usageIcons = this.props.usageIcons.map((usageIcon, index) => (
                 <p key={index} ><FontAwesomeIcon icon={usageIcon.icon} /> {usageIcon.description}</p>
             ));
         } else {
@@ -29,8 +16,8 @@ class OperatingSystemCarouselTile extends Component {
         return (
             <div className="operating-system-carousel-tile">
                 <div className="os-name">
-                    <img className={this.state.osIconClassName + " tech-svg"} src={this.state.osIconFilePath} alt={this.state.osIconAltText}></img>
-                    <a href={this.state.url} target="_blank" rel="noopener noreferrer" >{this.state.osName}</a>
+                    <img className={this.props.osIconClassName + " tech-svg"} src={this.props.osIconFilePath} alt={this.props.osIconAltText}></img>
+                    <a href={this.props.url} target="_blank" rel="noopener noreferrer" >{this.props.osName}</a>
                 </div>
                 <div className="os-usage">
                     {usageIcons}
