@@ -11,6 +11,7 @@
     width: auto;
     max-width: 980px;
     height: auto;
+    cursor: pointer;
 }
 
 .focusable-image-carousel-tile p {

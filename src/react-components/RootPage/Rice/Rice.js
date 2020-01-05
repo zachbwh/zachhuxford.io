@@ -135,20 +135,98 @@ class Rice extends ViewportPaginationView {
         },
     ];
 
+    onComponentDidMount() {
+        this.setState({
+            currentRiceTileLoadIndex: 0,
+            androidHomescreenTileLoadIndex: 0,
+            redSpotRiceTileLoadIndex: 0,
+            bspwmRiceTileLoadIndex: 0,
+        })
+    }
+
+    loadNextCarouselTile(carouselName, loadedIndex) {
+        console.log(`${carouselName} ${loadedIndex} loaded`);
+        
+        if (carouselName === "current-rice") {
+            if (loadedIndex >= this.state.currentRiceTileLoadIndex) {
+                this.setState({
+                    currentRiceTileLoadIndex: loadedIndex + 1
+                });
+            }
+        } else if (carouselName === "android-homescreen") {
+            if (loadedIndex >= this.state.androidHomescreenTileLoadIndex) {
+                this.setState({
+                    androidHomescreenTileLoadIndex: loadedIndex + 1
+                });
+            }
+        } else if (carouselName === "red-spot-rice") {
+            if (loadedIndex >= this.state.redSpotRiceTileLoadIndex) {
+                this.setState({
+                    redSpotRiceTileLoadIndex: loadedIndex + 1
+                });
+            }
+        } else if (carouselName === "bspwm-rice") {
+            if (loadedIndex >= this.state.bspwmRiceTileLoadIndex) {
+                this.setState({
+                    bspwmRiceTileLoadIndex: loadedIndex + 1
+                });
+            }
+        }
+    }
 
     render() {
         var imageCarouselTileWidth = this.state.windowWidth < 980 ? this.state.windowWidth : 980;
-        var currentRiceTiles = this.currentRiceImageList.map(image => (
-            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} imageClassName={image.name.toLowerCase().replace(/ /g, "-")} maxWidth={imageCarouselTileWidth} />
+        var currentRiceTiles = this.currentRiceImageList.map((image, index) => (
+            <FocusableImageCarouselTile
+                name={image.name}
+                imageFilePath={image.filePath}
+                imageCaption={image.caption}
+                imageClassName={image.name.toLowerCase().replace(/ /g, "-")}
+                maxWidth={imageCarouselTileWidth}
+                tileIndex={index}
+                carouselName="current-rice"
+                canLoadImage={index <= this.state.currentRiceTileLoadIndex}
+                loadNext={this.loadNextCarouselTile.bind(this)}
+            />
         ));
-        var androidHomescreenTiles = this.androidHomescreenImageList.map(image => (
-            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} imageClassName={image.name.toLowerCase().replace(/ /g, "-")} maxWidth={imageCarouselTileWidth} />
+        var androidHomescreenTiles = this.androidHomescreenImageList.map((image, index) => (
+            <FocusableImageCarouselTile
+                name={image.name}
+                imageFilePath={image.filePath}
+                imageCaption={image.caption}
+                imageClassName={image.name.toLowerCase().replace(/ /g, "-")}
+                maxWidth={imageCarouselTileWidth}
+                tileIndex={index}
+                carouselName="android-homescreen"
+                canLoadImage={index <= this.state.androidHomescreenTileLoadIndex}
+                loadNext={this.loadNextCarouselTile.bind(this)}
+            />
         ));
-        var redSpotRiceTiles = this.redSpotRiceImageList.map(image => (
-            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} imageClassName={image.name.toLowerCase().replace(/ /g, "-")} maxWidth={imageCarouselTileWidth} />
+        var redSpotRiceTiles = this.redSpotRiceImageList.map((image, index) => (
+            <FocusableImageCarouselTile
+                name={image.name}
+                imageFilePath={image.filePath}
+                imageCaption={image.caption}
+                imageClassName={image.name.toLowerCase().replace(/ /g, "-")}
+                maxWidth={imageCarouselTileWidth}
+                tileIndex={index}
+                carouselName="red-spot-rice"
+                canLoadImage={index <= this.state.redSpotRiceTileLoadIndex}
+                loadNext={this.loadNextCarouselTile.bind(this)}
+            />
         ));
-        var bspwmRiceTiles = this.bspwmRiceImageList.map(image => (
-            <FocusableImageCarouselTile name={image.name} imageFilePath={image.filePath} imageCaption={image.caption} imageClassName={image.name.toLowerCase().replace(/ /g, "-")} maxWidth={imageCarouselTileWidth} />
+        var bspwmRiceTiles = this.bspwmRiceImageList.map((image, index) => (
+            <FocusableImageCarouselTile
+                name={image.name}
+                imageFilePath={image.filePath}
+                imageCaption={image.caption}
+                imageClassName={image.name.toLowerCase().replace(/ /g, "-")}
+                maxWidth={imageCarouselTileWidth}
+                tileIndex={index}
+                carouselName="bspwm-rice"
+                canLoadImage={index <= this.state.bspwmRiceTileLoadIndex}
+                loadNext={this.loadNextCarouselTile.bind(this)}
+            />
         ));
         return (
             <div className="viewport-pagination-view rice">
