@@ -7,10 +7,6 @@ class FocusableImageCarouselTile extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            focused: false
-        };
-
         this.onImageLoad = this.onImageLoad.bind(this);
         this.onImageError = this.onImageError.bind(this);
     }
@@ -36,7 +32,15 @@ class FocusableImageCarouselTile extends Component {
         var imageOrPlaceholder;
         if (this.props.canLoadImage) {
             imageOrPlaceholder = (
-                <img className={this.props.imageClassName} src={this.props.imageFilePath} alt={this.props.imageCaption} onClick={this.showImageModalView.bind(this)} style={{maxWidth: this.props.maxWidth}} onLoad={this.onImageLoad} onError={this.onImageError}></img>
+                <img
+                    className={this.props.imageClassName}
+                    src={this.props.imageFilePath}
+                    alt={this.props.imageCaption}
+                    onClick={this.showImageModalView.bind(this)}
+                    style={{maxWidth: this.props.maxWidth}}
+                    onLoad={this.onImageLoad}
+                    onError={this.onImageError}
+                />
             );
         } else {
             imageOrPlaceholder = (<div></div>);

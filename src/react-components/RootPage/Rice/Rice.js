@@ -5,6 +5,9 @@ import ViewportPaginationView from '../ViewportPaginationView/ViewportPagination
 import '../ViewportPaginationView/ViewportPaginationView.css';
 import Carousel from '../../Carousel/Carousel';
 import FocusableImageCarouselTile from '../../Carousel/FocusableImageCarouselTile/FocusableImageCarouselTile';
+import SimpleTextCarouselTile from '../../Carousel/SimpleTextCarouselTile/SimpleTextCarouselTile';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 
 import IndexIndicator from '../ViewportPaginationView/IndexIndicator/IndexIndicator';
@@ -189,6 +192,13 @@ class Rice extends ViewportPaginationView {
                 loadNext={this.loadNextCarouselTile.bind(this)}
             />
         ));
+        currentRiceTiles.unshift((
+            <SimpleTextCarouselTile
+                header="Current Rice"
+                paragraph="The current state of my linux environment on my Dell XPS 13 (9360)"
+            />
+        ));
+
         var androidHomescreenTiles = this.androidHomescreenImageList.map((image, index) => (
             <FocusableImageCarouselTile
                 name={image.name}
@@ -202,6 +212,13 @@ class Rice extends ViewportPaginationView {
                 loadNext={this.loadNextCarouselTile.bind(this)}
             />
         ));
+        androidHomescreenTiles.unshift((
+            <SimpleTextCarouselTile
+                header="Android Homescreen"
+                paragraph="The current state of my android homescreen running on my Samsung Galaxy Note 9"
+            />
+        ));
+
         var redSpotRiceTiles = this.redSpotRiceImageList.map((image, index) => (
             <FocusableImageCarouselTile
                 name={image.name}
@@ -215,6 +232,13 @@ class Rice extends ViewportPaginationView {
                 loadNext={this.loadNextCarouselTile.bind(this)}
             />
         ));
+        redSpotRiceTiles.unshift((
+            <SimpleTextCarouselTile
+                header="Red Spot Rice"
+                paragraph="A Martian landscape inspired rice. Very limited and bright colour pallete and yes it was difficult for me to read. The goal here was to make as many applications as possible conform to my colour scheme. Oct 2017"
+            />
+        ));
+
         var bspwmRiceTiles = this.bspwmRiceImageList.map((image, index) => (
             <FocusableImageCarouselTile
                 name={image.name}
@@ -226,6 +250,12 @@ class Rice extends ViewportPaginationView {
                 carouselName="bspwm-rice"
                 canLoadImage={index <= this.state.bspwmRiceTileLoadIndex}
                 loadNext={this.loadNextCarouselTile.bind(this)}
+            />
+        ));
+        bspwmRiceTiles.unshift((
+            <SimpleTextCarouselTile
+                header="BSPWM Rice"
+                paragraph="My first high effort rice using the Window Manager BSPWM. At this stage I was using terminal applications as much as possible as they were easy to customise the colours for. Nov 2015"
             />
         ));
         return (
@@ -242,33 +272,33 @@ class Rice extends ViewportPaginationView {
                                  <br />
                                 <span style={{float: "right"}} >- /r/unixporn</span>
                             </p>
+                            <div className="scroll-down">
+								<p>SCROLL DOWN</p>
+								<FontAwesomeIcon icon={faChevronDown} />
+							</div>
                         </div>
                     </div>
     
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div className="rice-pane">
-                            <h1 className="carousel-heading">Current Rice</h1>
                             <Carousel carouselItems={currentRiceTiles} />
                         </div>
                     </div>
 
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div className="rice-pane">
-                            <h1 className="carousel-heading">Android Homescreen</h1>
                             <Carousel carouselItems={androidHomescreenTiles} />
                         </div>
                     </div>
 
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div className="rice-pane">
-                            <h1 className="carousel-heading">Red Spot Rice</h1>
                             <Carousel carouselItems={redSpotRiceTiles} />
                         </div>
                     </div>
 
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div className="rice-pane">
-                            <h1 className="carousel-heading">BSPWM Rice</h1>
                             <Carousel carouselItems={bspwmRiceTiles} />
                         </div>
                     </div>

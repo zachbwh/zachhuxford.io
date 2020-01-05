@@ -1,0 +1,14 @@
+.simple-text-carousel-tile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 980px;
+    height: 100%;
+}
+
+.simple-text-carousel-tile .paragraph {
+    padding-top: 20px;
+    font-size: 1.4em;
+}
