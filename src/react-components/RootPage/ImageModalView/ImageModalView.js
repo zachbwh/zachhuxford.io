@@ -36,10 +36,12 @@ class ImageModalView extends Component {
         this.handleFullScreenChange = this.handleFullScreenChange.bind(this);
         this.handleWindowResize = this.handleWindowResize.bind(this);
         this.handleHashChange = this.handleHashChange.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
 
         this.handleImageMouseMove = this.handleImageMouseMove.bind(this);
         this.handleImageMouseDown = this.handleImageMouseDown.bind(this);
         this.handleImageMouseUp = this.handleImageMouseUp.bind(this);
+        this.handleImageScroll = this.handleImageScroll.bind(this);
         this.registerImageTouchStart = this.registerImageTouchStart.bind(this);
         this.handleImageTouchEnd = this.handleImageTouchEnd.bind(this);
         this.handleImageTouchMove = this.handleImageTouchMove.bind(this);
@@ -61,14 +63,20 @@ class ImageModalView extends Component {
     }
 
     handleKeyDown(event) {
-        if (event.keyCode === 27) {
+        if (event.keyCode === 27) { // esc
             ImageModalView.hide()
+        } else if (!this.state.hidden) {
+            if (event.keyCode === 37) { // left
+                this.handlePreviousImageClick()
+            } else if (event.keyCode === 39) { // left
+                this.handleNextImageClick()
+            }
         }
     }
 
     handleFullScreenChange(event) {
         var newFullScreenState = document.fullscreenElement != null ? true : false;
-        this.setState({fullScreen: newFullScreenState});
+        this.setState({ fullScreen: newFullScreenState });
     }
 
     componentDidMount() {
@@ -120,7 +128,7 @@ class ImageModalView extends Component {
     }
 
     toggleHideOverlay() {
-        this.setState({overlayHidden: !this.state.overlayHidden})
+        this.setState({ overlayHidden: !this.state.overlayHidden })
     }
 
     toggleFullScreen() {
@@ -138,15 +146,15 @@ class ImageModalView extends Component {
 
     handleWindowResize() {
         var that = this;
-        if ( !this.eventTimeout ) {
-            this.eventTimeout = setTimeout(function() {
+        if (!this.eventTimeout) {
+            this.eventTimeout = setTimeout(function () {
                 that.eventTimeout = null;
                 console.log("resize event handled");
                 that.setState({
                     windowHeight: window.innerHeight,
                     windowWidth: window.innerWidth
                 });
-             }, 66);
+            }, 66);
         }
     }
 
@@ -161,7 +169,7 @@ class ImageModalView extends Component {
         if (newZoomValue > this.maxZoom) {
             newZoomValue = this.maxZoom;
         }
-        
+
         this.zoomTo(newZoomValue);
     }
 
@@ -183,7 +191,7 @@ class ImageModalView extends Component {
             maxDeltaY = maxTranslationValues.maxDeltaY;
 
         this.ensureMaxTranslationRespected(maxDeltaX, maxDeltaY, deltaX, deltaY);
-        
+
         this.zoomTo(newZoomValue);
     }
 
@@ -234,6 +242,27 @@ class ImageModalView extends Component {
                 maxDeltaY = maxTranslationValues.maxDeltaY;
 
             this.ensureMaxTranslationRespected(maxDeltaX, maxDeltaY, deltaX, deltaY);
+        }
+    }
+
+    handleImageScroll(event) {
+        var zoomValue = this.state.zoom,
+            newZoomValue = zoomValue + (event.deltaY / -30);
+
+        if (newZoomValue < this.minZoom) {
+            newZoomValue = this.minZoom;
+        } else if (newZoomValue > this.maxZoom) {
+            newZoomValue = this.maxZoom;
+        }
+        
+        if (event.ctrlKey) {
+            var maxTranslationValues = this.getMaxTranslationValues(event.target.width, event.target.height, zoomValue),
+            maxDeltaX = maxTranslationValues.maxDeltaX,
+            maxDeltaY = maxTranslationValues.maxDeltaY;
+
+            this.ensureMaxTranslationRespected(maxDeltaX, maxDeltaY, this.deltaX, this.deltaY);
+
+            this.zoomTo(newZoomValue);
         }
     }
 
@@ -323,7 +352,7 @@ class ImageModalView extends Component {
         var zoomValue = this.zoom,
             deltaX,
             deltaY;
-        
+
         if (event.touches.length === 1) {
             var newTouch = {
                 touchStartPosY: event.changedTouches[0].pageY,
@@ -345,7 +374,7 @@ class ImageModalView extends Component {
 
             var newPinchDistance = this.calculateDistanceBetweenPoints(...points),
                 newZoomValue = (newPinchDistance / this.currentPinchDistance) * zoomValue;
-            
+
             // Adjust new zoom value to decrease user effort when zooming
             if (newZoomValue > zoomValue) {
                 newZoomValue = newZoomValue * 1.03;
@@ -362,8 +391,8 @@ class ImageModalView extends Component {
         }
 
         var maxTranslationValues = this.getMaxTranslationValues(event.target.width, event.target.height, zoomValue),
-                maxDeltaX = maxTranslationValues.maxDeltaX,
-                maxDeltaY = maxTranslationValues.maxDeltaY;
+            maxDeltaX = maxTranslationValues.maxDeltaX,
+            maxDeltaY = maxTranslationValues.maxDeltaY;
 
         this.ensureMaxTranslationRespected(maxDeltaX, maxDeltaY, deltaX, deltaY);
     }
@@ -395,7 +424,7 @@ class ImageModalView extends Component {
                         </div>
                         <FontAwesomeIcon icon={faSearchMinus} onClick={this.handleZoomOutClick.bind(this)}></FontAwesomeIcon>
                         <span className="zoom-level">{Math.round((this.state.zoom < this.minZoom ? this.minZoom : this.state.zoom > this.maxZoom ? this.maxZoom : this.state.zoom) * 100)}%</span>
-                        <FontAwesomeIcon icon={faSearchPlus} onClick={this.handleZoomInClick.bind(this)}></FontAwesomeIcon>    
+                        <FontAwesomeIcon icon={faSearchPlus} onClick={this.handleZoomInClick.bind(this)}></FontAwesomeIcon>
                         <div className="right">
                             <FontAwesomeIcon icon={faTimesCircle} onClick={ImageModalView.hide}></FontAwesomeIcon>
                         </div>
@@ -406,11 +435,12 @@ class ImageModalView extends Component {
                         src={this.state.imageFilePath}
                         alt={this.state.imageCaption}
                         onClick={this.toggleHideOverlay.bind(this)}
-                        style={{transform: "scale(" + this.state.zoom + ") translate(" + this.state.deltaX + "px, " + this.state.deltaY + "px)"}}
+                        style={{ transform: "scale(" + this.state.zoom + ") translate(" + this.state.deltaX + "px, " + this.state.deltaY + "px)" }}
                         onMouseMove={this.handleImageMouseMove}
                         onMouseDown={this.handleImageMouseDown}
                         onMouseUp={this.handleImageMouseUp}
                         onMouseOut={this.handleImageMouseUp}
+                        onWheel={this.handleImageScroll}
                         onTouchStart={this.registerImageTouchStart}
                         onTouchEnd={this.handleImageTouchEnd}
                         onTouchMove={this.handleImageTouchMove}
@@ -422,6 +452,8 @@ class ImageModalView extends Component {
                         </div>
                         <span className="image-caption">
                             {this.state.imageCaption}
+                            <br />
+                            ({this.state.imageIndex + 1}/{this.state.imageList.length})
                         </span>
                         <div className="right" style={{ opacity: this.state.imageIndex < this.state.imageList.length - 1 ? "1" : "0.5" }}>
                             <FontAwesomeIcon icon={faChevronRight} onClick={this.handleNextImageClick}></FontAwesomeIcon>
