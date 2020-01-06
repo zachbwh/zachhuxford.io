@@ -268,9 +268,10 @@ class Rice extends ViewportPaginationView {
                             <p>
                                 (v.) "Rice" is a word that is commonly used to refer to making visual improvements and customizations on one's desktop.
                                  The word is used to refer to a visually attractive desktop upgraded beyond the default.
-                                 <br />
-                                 <br />
+                                <br />
+                                <br />
                                 <span style={{float: "right"}} >- /r/unixporn</span>
+                                <br />
                             </p>
                             <div className="scroll-down">
 								<p>SCROLL DOWN</p>
