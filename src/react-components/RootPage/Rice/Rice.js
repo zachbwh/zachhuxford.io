@@ -190,6 +190,8 @@ class Rice extends ViewportPaginationView {
                 carouselName="current-rice"
                 canLoadImage={index <= this.state.currentRiceTileLoadIndex}
                 loadNext={this.loadNextCarouselTile.bind(this)}
+                imageList={this.currentRiceImageList}
+                carouselIndex={index}
             />
         ));
         currentRiceTiles.unshift((
@@ -210,12 +212,14 @@ class Rice extends ViewportPaginationView {
                 carouselName="android-homescreen"
                 canLoadImage={index <= this.state.androidHomescreenTileLoadIndex}
                 loadNext={this.loadNextCarouselTile.bind(this)}
+                imageList={this.androidHomescreenImageList}
+                carouselIndex={index}
             />
         ));
         androidHomescreenTiles.unshift((
             <SimpleTextCarouselTile
                 header="Android Homescreen"
-                paragraph="The current state of my android homescreen running on my Samsung Galaxy Note 9"
+                paragraph="My current Android Homescreen running on my Samsung Galaxy Note 9"
             />
         ));
 
@@ -230,12 +234,14 @@ class Rice extends ViewportPaginationView {
                 carouselName="red-spot-rice"
                 canLoadImage={index <= this.state.redSpotRiceTileLoadIndex}
                 loadNext={this.loadNextCarouselTile.bind(this)}
+                imageList={this.redSpotRiceImageList}
+                carouselIndex={index}
             />
         ));
         redSpotRiceTiles.unshift((
             <SimpleTextCarouselTile
                 header="Red Spot Rice"
-                paragraph="A Martian landscape inspired rice. Very limited and bright colour pallete and yes it was difficult for me to read. The goal here was to make as many applications as possible conform to my colour scheme. Oct 2017"
+                paragraph="A Martian landscape inspired rice. The goal here was to make as many applications as possible conform to my colour scheme. Oct 2017"
             />
         ));
 
@@ -250,6 +256,8 @@ class Rice extends ViewportPaginationView {
                 carouselName="bspwm-rice"
                 canLoadImage={index <= this.state.bspwmRiceTileLoadIndex}
                 loadNext={this.loadNextCarouselTile.bind(this)}
+                imageList={this.bspwmRiceImageList}
+                carouselIndex={index}
             />
         ));
         bspwmRiceTiles.unshift((

@@ -14,3 +14,9 @@
     opacity: 1;
     transform: scale(1.4);
 }
+
+@media (max-width: 350px) {
+    .carousel-index-indicator-item {
+        margin: 5px;
+    }
+}

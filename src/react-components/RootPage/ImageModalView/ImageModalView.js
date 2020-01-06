@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './ImageModalView.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle, faExpand, faSearchMinus, faSearchPlus, faCompress } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle, faExpand, faSearchMinus, faSearchPlus, faCompress, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -43,6 +43,9 @@ class ImageModalView extends Component {
         this.registerImageTouchStart = this.registerImageTouchStart.bind(this);
         this.handleImageTouchEnd = this.handleImageTouchEnd.bind(this);
         this.handleImageTouchMove = this.handleImageTouchMove.bind(this);
+
+        this.handlePreviousImageClick = this.handlePreviousImageClick.bind(this);
+        this.handleNextImageClick = this.handleNextImageClick.bind(this);
     }
 
     static show() {
@@ -182,6 +185,33 @@ class ImageModalView extends Component {
         this.ensureMaxTranslationRespected(maxDeltaX, maxDeltaY, deltaX, deltaY);
         
         this.zoomTo(newZoomValue);
+    }
+
+    handlePreviousImageClick() {
+        if (this.state.imageIndex > 0) {
+            var nextIndex = this.state.imageIndex - 1,
+                nextImage = this.state.imageList[nextIndex]
+            this.setState({
+                imageIndex: nextIndex,
+                imageFilePath: nextImage.filePath,
+                imageCaption: nextImage.caption,
+                imageClassName: nextImage.className
+            })
+        }
+    }
+
+    handleNextImageClick() {
+        if (this.state.imageIndex < this.state.imageList.length - 1) {
+            var nextIndex = this.state.imageIndex + 1,
+                nextImage = this.state.imageList[nextIndex];
+
+            this.setState({
+                imageIndex: nextIndex,
+                imageFilePath: nextImage.filePath,
+                imageCaption: nextImage.caption,
+                imageClassName: nextImage.className
+            })
+        }
     }
 
     handleImageMouseDown(event) {
@@ -340,7 +370,7 @@ class ImageModalView extends Component {
 
     zoomTo(newZoomValue) {
         var minZoomTemporary = this.minZoom - this.zoomIncrement,
-            maxZoomTemporary = this.maxZoom + this.zoomIncrement;
+            maxZoomTemporary = this.maxZoom + (this.zoomIncrement * 3);
 
         if (newZoomValue < minZoomTemporary) {
             newZoomValue = minZoomTemporary;
@@ -370,6 +400,7 @@ class ImageModalView extends Component {
                             <FontAwesomeIcon icon={faTimesCircle} onClick={ImageModalView.hide}></FontAwesomeIcon>
                         </div>
                     </div>
+
                     <img
                         className={this.state.imageClassName}
                         src={this.state.imageFilePath}
@@ -385,9 +416,17 @@ class ImageModalView extends Component {
                         onTouchMove={this.handleImageTouchMove}
                         ref={this.imageRef}
                     />
-                    <p className="image-caption" style={{ opacity: this.state.overlayHidden ? "0" : "1" }}>
-                        {this.state.imageCaption}
-                    </p>
+                    <div className="image-controls-bottom" style={{ opacity: this.state.overlayHidden ? "0" : "1" }}>
+                        <div className="left" style={{ opacity: this.state.imageIndex === 0 ? "0.5" : "1" }}>
+                            <FontAwesomeIcon icon={faChevronLeft} onClick={this.handlePreviousImageClick}></FontAwesomeIcon>
+                        </div>
+                        <span className="image-caption">
+                            {this.state.imageCaption}
+                        </span>
+                        <div className="right" style={{ opacity: this.state.imageIndex < this.state.imageList.length - 1 ? "1" : "0.5" }}>
+                            <FontAwesomeIcon icon={faChevronRight} onClick={this.handleNextImageClick}></FontAwesomeIcon>
+                        </div>
+                    </div>
                 </div>
             );
         } else {

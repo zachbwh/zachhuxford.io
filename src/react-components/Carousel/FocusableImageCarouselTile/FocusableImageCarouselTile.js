@@ -23,7 +23,9 @@ class FocusableImageCarouselTile extends Component {
         ImageModalView.setContent({
             imageFilePath: this.props.imageFilePath,
             imageCaption: this.props.imageCaption,
-            imageClassName: this.props.imageCaption
+            imageClassName: this.props.imageClassName,
+            imageList: this.props.imageList,
+            imageIndex: this.props.carouselIndex
         });
         ImageModalView.show();
     }
