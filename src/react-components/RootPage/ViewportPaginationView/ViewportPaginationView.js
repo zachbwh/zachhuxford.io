@@ -71,7 +71,6 @@ class ViewportPaginationView extends Component {
     }
     
     handleScroll(event) {
-        event.preventDefault();
         if (this.ignoreTouchAndScrollEvents(event)) {
             return null;
         }
@@ -97,7 +96,6 @@ class ViewportPaginationView extends Component {
     }
 
     registerTouchStart(event) {
-        event.preventDefault();
         if (this.ignoreTouchAndScrollEvents(event)) {
             return null;
         }
@@ -109,7 +107,6 @@ class ViewportPaginationView extends Component {
     }
     
     handleTouchMove(event) {
-        event.preventDefault();
         if (this.ignoreTouchAndScrollEvents(event)) {
             return null;
         }

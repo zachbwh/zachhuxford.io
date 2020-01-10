@@ -21,75 +21,60 @@
     max-height: 100%;
     width: auto;
     max-width: 100%;
-    transition: transform 100ms linear;
-}
-
-.image-modal-view .image-controls-bottom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    background-color: rgba(50, 50, 50, 0.7);
-    margin: 0px;
-    padding: 20px 0;
-    text-align: center;
-    z-index: 99998;
-
+    transition: transform 200ms linear, transform-origin 200ms linear;
 }
 
 .image-modal-view .image-controls {
     position: fixed;
-    top: 0;
     left: 0;
     width: 100vw;
     background-color: rgba(50, 50, 50, 0.7);
     margin: 0px;
     padding: 20px 0;
     text-align: center;
-    font-size: 1.5em;
+    z-index: 99999;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    transition: opacity 100ms linear;
+    opacity: 1;
+    pointer-events: all;
+}
+
+.image-modal-view .image-controls.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.image-modal-view .image-controls.top {
+    top: 0;
     z-index: 99999;
 }
 
-.image-modal-view .image-controls .left, .image-modal-view .image-controls-bottom .left  {
-    float: left;
-    padding-left: 20px;
+.image-modal-view .image-controls.bottom {
+    bottom: 0;
+    z-index: 99998;
 }
 
-.image-modal-view .image-controls .right, .image-modal-view .image-controls-bottom .right {
-    float: right;
-    padding-right: 20px;
-}
-
-.image-modal-view .image-controls svg, .image-modal-view .image-controls-bottom svg {
+.image-modal-view .button {
     cursor: pointer;
-}
-
-.image-modal-view .image-controls, .image-modal-view .image-caption {
-    transition: opacity 100ms linear;
+    padding: 0 10px;
+    height: 100%;
+    font-size: 1.5em;
 }
 
 .image-modal-view .image-controls .zoom-level {
     opacity: 0.7;
     display: inline-block;
+    font-size: 1.5em;
     padding: 0px 20px;
 }
 
-.image-modal-view .image-controls-bottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.image-modal-view .image-controls .side-control {
+    width: 50px;
+    max-width: 50px;
 }
 
-.image-modal-view .image-controls-bottom div {
-    flex: 1;
-    padding: 20px 0;
-}
-
-.image-modal-view .image-controls-bottom span {
-    flex: 2;
-    vertical-align: middle;
-}
-
-.image-modal-view .image-controls-bottom svg {
-    font-size: 1.5em;
+.image-modal-view .image-controls .middle-section {
+    min-width: calc(100% - 100px);
 }

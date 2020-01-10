@@ -122,7 +122,9 @@ class ImageModalView extends Component {
             this.setState({
                 zoom: this.zoom,
                 deltaX: this.deltaX,
-                deltaY: this.deltaY
+                deltaY: this.deltaY,
+                transformOriginX: 0,
+                transformOriginY: 0
             })
         }
     }
@@ -187,10 +189,12 @@ class ImageModalView extends Component {
         var element = this.imageRef.current;
 
         var maxTranslationValues = this.getMaxTranslationValues(element.width, element.height, newZoomValue),
+            minDeltaX = maxTranslationValues.minDeltaX,
+            minDeltaY = maxTranslationValues.minDeltaY,
             maxDeltaX = maxTranslationValues.maxDeltaX,
             maxDeltaY = maxTranslationValues.maxDeltaY;
 
-        this.ensureMaxTranslationRespected(maxDeltaX, maxDeltaY, deltaX, deltaY);
+        this.ensureMaxTranslationRespected(minDeltaX, minDeltaY, maxDeltaX, maxDeltaY, deltaX, deltaY);
 
         this.zoomTo(newZoomValue);
     }
@@ -223,29 +227,44 @@ class ImageModalView extends Component {
     }
 
     handleImageMouseDown(event) {
-        event.preventDefault()
+        event.preventDefault();
+
         this.mouseDownOnImage = true;
+        this.timeDownOnImage = Date.now();
     }
 
     handleImageMouseUp(event) {
+        event.preventDefault();
+
         this.mouseDownOnImage = false;
+        var now = Date.now()
+        if (now - this.timeDownOnImage < 250) {
+            this.toggleHideOverlay();
+        }
+        this.timeDownOnImage = null;
     }
 
     handleImageMouseMove(event) {
+        event.preventDefault();
+
         var zoomValue = this.state.zoom;
         if (this.mouseDownOnImage && zoomValue > 1) {
             var deltaX = this.deltaX + event.movementX,
                 deltaY = this.deltaY + event.movementY;
 
             var maxTranslationValues = this.getMaxTranslationValues(event.target.width, event.target.height, zoomValue),
+                minDeltaX = maxTranslationValues.minDeltaX,
+                minDeltaY = maxTranslationValues.minDeltaY,
                 maxDeltaX = maxTranslationValues.maxDeltaX,
                 maxDeltaY = maxTranslationValues.maxDeltaY;
-
-            this.ensureMaxTranslationRespected(maxDeltaX, maxDeltaY, deltaX, deltaY);
+    
+            this.ensureMaxTranslationRespected(minDeltaX, minDeltaY, maxDeltaX, maxDeltaY, deltaX, deltaY);
         }
     }
 
     handleImageScroll(event) {
+        event.preventDefault();
+
         var zoomValue = this.state.zoom,
             newZoomValue = zoomValue + (event.deltaY / -30);
 
@@ -256,51 +275,72 @@ class ImageModalView extends Component {
         }
         
         if (event.ctrlKey) {
-            var maxTranslationValues = this.getMaxTranslationValues(event.target.width, event.target.height, zoomValue),
-            maxDeltaX = maxTranslationValues.maxDeltaX,
-            maxDeltaY = maxTranslationValues.maxDeltaY;
-
-            this.ensureMaxTranslationRespected(maxDeltaX, maxDeltaY, this.deltaX, this.deltaY);
+            var maxTranslationValues = this.getMaxTranslationValues(event.target.width, event.target.height, newZoomValue),
+                minDeltaX = maxTranslationValues.minDeltaX,
+                minDeltaY = maxTranslationValues.minDeltaY,
+                maxDeltaX = maxTranslationValues.maxDeltaX,
+                maxDeltaY = maxTranslationValues.maxDeltaY;
+            
+            this.ensureMaxTranslationRespected(minDeltaX, minDeltaY, maxDeltaX, maxDeltaY, this.deltaX, this.deltaY);
 
             this.zoomTo(newZoomValue);
         }
     }
 
     getMaxTranslationValues(elementWidth, elementHeight, zoomValue) {
-        var maxDeltaX,
+        var minDeltaX,
+            maxDeltaX,
+            minDeltaY,
             maxDeltaY;
 
         var scaleWidth = zoomValue * elementWidth,
             scaleHeight = zoomValue * elementHeight;
 
-        if (scaleWidth < window.innerWidth) {
-            maxDeltaX = 0;
+
+        var transformOriginDeviationX,
+            transformOriginDeviationY;
+        if (!this.state.transformOriginX || !this.state.transformOriginY) {
+            transformOriginDeviationX = 0;
+            transformOriginDeviationY = 0;
         } else {
-            maxDeltaX = (Math.abs((window.innerWidth - scaleWidth)) / 2) / zoomValue;
+            transformOriginDeviationX = ((zoomValue - 1) * ((elementWidth / 2) - this.state.transformOriginX)) / zoomValue;
+            transformOriginDeviationY = ((zoomValue - 1) * ((elementHeight / 2) - this.state.transformOriginY)) / zoomValue;
+        }
+
+        if (scaleWidth < window.innerWidth) {
+            minDeltaX = 0 - transformOriginDeviationX;
+            maxDeltaX = 0 - transformOriginDeviationX;
+        } else {
+            minDeltaX = (((window.innerWidth - scaleWidth) / 2) / zoomValue) - transformOriginDeviationX;
+            maxDeltaX = -(((window.innerWidth - scaleWidth) / 2) / zoomValue) - transformOriginDeviationX;
         }
 
         if (scaleHeight < window.innerHeight) {
-            maxDeltaY = 0;
+            minDeltaY = 0 - transformOriginDeviationY;
+            maxDeltaY = 0 - transformOriginDeviationY;
         } else {
-            maxDeltaY = (Math.abs((window.innerHeight - scaleHeight)) / 2) / zoomValue;
+            minDeltaY = (((window.innerHeight - scaleHeight) / 2) / zoomValue) - transformOriginDeviationY;
+            maxDeltaY = -((window.innerHeight - scaleHeight) / 2) / zoomValue - transformOriginDeviationY;
         }
         return {
+            minDeltaX: minDeltaX,
+            minDeltaY: minDeltaY,
             maxDeltaX: maxDeltaX,
             maxDeltaY: maxDeltaY
         };
     }
 
-    ensureMaxTranslationRespected(maxDeltaX, maxDeltaY, deltaX, deltaY) {
-        if (Math.abs(deltaX) > maxDeltaX && deltaX > 0) {
+    ensureMaxTranslationRespected(minDeltaX, minDeltaY, maxDeltaX, maxDeltaY, deltaX, deltaY) {
+        if (deltaX > maxDeltaX) {
             deltaX = maxDeltaX;
-        } else if (Math.abs(deltaX) > maxDeltaX && deltaX < 0) {
-            deltaX = -1 * maxDeltaX;
+        } else if (deltaX < minDeltaX) {
+            deltaX = minDeltaX;
         }
 
-        if (Math.abs(deltaY) > maxDeltaY && deltaY > 0) {
+        if (deltaY > maxDeltaY) {
             deltaY = maxDeltaY;
-        } else if (Math.abs(deltaY) > maxDeltaY && deltaY < 0) {
-            deltaY = -1 * maxDeltaY;
+        } else if (deltaY < minDeltaY) {
+            deltaY = minDeltaY;
         }
 
         this.deltaX = deltaX;
@@ -319,13 +359,23 @@ class ImageModalView extends Component {
         return Math.sqrt((deltaX ^ 2) + (deltaY ^ 2))
     }
 
+    calculateMidpointBetweenPoints(pointA, pointB) {
+        return {
+            touchStartPosX: (pointA.xCoordinate + pointB.xCoordinate) / 2,
+            touchStartPosY: (pointA.yCoordinate + pointB.yCoordinate) / 2
+        };
+    }
+
     registerImageTouchStart(event) {
-        event.preventDefault();
+        this.timeDownOnImage = Date.now();
+
         if (event.targetTouches.length === 1) {
             this.referenceTouch = {
                 touchStartPosY: event.targetTouches[0].pageY,
                 touchStartPosX: event.targetTouches[0].pageX
             };
+            this.midpointReferenceTouch = null;
+
         } else if (event.targetTouches.length === 2) {
             var points = [{
                 xCoordinate: event.targetTouches[0].pageX,
@@ -336,6 +386,20 @@ class ImageModalView extends Component {
                 yCoordinate: event.targetTouches[1].pageY
             }];
 
+            this.midpointReferenceTouch = this.calculateMidpointBetweenPoints(...points);
+            this.referenceTouch = null;
+
+            if (this.zoom === 1) {
+                console.log("set transform origin")
+                var targetLeft = (window.innerWidth - event.target.width) / 2,
+                    targetTop = (window.innerHeight - event.target.height) / 2;
+
+                this.setState({
+                    transformOriginX: this.midpointReferenceTouch.touchStartPosX - targetLeft,
+                    transformOriginY: this.midpointReferenceTouch.touchStartPosY - targetTop
+                })
+            }
+
             this.currentPinchDistance = this.calculateDistanceBetweenPoints(...points)
         }
     }
@@ -344,8 +408,22 @@ class ImageModalView extends Component {
         if (this.zoom < this.minZoom) {
             this.setDefaultTransformPropertyValues(true);
         } else if (this.zoom > this.maxZoom) {
+            var maxTranslationValues = this.getMaxTranslationValues(event.target.width, event.target.height, this.maxZoom),
+                minDeltaX = maxTranslationValues.minDeltaX,
+                minDeltaY = maxTranslationValues.minDeltaY,
+                maxDeltaX = maxTranslationValues.maxDeltaX,
+                maxDeltaY = maxTranslationValues.maxDeltaY;
+
+            this.ensureMaxTranslationRespected(minDeltaX, minDeltaY, maxDeltaX, maxDeltaY, this.deltaX, this.deltaY);
+
             this.zoomTo(this.maxZoom);
         }
+
+        if (Date.now() - this.timeDownOnImage < 100) {
+            event.preventDefault();
+            this.toggleHideOverlay();
+        }
+        this.timeDownOnImage = null;
     }
 
     handleImageTouchMove(event) {
@@ -353,13 +431,19 @@ class ImageModalView extends Component {
             deltaX,
             deltaY;
 
-        if (event.touches.length === 1) {
+        if (event.targetTouches.length === 1) {
             var newTouch = {
-                touchStartPosY: event.changedTouches[0].pageY,
-                touchStartPosX: event.changedTouches[0].pageX
+                touchStartPosY: event.targetTouches[0].pageY,
+                touchStartPosX: event.targetTouches[0].pageX
             }
-            deltaX = this.deltaX - ((this.referenceTouch.touchStartPosX - newTouch.touchStartPosX) / zoomValue);
-            deltaY = this.deltaY - ((this.referenceTouch.touchStartPosY - newTouch.touchStartPosY) / zoomValue);
+            if (this.referenceTouch) {
+                deltaX = this.deltaX - ((this.referenceTouch.touchStartPosX - newTouch.touchStartPosX) / zoomValue);
+                deltaY = this.deltaY - ((this.referenceTouch.touchStartPosY - newTouch.touchStartPosY) / zoomValue);
+            } else {
+                deltaX = this.deltaX;
+                deltaY = this.deltaY;
+            }
+            
 
             this.referenceTouch = newTouch;
         } else if (event.targetTouches.length === 2) {
@@ -373,28 +457,39 @@ class ImageModalView extends Component {
             }];
 
             var newPinchDistance = this.calculateDistanceBetweenPoints(...points),
+                newMidpointReferenceTouch = this.calculateMidpointBetweenPoints(...points),
                 newZoomValue = (newPinchDistance / this.currentPinchDistance) * zoomValue;
 
             // Adjust new zoom value to decrease user effort when zooming
+            // console.log(newPinchDistance)
             if (newZoomValue > zoomValue) {
+                // console.log("increased zoom")
                 newZoomValue = newZoomValue * 1.03;
             } else if (newZoomValue < zoomValue) {
+                // console.log("decreased zoom")
                 newZoomValue = newZoomValue * 0.97;
             }
 
-            this.zoomTo(newZoomValue);
-            zoomValue = newZoomValue;
-            deltaX = this.deltaX;
-            deltaY = this.deltaY;
+            deltaX = this.deltaX - ((this.midpointReferenceTouch.touchStartPosX - newMidpointReferenceTouch.touchStartPosX) / newZoomValue);
+            deltaY = this.deltaY - ((this.midpointReferenceTouch.touchStartPosY - newMidpointReferenceTouch.touchStartPosY) / newZoomValue);
+
+            this.midpointReferenceTouch = newMidpointReferenceTouch;
 
             this.currentPinchDistance = newPinchDistance;
+
+            this.zoomTo(newZoomValue);
+
+            zoomValue = newZoomValue;
+            
         }
 
         var maxTranslationValues = this.getMaxTranslationValues(event.target.width, event.target.height, zoomValue),
+            minDeltaX = maxTranslationValues.minDeltaX,
+            minDeltaY = maxTranslationValues.minDeltaY,
             maxDeltaX = maxTranslationValues.maxDeltaX,
             maxDeltaY = maxTranslationValues.maxDeltaY;
 
-        this.ensureMaxTranslationRespected(maxDeltaX, maxDeltaY, deltaX, deltaY);
+        this.ensureMaxTranslationRespected(minDeltaX, minDeltaY, maxDeltaX, maxDeltaY, deltaX, deltaY);
     }
 
     zoomTo(newZoomValue) {
@@ -418,15 +513,33 @@ class ImageModalView extends Component {
         if (this.state.imageFilePath) {
             content = (
                 <div className="image-modal-view" style={{ display: this.state.hidden ? "none" : "", maxHeight: this.state.windowHeight }} ref={this.imageModalViewRef}>
-                    <div className="image-controls" style={{ opacity: this.state.overlayHidden ? "0" : "1" }}>
-                        <div className="left">
-                            <FontAwesomeIcon icon={this.state.fullScreen ? faCompress : faExpand} onClick={this.toggleFullScreen.bind(this)}></FontAwesomeIcon>
+                    <div className={"image-controls top" + (this.state.overlayHidden ? " hidden" : "")}>
+                        <div className="side-control">
+                            <FontAwesomeIcon
+                                icon={this.state.fullScreen ? faCompress : faExpand}
+                                onClick={this.toggleFullScreen.bind(this)}
+                                className="button"
+                            />
                         </div>
-                        <FontAwesomeIcon icon={faSearchMinus} onClick={this.handleZoomOutClick.bind(this)}></FontAwesomeIcon>
-                        <span className="zoom-level">{Math.round((this.state.zoom < this.minZoom ? this.minZoom : this.state.zoom > this.maxZoom ? this.maxZoom : this.state.zoom) * 100)}%</span>
-                        <FontAwesomeIcon icon={faSearchPlus} onClick={this.handleZoomInClick.bind(this)}></FontAwesomeIcon>
-                        <div className="right">
-                            <FontAwesomeIcon icon={faTimesCircle} onClick={ImageModalView.hide}></FontAwesomeIcon>
+                        <div className="middle-section">
+                            <FontAwesomeIcon
+                                icon={faSearchMinus}
+                                onClick={this.handleZoomOutClick.bind(this)}
+                                className="button"
+                            />
+                            <span className="zoom-level">{Math.round((this.state.zoom < this.minZoom ? this.minZoom : this.state.zoom > this.maxZoom ? this.maxZoom : this.state.zoom) * 100)}%</span>
+                            <FontAwesomeIcon
+                                icon={faSearchPlus}
+                                onClick={this.handleZoomInClick.bind(this)}
+                                className="button"
+                            />
+                        </div>
+                        <div className="side-control">
+                            <FontAwesomeIcon
+                                icon={faTimesCircle}
+                                onClick={ImageModalView.hide}
+                                className="button"
+                            />
                         </div>
                     </div>
 
@@ -434,8 +547,10 @@ class ImageModalView extends Component {
                         className={this.state.imageClassName}
                         src={this.state.imageFilePath}
                         alt={this.state.imageCaption}
-                        onClick={this.toggleHideOverlay.bind(this)}
-                        style={{ transform: "scale(" + this.state.zoom + ") translate(" + this.state.deltaX + "px, " + this.state.deltaY + "px)" }}
+                        style={{
+                            transform: "scale(" + this.state.zoom + ") translate(" + this.state.deltaX + "px, " + this.state.deltaY + "px)",
+                            transformOrigin: (this.state.transformOriginX ? this.state.transformOriginX + "px " : "50% ") + (this.state.transformOriginY ? this.state.transformOriginY + "px" : "50%")
+                        }}
                         onMouseMove={this.handleImageMouseMove}
                         onMouseDown={this.handleImageMouseDown}
                         onMouseUp={this.handleImageMouseUp}
@@ -446,17 +561,25 @@ class ImageModalView extends Component {
                         onTouchMove={this.handleImageTouchMove}
                         ref={this.imageRef}
                     />
-                    <div className="image-controls-bottom" style={{ opacity: this.state.overlayHidden ? "0" : "1" }}>
-                        <div className="left" style={{ opacity: this.state.imageIndex === 0 ? "0.5" : "1" }}>
-                            <FontAwesomeIcon icon={faChevronLeft} onClick={this.handlePreviousImageClick}></FontAwesomeIcon>
+                    <div className={"image-controls bottom" + (this.state.overlayHidden ? " hidden" : "")}>
+                        <div className="side-control" style={{ opacity: this.state.imageIndex === 0 ? "0.5" : "1" }}>
+                            <FontAwesomeIcon
+                                icon={faChevronLeft}
+                                onClick={this.handlePreviousImageClick}
+                                className="button"
+                            />
                         </div>
-                        <span className="image-caption">
+                        <span className="middle-section">
                             {this.state.imageCaption}
                             <br />
                             ({this.state.imageIndex + 1}/{this.state.imageList.length})
                         </span>
-                        <div className="right" style={{ opacity: this.state.imageIndex < this.state.imageList.length - 1 ? "1" : "0.5" }}>
-                            <FontAwesomeIcon icon={faChevronRight} onClick={this.handleNextImageClick}></FontAwesomeIcon>
+                        <div className="side-control" style={{ opacity: this.state.imageIndex < this.state.imageList.length - 1 ? "1" : "0.5" }}>
+                            <FontAwesomeIcon
+                                icon={faChevronRight}
+                                onClick={this.handleNextImageClick}
+                                className="button"
+                            />
                         </div>
                     </div>
                 </div>

@@ -30,8 +30,6 @@ class Carousel extends Component {
     }
     
     handleScroll(event) {
-        event.preventDefault();
-    
         var currentDate = new Date(),
             lastScrollTime = this.state.lastScrollTime;
     
@@ -55,7 +53,6 @@ class Carousel extends Component {
     }
 
     registerTouchStart(event) {
-        event.preventDefault();
         this.setState({
             touchStartPosY: event.targetTouches[0].pageY,
             touchStartPosX: event.targetTouches[0].pageX
@@ -63,8 +60,6 @@ class Carousel extends Component {
     }
     
     handleTouchMove(event) {
-        event.preventDefault();
-    
         var currentDate = new Date(),
             lastScrollTime = this.state.lastScrollTime,
             currentPageX = event.targetTouches[0].pageX,
