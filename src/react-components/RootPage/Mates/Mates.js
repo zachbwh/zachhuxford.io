@@ -40,7 +40,7 @@ class Mates extends ViewportPaginationView {
 		{
             name: "Buster",
             filePath: "/assets/mates/buster-disc-golf-smaller.jpg",
-            caption: "intense disc gold game"
+            caption: "intense disc golf game"
 		},
 		{
             name: "Buster",
