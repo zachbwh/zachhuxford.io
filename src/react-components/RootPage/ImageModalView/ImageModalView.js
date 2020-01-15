@@ -35,7 +35,7 @@ class ImageModalView extends Component {
 
         this.handleFullScreenChange = this.handleFullScreenChange.bind(this);
         this.handleWindowResize = this.handleWindowResize.bind(this);
-        this.handleHashChange = this.handleHashChange.bind(this);
+        this.handlePopstate = this.handlePopstate.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
 
         this.handleImageMouseMove = this.handleImageMouseMove.bind(this);
@@ -83,18 +83,21 @@ class ImageModalView extends Component {
         document.addEventListener("keydown", this.handleKeyDown, false);
         document.addEventListener("fullscreenchange", this.handleFullScreenChange, false);
         window.addEventListener("resize", this.handleWindowResize);
-        window.addEventListener("hashchange", this.handleHashChange);
+        window.addEventListener("popstate", this.handlePopstate);
     }
 
     componentWillUnmount() {
         document.removeEventListener("keydown", this.handleKeyDown, false);
         document.removeEventListener("fullscreenchange", this.handleFullScreenChange, false);
         window.removeEventListener("resize", this.handleWindowResize);
-        window.removeEventListener("hashchange", this.handleHashChange);
+        window.removeEventListener("popstate", this.handlePopstate);
     }
 
     __show() {
         this.setState({ hidden: false });
+        window.history.pushState({
+            imageModalViewVisible: true
+        }, "", window.location);
     }
 
     __hide() {
@@ -105,6 +108,9 @@ class ImageModalView extends Component {
             hidden: true,
             overlayHidden: false
         });
+        if (window.history.state && window.history.state.imageModalViewVisible) {
+            window.history.back();
+        }
 
         this.setDefaultTransformPropertyValues(true);
     }
@@ -160,8 +166,10 @@ class ImageModalView extends Component {
         }
     }
 
-    handleHashChange() {
-        ImageModalView.hide();
+    handlePopstate() {
+        if (!this.state.hidden) {
+            ImageModalView.hide();
+        }
     }
 
     handleZoomInClick() {
