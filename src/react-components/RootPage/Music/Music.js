@@ -2,7 +2,6 @@ import React from 'react';
 import config from '../../../config';
 import './Music.css';
 
-import io from 'socket.io-client';
 import RecentTrackTile from './RecentTrackTile/RecentTrackTile';
 import TopAlbumTile from './TopAlbumTile/TopAlbumTile';
 import ViewportPaginationView from '../ViewportPaginationView/ViewportPaginationView';
@@ -14,25 +13,17 @@ import IndexIndicator from '../ViewportPaginationView/IndexIndicator/IndexIndica
 class Music extends ViewportPaginationView {
     onComponentDidMount() {
         var that = this;
-        this.socket = io(`${config.apiDomain}/lastfm`);
+        // this.socket = new WebSocket(`wss://${config.websocketDomain}/RecentTrack`);
 
-        this.socket.on("load-my-recent-track", function(message) {
-            console.log("first push recent track");
-            var recentTrack = JSON.parse(message);
-            that.setState({ recentTrack: recentTrack });
-        });
-
-        this.socket.on("recent-track-update", function(message) {
-            var newRecentTrack = JSON.parse(message);
-            that.setState({recentTrack: newRecentTrack});
-        })
-        this.socket.on("connected", function(msg) {
-            console.log(msg);
-        })
-
+        // this.socket.onmessage = function(message) {
+        //     console.log("first push recent track");
+        //     var recentTrack = JSON.parse(message);
+        //     that.setState({ recentTrack: recentTrack });
+        // };
+        
         this.onHandleWindowResize();
 
-        fetch(`${config.apiDomain}/topAlbums`).then(response => {
+        fetch(`https://${config.httpApiDomain}/getTopAlbums`).then(response => {
             response.json().then(responseJson => {
                 that.setState({topAlbums: responseJson})
             })
@@ -40,7 +31,7 @@ class Music extends ViewportPaginationView {
     }
 
     onComponentWillUnmount() {
-        this.socket.close();
+        // this.socket.close();
     }
 
     onHandleWindowResize() {
