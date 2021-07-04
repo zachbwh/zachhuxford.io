@@ -43,7 +43,7 @@ class Projects extends ViewportPaginationView {
                                 My built from scratch personal blog site.
                             </p>
                             <br />
-                            <h3 className="project-link"><a href="https://gtihub.com/zachbwh/blog.zachhuxford.io" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> Repo Link</a></h3>
+                            <h3 className="project-link"><a href="https://github.com/zachbwh/blog.zachhuxford.io" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> Repo Link</a></h3>
                         </div>
                     </div>
     
