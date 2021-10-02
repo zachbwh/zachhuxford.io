@@ -1,5 +1,4 @@
 import React from 'react';
-import config from '../../../config';
 import './Music.css';
 
 import RecentTrackTile from './RecentTrackTile/RecentTrackTile';
@@ -13,7 +12,7 @@ import IndexIndicator from '../ViewportPaginationView/IndexIndicator/IndexIndica
 class Music extends ViewportPaginationView {
     onComponentDidMount() {
         var that = this;
-        // this.socket = new WebSocket(`wss://${config.websocketDomain}/RecentTrack`);
+        // this.socket = new WebSocket(`wss://${process.env.REACT_APP_WEBSOCKET_API_DOMAIN}/RecentTrack`);
 
         // this.socket.onmessage = function(message) {
         //     console.log("first push recent track");
@@ -23,7 +22,7 @@ class Music extends ViewportPaginationView {
         
         this.onHandleWindowResize();
 
-        fetch(`https://${config.httpApiDomain}/getTopAlbums`).then(response => {
+        fetch(`https://${process.env.REACT_APP_HTTP_API_DOMAIN}/getTopAlbums`).then(response => {
             response.json().then(responseJson => {
                 that.setState({topAlbums: responseJson})
             })

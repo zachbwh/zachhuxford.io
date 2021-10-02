@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './LastFmCreep.css';
-import config from '../../../../config';
 import RecentTrackTile from '../../Music/RecentTrackTile/RecentTrackTile';
 import io from 'socket.io-client';
 
@@ -14,7 +13,7 @@ class LastFmCreep extends Component {
     componentDidMount() {
         var that = this;
 
-        this.socket = io(`${config.apiDomain}/lastfmcreep`);
+        this.socket = io(`${process.env.REACT_APP_WEBSOCKET_API_DOMAIN}/lastfmcreep`);
 
         this.socket.on("load-friend-recent-tracks", function(message) {
             console.log("loaded fresh friends list");
