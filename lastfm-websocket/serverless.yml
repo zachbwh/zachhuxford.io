@@ -1,0 +1,105 @@
+org: zachbwh
+app: zachhuxford-io
+service: lastfm-websocket
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  websocketsApiName: lastfm-websocket-${self:provider.stage}
+  # required for websocket apis
+  # this selects from your payload what your "routeKey" parameter is
+  # from the websocket event types on your function
+  websocketsApiRouteSelectionExpression: $request.body.action
+  stackName: ${self:service}-${self:provider.stage}
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "execute-api:ManageConnections"
+      Resource:
+        - "arn:aws:execute-api:*:*:**/@connections/*"
+    - Effect: Allow
+      Action:
+        - "dynamodb:PutItem"
+        - "dynamodb:GetItem"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:DeleteItem"
+        - "dynamodb:BatchGetItem"
+        - "dynamodb:BatchWriteItem"
+        - "dynamodb:Query"
+      Resource:
+        - Fn::GetAtt: [ApplicationDynamoDBTable, Arn]
+        - Fn::Join:
+            - '/'
+            - - Fn::GetAtt: [ApplicationDynamoDBTable, Arn]
+              - '*'
+  environment:
+    APPLICATION_TABLE:
+      Ref: ApplicationDynamoDBTable
+    API_REGION: "${self:provider.region}"
+  lambdaHashingVersion: "20201221"
+
+functions:
+  # manage connection and disconnection of clients
+  connectionManager:
+    handler: src/handler.connectionManager
+    events:
+      - websocket: $connect
+      - websocket: $disconnect
+
+  # just in case we are getting weird / bad data
+  # we can react to it with a sane response
+  defaultMessages:
+    handler: src/handler.defaultMessage
+    events:
+      - websocket: $default
+
+  # handle chat app messages
+  sendMessage:
+    handler: src/handler.sendMessage
+    events:
+      - websocket: sendMessage
+
+  # handle broadcasting recent track change
+  # we do this by listening the dynamodb table stream for new recent tracks
+  # could even be done by sub-systems directly to dynamodb
+  ddbStreamListener:
+    handler: src/handler.ddbStreamListener
+    events:
+      - stream:
+          type: dynamodb
+          arn:
+            Fn::GetAtt: [ApplicationDynamoDBTable, StreamArn]
+
+resources:
+  Resources:
+    # DynamoDB best practices suggest most applications should only
+    # have a single table. For resources check out the follow links...
+    # https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+    # Advanced Design Patterns for DynamoDB - https://www.youtube.com/watch?v=HaEPXoXVf2k
+    ApplicationDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+          - AttributeName: sk
+            AttributeType: S
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: sk
+            KeyType: RANGE
+        GlobalSecondaryIndexes:
+          - IndexName: reverse
+            KeySchema:
+              - AttributeName: sk
+                KeyType: HASH
+              - AttributeName: pk
+                KeyType: RANGE
+            Projection:
+                ProjectionType: ALL
