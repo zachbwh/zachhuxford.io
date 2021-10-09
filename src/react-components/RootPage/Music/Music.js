@@ -12,13 +12,15 @@ import IndexIndicator from '../ViewportPaginationView/IndexIndicator/IndexIndica
 class Music extends ViewportPaginationView {
     onComponentDidMount() {
         var that = this;
-        // this.socket = new WebSocket(`wss://${process.env.REACT_APP_WEBSOCKET_API_DOMAIN}/RecentTrack`);
+        this.socket = new WebSocket(`wss://${process.env.REACT_APP_WEBSOCKET_API_DOMAIN}`);
 
-        // this.socket.onmessage = function(message) {
-        //     console.log("first push recent track");
-        //     var recentTrack = JSON.parse(message);
-        //     that.setState({ recentTrack: recentTrack });
-        // };
+        this.socket.onmessage = function(message) {
+            console.log("first push recent track");
+            var recentTrack = JSON.parse(message.data).recentTrack;
+            if (recentTrack.name) {
+                that.setState({ recentTrack: recentTrack });
+            }
+        };
         
         this.onHandleWindowResize();
 
@@ -30,7 +32,7 @@ class Music extends ViewportPaginationView {
     }
 
     onComponentWillUnmount() {
-        // this.socket.close();
+        this.socket.close();
     }
 
     onHandleWindowResize() {

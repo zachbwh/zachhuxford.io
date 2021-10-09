@@ -1,6 +1,8 @@
 node_modules 
 old-website
 
+.serverless
+
 # testing
 /coverage
 
