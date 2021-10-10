@@ -34,12 +34,8 @@ async function defaultMessage(event, context) {
 
 async function sendMessage(event, context) {
   const body = JSON.parse(event.body);
-  console.info(body.recentTrack);
 
   const recentTrack = JSON.parse(body.recentTrack);
-
-  console.info(body)
-  console.info(recentTrack)
 
   await broadcastRecentTrackUpdate(recentTrack);
 
@@ -67,23 +63,20 @@ async function ddbStreamListener(event, context) {
   // Listen to ddb stream
   // Broadcast any recent track updates
 
-  event.Records.forEach(async record => {
-    switch (record.dynamodb.Keys[db.Primary.Key].S.split("|")[0]) {
+  const recentTrackRecords = event.Records
+    .filter(record => record.eventName === "INSERT")
+    .filter(record => record.dynamodb)
+    .filter(record => record.dynamodb.Keys[db.Primary.Key].S.split("|")[0] === db.RecentTrack.Entity)
+    .sort((a, b) => a.SequenceNumber > b.SequenceNumber ? 1 : a.SequenceNumber > b.SequenceNumber ? -1 : 0);
 
-      // RecentTrack entities (most stuff)
-      case db.RecentTrack.Entity:
-        // If Recent Track Addded
-        if (record.eventName === "INSERT") {
-          const newRecentTrack = record.dynamodb.RecentTrack.S;
+  const newRecentTrackRecord = recentTrackRecords[0];
 
+  if (newRecentTrackRecord) {
+    const newRecentTrack = JSON.parse(newRecentTrackRecord.dynamodb.NewImage.RecentTrack.S.replace(/\\/g, ""));
           await broadcastRecentTrackUpdate(newRecentTrack)
         }
-        break;
 
-      default:
-        break;
-    }
-  });
+  return success;
 }
 
 async function subscribe(event, context) {

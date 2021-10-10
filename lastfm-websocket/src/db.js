@@ -29,9 +29,7 @@ const recentTrackRegex = new RegExp(`^${db.RecentTrack.Entity}\|`);
 const connectionRegex = new RegExp(`^${db.Connection.Entity}\|`);
 
 function parseEntityId(target){
-    console.log('ENTITY ID A ', target)
-
-    if(typeof target === 'object'){
+    if (typeof target === 'object'){
         // use from raw event, only needed for connectionId at the moment
         target = target.requestContext.connectionId;
     } else {
@@ -59,9 +57,6 @@ async function fetchConnections(){
     } catch (e) {
         console.error(e);
     }
-
-    console.info(connectionsResults);
-    console.info(connectionsResults.Items);
 
     return connectionsResults.Items;
 }

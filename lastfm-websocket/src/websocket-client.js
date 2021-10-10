@@ -69,7 +69,6 @@ class Client {
             ConnectionId,
             Data: JSON.stringify(payload)
         }).promise().catch(async err => {
-            console.log(JSON.stringify(err))
           
             if (err.statusCode === 410) {
                 console.log(`[wsClient][send][postToConnection] Found stale connection, deleting ${ConnectionId}:`);
@@ -77,7 +76,7 @@ class Client {
                 await db.Client.delete({
                     TableName: db.Table,
                     Key: {
-                        [db.Connection.Key]: `${db.Connection.Prefix}${ConnectionId}`,
+                        [db.Connection.Key]: `${db.Connection.Prefix}`,
                         [db.Connection.Range]: `${db.Connection.Prefix}${ConnectionId}`
                     }
                 }).promise()
