@@ -72,6 +72,13 @@ functions:
           arn:
             Fn::GetAtt: [ApplicationDynamoDBTable, StreamArn]
 
+  pollRecentTrack:
+    handler: src/handler.pollRecentTrack
+    environment:
+      LASTFM_API_KEY: ${env:LASTFM_API_KEY}
+    events:
+      - schedule: rate(1 minute)
+
 resources:
   Resources:
     # DynamoDB best practices suggest most applications should only

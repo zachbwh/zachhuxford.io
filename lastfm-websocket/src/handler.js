@@ -73,8 +73,8 @@ async function ddbStreamListener(event, context) {
 
   if (newRecentTrackRecord) {
     const newRecentTrack = JSON.parse(newRecentTrackRecord.dynamodb.NewImage.RecentTrack.S.replace(/\\/g, ""));
-          await broadcastRecentTrackUpdate(newRecentTrack)
-        }
+    await broadcastRecentTrackUpdate(newRecentTrack)
+  }
 
   return success;
 }
@@ -105,11 +105,59 @@ async function unsubscribe(event, context) {
   return success;
 }
 
+async function pollRecentTrack() {
+  try {
+    const recentTrack = await getRecentTrack()
+
+    await db.Client.put({
+      TableName: db.Table,
+      Item: {
+        [db.RecentTrack.Primary.Key]: db.RecentTrack.Prefix,
+        [db.RecentTrack.Primary.Range]: `${db.RecentTrack.Prefix}${Date.now()}`,
+        "RecentTrack": JSON.stringify(recentTrack)
+      }
+    }).promise();
+
+  } catch (e) {
+    console.error(e);
+  }
+
+  return success;
+}
+
+async function getRecentTrack() {
+  const username = process.env.LASTFM_USERNAME || 'zachbwh'
+  
+  const queryString = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${process.env.LASTFM_API_KEY}&format=json&limit=1`;
+
+  const reponse = await fetch(queryString),
+      recentTracks = await reponse.json();
+  
+  if (recentTracks.recenttracks.track.length < 1) {
+    const err = `There are no recent tracks for the lastfm user: ${username}`;
+    response = responders.clientError(err);
+
+    throw new Error(err);
+  }
+  
+  // Shaping Recent Track Object
+  const recentTrack = recentTracks.recenttracks.track[0];
+  delete recentTrack.image;
+  if (recentTrack.date && recentTrack.date["#text"]) {
+      delete recentTrack.date["#text"];
+  }
+  delete recentTrack.url;
+  delete recentTrack.streamable;
+
+  return recentTrack;
+};
+
 module.exports = {
   connectionManager,
   defaultMessage,
   sendMessage,
   subscribe,
   unsubscribe,
-  ddbStreamListener
+  ddbStreamListener,
+  pollRecentTrack
 };
