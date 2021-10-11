@@ -65,7 +65,7 @@ async function ddbStreamListener(event, context) {
   // Broadcast any recent track updates
 
   const recentTrackRecords = event.Records
-    .filter(record => record.eventName === "INSERT")
+    .filter(record => record.eventName === "INSERT" || record.eventName === "MODIFY")
     .filter(record => record.dynamodb)
     .filter(record => record.dynamodb.Keys[db.Primary.Key].S.split("|")[0] === db.RecentTrack.Entity)
     .sort((a, b) => a.SequenceNumber > b.SequenceNumber ? 1 : a.SequenceNumber > b.SequenceNumber ? -1 : 0);
@@ -114,7 +114,7 @@ async function pollRecentTrack() {
       TableName: db.Table,
       Item: {
         [db.RecentTrack.Primary.Key]: db.RecentTrack.Prefix,
-        [db.RecentTrack.Primary.Range]: `${db.RecentTrack.Prefix}${Date.now()}`,
+        [db.RecentTrack.Primary.Range]: db.RecentTrack.Prefix,
         "RecentTrack": JSON.stringify(recentTrack)
       }
     }).promise();
