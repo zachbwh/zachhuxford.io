@@ -59,10 +59,10 @@ functions:
       - websocket: $default
 
   # handle chat app messages
-  sendMessage:
-    handler: src/handler.sendMessage
+  requestRecentTrack:
+    handler: src/handler.requestRecentTrack
     events:
-      - websocket: sendMessage
+      - websocket: requestRecentTrack
 
   # handle broadcasting recent track change
   # we do this by listening the dynamodb table stream for new recent tracks

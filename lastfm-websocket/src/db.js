@@ -61,11 +61,33 @@ async function fetchConnections(){
     return connectionsResults.Items;
 }
 
+async function fetchRecentTrack(){
+    let recentTrackResults;
+    try {
+        recentTrackResults = await ddb.query({
+            TableName: db.Table,
+            KeyConditionExpression: `${db.RecentTrack.Primary.Key} = :recentTrackKey and begins_with(${db.RecentTrack.Primary.Range}, :recentTrackEntity)`,
+            ExpressionAttributeValues: {
+                ":recentTrackKey": db.RecentTrack.Prefix,
+                ":recentTrackEntity": db.RecentTrack.Prefix
+            }
+        }).promise();
+
+    } catch (e) {
+        console.error(e);
+    }
+
+    console.info("Recent Tracks Fetched". recentTrackResults);
+
+    return recentTrackResults.Items[0].RecentTrack;
+}
+
 
 const client = {
     ...db,
     parseEntityId,
     fetchConnections,
+    fetchRecentTrack,
     Client: ddb
 }
 

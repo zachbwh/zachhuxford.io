@@ -14,9 +14,14 @@ class Music extends ViewportPaginationView {
         var that = this;
         this.socket = new WebSocket(`wss://${process.env.REACT_APP_WEBSOCKET_API_DOMAIN}`);
 
+        this.socket.addEventListener('open', function (event) {
+            that.socket.send("{\"action\": \"requestRecentTrack\"}");
+        });
+
         this.socket.onmessage = function(message) {
             console.log("first push recent track");
             var recentTrack = JSON.parse(message.data).recentTrack;
+            
             if (recentTrack.name) {
                 that.setState({ recentTrack: recentTrack });
             }

@@ -33,16 +33,6 @@ async function defaultMessage(event, context) {
   return success;
 }
 
-async function sendMessage(event, context) {
-  const body = JSON.parse(event.body);
-
-  const recentTrack = JSON.parse(body.recentTrack);
-
-  await broadcastRecentTrackUpdate(recentTrack);
-
-  return success;
-}
-
 async function broadcastRecentTrackUpdate(newRecentTrack) {
   const connections = await db.fetchConnections();
 
@@ -65,14 +55,15 @@ async function ddbStreamListener(event, context) {
   // Broadcast any recent track updates
 
   const recentTrackRecords = event.Records
+    .filter(record => record.eventName)
     .filter(record => record.eventName === "INSERT" || record.eventName === "MODIFY")
     .filter(record => record.dynamodb)
     .filter(record => record.dynamodb.Keys[db.Primary.Key].S.split("|")[0] === db.RecentTrack.Entity)
-    .sort((a, b) => a.SequenceNumber > b.SequenceNumber ? 1 : a.SequenceNumber > b.SequenceNumber ? -1 : 0);
+    .sort((a, b) => a.SequenceNumber < b.SequenceNumber ? 1 : a.SequenceNumber > b.SequenceNumber ? -1 : 0);
 
-  const newRecentTrackRecord = recentTrackRecords[0];
 
-  if (newRecentTrackRecord) {
+  if (recentTrackRecords.length > 0) {
+    const newRecentTrackRecord = recentTrackRecords[0];
     const newRecentTrack = JSON.parse(newRecentTrackRecord.dynamodb.NewImage.RecentTrack.S.replace(/\\/g, ""));
     await broadcastRecentTrackUpdate(newRecentTrack)
   }
@@ -153,12 +144,24 @@ async function getRecentTrack() {
   return recentTrack;
 };
 
+async function requestRecentTrack(event) {
+  const connectionId = db.parseEntityId(event);
+  const recentTrack = await db.fetchRecentTrack();
+
+  await wsClient.send(connectionId, {
+    event: "recent_track_update",
+    recentTrack: JSON.parse(recentTrack),
+  });
+
+  return success;
+}
+
 module.exports = {
   connectionManager,
   defaultMessage,
-  sendMessage,
   subscribe,
   unsubscribe,
   ddbStreamListener,
-  pollRecentTrack
+  pollRecentTrack,
+  requestRecentTrack
 };
