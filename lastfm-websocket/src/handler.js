@@ -1,5 +1,6 @@
 const db = require("./db");
 const ws = require("./websocket-client");
+const fetch = require("node-fetch");
 
 const wsClient = new ws.Client();
 
