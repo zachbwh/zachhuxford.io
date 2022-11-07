@@ -101,7 +101,7 @@ class Music extends ViewportPaginationView {
                 <div className="viewport-container" style={{transform: "translateY(-" + this.state.currentIndex * this.state.windowHeight + "px)"}}>
                     <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
                         <div>
-                            <RecentTrackTile name="Zach Huxford" displayPhoto="/profile_photo.png" recentTrack={this.state.recentTrack}></RecentTrackTile>
+                            <RecentTrackTile name="Zach Huxford" displayPhoto="/profile_photo.webp" recentTrack={this.state.recentTrack}></RecentTrackTile>
                             <div className="scroll-down">
                                 <p>SCROLL DOWN</p>
                                 <FontAwesomeIcon icon={faChevronDown} />

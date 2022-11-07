@@ -10,7 +10,7 @@ class HomePage extends Component {
                         <p className="d1">It's me!</p>
                         <h1 className="d2">Zach Huxford<span className="highlight-full-stop">.</span></h1>
                         <div className="display-photo d2" >
-                            <img alt="Headshot of Zach Huxford" src="/profile_photo.png" />
+                            <img alt="Headshot of Zach Huxford" src="/profile_photo.webp" />
                         </div>
                     </div>
                     <p className="d3">

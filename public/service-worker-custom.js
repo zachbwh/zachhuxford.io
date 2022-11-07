@@ -1,6 +1,6 @@
 var CACHE_NAME = 'zachhuxford.io';
 var urlsToCache = [
-	"/profile_photo.png"
+	"/profile_photo.webp"
 ];
 
 console.log("this is the custom service worker");
