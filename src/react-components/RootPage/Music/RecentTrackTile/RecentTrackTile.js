@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './RecentTrackTile.css';
-import Moment from 'moment'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+
+dayjs.extend(relativeTime)
 
 class RecentTrackTile extends Component {
     render() {
@@ -20,7 +23,7 @@ class RecentTrackTile extends Component {
                         {displayPhoto}
                         <div className="text-block">
                             <p className="string"><b>{this.props.name}</b></p>
-                            <p className="string">{this.props.recentTrack["@attr"] && this.props.recentTrack["@attr"].nowplaying === "true" ? "is now listening to:" : Moment(new Date(this.props.recentTrack.date.uts * 1000)).fromNow()}</p>
+                            <p className="string">{this.props.recentTrack["@attr"] && this.props.recentTrack["@attr"].nowplaying === "true" ? "is now listening to:" : dayjs(new Date(this.props.recentTrack.date.uts * 1000)).fromNow()}</p>
                         </div>
                     </div>
                     <div className="text-block">
