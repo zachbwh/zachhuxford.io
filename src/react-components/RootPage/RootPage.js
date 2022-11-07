@@ -4,7 +4,6 @@ import './RootPage.css';
 import HomePage from './HomePage/HomePage';
 import Projects from './Projects/Projects';
 import Startpage from './Projects/Startpage/Startpage';
-import LastFmCreep from './Projects/LastFmCreep/LastFmCreep';
 import Rice from './Rice/Rice';
 import TechTastes from './TechTastes/TechTastes';
 import Music from './Music/Music';
@@ -31,7 +30,6 @@ class RootPage extends Component {
                                 <Route exact path="/" component={HomePage} />
                                 <Route exact path="/projects" component={Projects} />
                                 <Route path="/projects/startpage" component={Startpage} />
-                                <Route path="/projects/lastfmcreep" component={LastFmCreep} />
                                 <Route path="/rice" component={Rice} />
                                 <Route path="/tech-tastes" component={TechTastes} />
                                 <Route path="/music" component={Music} />

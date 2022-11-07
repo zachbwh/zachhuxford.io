@@ -1,15 +1,14 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
 import './Projects.css';
 import ViewportPaginationView from '../ViewportPaginationView/ViewportPaginationView';
 import '../ViewportPaginationView/ViewportPaginationView.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faLink } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import IndexIndicator from '../ViewportPaginationView/IndexIndicator/IndexIndicator';
 
 class Projects extends ViewportPaginationView {
-    hashes = ["", "tatai", "blog", "lastfm"]
+    hashes = ["", "tatai", "blog"]
 
     render() {
         return (
@@ -44,19 +43,6 @@ class Projects extends ViewportPaginationView {
                             </p>
                             <br />
                             <h3 className="project-link"><a href="https://github.com/zachbwh/blog.zachhuxford.io" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> Repo Link</a></h3>
-                        </div>
-                    </div>
-    
-                    <div className="viewport" style={{height: this.state.windowHeight + "px"}}>
-                        <div className="project">
-                            <h1>last.fm bar</h1>
-                            <p>
-                                A webpage that keeps me up to date with what my friends are listening to in real time.
-                            </p>
-                            <h3 className="project-link"><a href="https://github.com/zachbwh/zachhuxford.io/tree/master/src/react-components/RootPage/Projects/LastFmCreep" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> Repo Link</a></h3>
-                            <br />
-                            <br />
-                            <h3 className="project-link"><NavLink to="/projects/lastfmcreep"><FontAwesomeIcon icon={faLink} /></NavLink></h3>
                         </div>
                     </div>
                 </div>
