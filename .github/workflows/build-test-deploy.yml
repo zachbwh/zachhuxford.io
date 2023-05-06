@@ -14,9 +14,9 @@ jobs:
       - run: npm install
       - run: npm test
   build:
-    environment:
-      PUBLIC_URL: zachhuxford.io
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_URL: zachhuxford.io
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
