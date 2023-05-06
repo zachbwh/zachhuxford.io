@@ -2,7 +2,8 @@ name: build-test
 run-name: Test and Build
 on:
   push:
-    branches: -!master
+    branches-ignore:
+      - master
 jobs:
   jest-tests:
     runs-on: ubuntu-latest
