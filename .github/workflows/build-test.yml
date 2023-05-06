@@ -1,0 +1,27 @@
+name: build-test-deploy
+run-name: Test, Build and Deploy to Github Pages
+on:
+  push:
+    branches: -!main
+jobs:
+  jest-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - run: npm install
+      - run: npm test
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - run: npm install
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@master
+        with:
+          path: build
