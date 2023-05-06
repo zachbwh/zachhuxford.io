@@ -1,5 +1,5 @@
-name: build-test-deploy
-run-name: Test, Build and Deploy to Github Pages
+name: build-test
+run-name: Test and Build
 on:
   push:
     branches: -!master
