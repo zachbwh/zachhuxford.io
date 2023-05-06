@@ -12,6 +12,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
+      - run: npm install
       - run: npm test
   build:
     runs-on: ubuntu-latest
@@ -20,6 +21,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
+      - run: npm install
       - run: npm run build
       - uses: actions/upload-artifact@master
         with:
