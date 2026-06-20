@@ -18,7 +18,7 @@
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
     "@lucide/astro": "^1.8.0",
-    "astro": "^6.1.8"
+    "astro": "^6.4.8"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
